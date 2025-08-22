@@ -2,8 +2,6 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-// import registerImg from "../assets/images/register.jpg";
-
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,7 +15,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import Password from "@/components/ui/Password";
-// import { useRegisterMutation } from "@/redux/features/auth/auth.api";
 // import { toast } from "sonner";
 import { Link, useNavigate } from "react-router";
 import {
@@ -28,6 +25,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { division } from "@/constants/division";
+import { useRegisterMutation } from "@/redux/features/auth/auth.api";
+import { toast } from "sonner";
 
 const registerSchema = z
   .object({
@@ -45,15 +44,15 @@ const registerSchema = z
     phone: z
       .string({ error: "Phone number must be a string" })
       .regex(/^(?:\+8801\d{9}|01\d{9})$/, {
-        message:
-          "Phone number must be valid for Bangladesh. Format: +8801XXXXXXXXX or 01XXXXXXXXX",
+        message: "Invalid BD phone number",
       }),
     division: z.enum(Object.values(division)),
     city: z.string({ error: "city should be string" }),
     zip: z
-      .number({ error: "zip code must be in number" })
-      .min(1000, { message: "zip code must be of 4 digits" })
-      .max(9999, { message: "zip code cannot be larger than 4 digits" }),
+      .string({ error: "zip code must be in number" })
+      .min(4, { error: "Zip code must be of 4 numbers" })
+      .max(4, { error: "zip code must be of 4 numbers" }),
+
     street: z.string({ error: "street should be string" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -61,7 +60,7 @@ const registerSchema = z
     path: ["confirmPassword"],
   });
 const Register = () => {
-  //   const [register] = useRegisterMutation();
+  const [register] = useRegisterMutation();
   const navigate = useNavigate();
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
@@ -70,23 +69,35 @@ const Register = () => {
       email: "",
       password: "",
       confirmPassword: "",
+      phone: "",
+      city: "",
+      division: "",
+      zip: "",
+      street: "",
     },
   });
 
   const onSubmit = async (data: z.infer<typeof registerSchema>) => {
-    const userInfo = {
-      name: data.name,
-      email: data.email,
-      password: data.password,
+    console.log(data);
+    const { division, city, zip, street, ...rest } = data;
+    const userData = {
+      ...rest,
+      address: {
+        division,
+        city,
+        zip: Number(zip),
+        street,
+      },
     };
     try {
-      //   const result = await register(userInfo).unwrap();
-      //   console.log(result);
-      //   toast.success("User created successfully!");
-      navigate("/verify");
+      const res = await register(userData).unwrap();
+      console.log(res);
+      toast.success("Account created successfully");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
+    console.log(userData);
   };
   return (
     <div className="grid justify-center items-center min-h-screen min-w-full">
@@ -158,67 +169,41 @@ const Register = () => {
                       <FormDescription className="sr-only">
                         This is a field for the phone input
                       </FormDescription>
+                      <FormMessage className="text-left" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="division"
+                  render={({ field }) => (
+                    <FormItem className="flex-1">
+                      <FormLabel>Division</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl className="w-full">
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select Division" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="w-full">
+                          {Object.values(division)?.map((item: string) => (
+                            <SelectItem key={item} value={item}>
+                              {item}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormDescription className="sr-only">
+                        This is a field for the division select input
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <div className="flex gap-3">
-                  {/* select division*/}
-                  <FormField
-                    control={form.control}
-                    name="division"
-                    render={({ field }) => (
-                      <FormItem className="flex-1">
-                        <FormLabel>Division</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl className="w-full">
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select Division" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent className="w-full">
-                            <SelectItem value="m@example.com">
-                              m@example.com
-                            </SelectItem>
-                            <SelectItem value="m@google.com">
-                              m@google.com
-                            </SelectItem>
-                            <SelectItem value="m@support.com">
-                              m@support.com
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormDescription className="sr-only">
-                          This is a field for the division select input
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="john.doe@company.com"
-                            type="email"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormDescription className="sr-only">
-                          This is a field for the email input
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+
                 <div className="flex gap-3">
                   <FormField
                     control={form.control}
