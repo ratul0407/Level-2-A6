@@ -17,17 +17,20 @@ import {
   useLogOutMutation,
 } from "@/redux/features/auth/auth.api";
 import { useAppDispatch } from "@/redux/hooks";
+import { useEffect } from "react";
 
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
   { href: "/", label: "Home", active: true },
-  { href: "/contact", label: "Contact" },
-  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact", active: false },
+  { href: "/about", label: "About", active: false },
 ];
 
 const Navbar = () => {
+  const { pathname } = useLocation();
+  console.log(pathname);
   const { data } = useGetMeQuery(undefined);
   const [logout] = useLogOutMutation();
   const dispatch = useAppDispatch();
@@ -36,6 +39,11 @@ const Navbar = () => {
     dispatch(authApi.util.resetApiState());
   };
   const avatarName = data?.data?.data?.name?.[0].toUpperCase();
+  // useEffect(() => {
+  //   navigationLinks.forEach((item) => {
+  //     item.active = item.href === pathname;
+  //   });
+  // }, [pathname]);
   return (
     <header className="border-b px-4 md:px-6">
       <div className="flex h-16 justify-between gap-4">
@@ -77,13 +85,12 @@ const Navbar = () => {
                 <NavigationMenu className="max-w-none *:w-full">
                   <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
                     {navigationLinks.map((link, index) => (
-                      <NavigationMenuItem key={index} className="w-full">
+                      <NavigationMenuItem key={index}>
                         <NavigationMenuLink
-                          href={link.href}
-                          className="py-1.5"
-                          active={link.active}
+                          asChild
+                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
                         >
-                          {link.label}
+                          <Link to={link.href}>{link.label}</Link>
                         </NavigationMenuLink>
                       </NavigationMenuItem>
                     ))}
@@ -101,13 +108,12 @@ const Navbar = () => {
             <NavigationMenu className="h-full *:h-full max-md:hidden">
               <NavigationMenuList className="h-full gap-2">
                 {navigationLinks.map((link, index) => (
-                  <NavigationMenuItem key={index} className="h-full">
+                  <NavigationMenuItem key={index}>
                     <NavigationMenuLink
-                      active={link.active}
-                      href={link.href}
-                      className="text-muted-foreground hover:text-primary border-b-primary hover:border-b-primary data-[active]:border-b-primary h-full justify-center rounded-none border-y-2 border-transparent py-1.5 font-medium hover:bg-transparent data-[active]:bg-transparent!"
+                      asChild
+                      className="text-muted-foreground hover:text-primary py-1.5 font-medium"
                     >
-                      {link.label}
+                      <Link to={link.href}>{link.label}</Link>
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                 ))}

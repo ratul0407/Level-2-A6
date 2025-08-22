@@ -1,4 +1,6 @@
 import App from "@/App";
+import About from "@/pages/About";
+import Contact from "@/pages/Contact";
 import HomePage from "@/pages/HomePage";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
@@ -13,6 +15,14 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: HomePage,
+      },
+      {
+        path: "/about",
+        Component: About,
+      },
+      {
+        path: "/contact",
+        Component: Contact,
       },
     ],
   },
