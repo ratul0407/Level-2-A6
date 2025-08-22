@@ -14,12 +14,37 @@ import Password from "@/components/ui/Password";
 import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
 import config from "@/config";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useLoginMutation } from "@/redux/features/auth/auth.api";
+import { toast } from "sonner";
 
+const loginSchema = z.object({
+  email: z.email(),
+  password: z.string().min(8),
+});
 const Login = () => {
-  const form = useForm();
-  const onSubmit = (data: unknown) => {
+  const navigate = useNavigate();
+  const [login] = useLoginMutation();
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+  const onSubmit = async (data: unknown) => {
     console.log(data);
+    try {
+      const res = await login(data).unwrap();
+      if (res.success) {
+        toast.success("Login successful!");
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="grid lg:grid-cols-2 grid-rows-1 min-h-svh lg: gap-12">
