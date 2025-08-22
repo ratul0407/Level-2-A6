@@ -27,6 +27,7 @@ import {
 import { division } from "@/constants/division";
 import { useRegisterMutation } from "@/redux/features/auth/auth.api";
 import { toast } from "sonner";
+import { role } from "@/constants/role";
 
 const registerSchema = z
   .object({
@@ -88,6 +89,7 @@ const Register = () => {
         zip: Number(zip),
         street,
       },
+      role: role.sender,
     };
     try {
       const res = await register(userData).unwrap();
@@ -97,7 +99,6 @@ const Register = () => {
     } catch (error) {
       console.log(error);
     }
-    console.log(userData);
   };
   return (
     <div className="grid justify-center items-center min-h-screen min-w-full">
