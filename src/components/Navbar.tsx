@@ -1,4 +1,4 @@
-import Logo from "@/registry/default/components/navbar-components/logo";
+import Logo from "@/assets/icons/Logo";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -11,16 +11,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Link } from "react-router";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
   { href: "#", label: "Home", active: true },
-  { href: "#", label: "Features" },
-  { href: "#", label: "Pricing" },
+  { href: "#", label: "Contact" },
   { href: "#", label: "About" },
 ];
 
-export default function Component() {
+const Navbar = () => {
   return (
     <header className="border-b px-4 md:px-6">
       <div className="flex h-16 justify-between gap-4">
@@ -103,13 +103,15 @@ export default function Component() {
         {/* Right side */}
         <div className="flex items-center gap-2">
           <Button asChild variant="ghost" size="sm" className="text-sm">
-            <a href="#">Sign In</a>
+            <Link to="/login">Log In</Link>
           </Button>
           <Button asChild size="sm" className="text-sm">
-            <a href="#">Get Started</a>
+            <Link to="/register">Get Started</Link>
           </Button>
         </div>
       </div>
     </header>
   );
-}
+};
+
+export default Navbar;
