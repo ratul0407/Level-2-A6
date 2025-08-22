@@ -15,9 +15,9 @@ import { Link } from "react-router";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
-  { href: "#", label: "Home", active: true },
-  { href: "#", label: "Contact" },
-  { href: "#", label: "About" },
+  { href: "/", label: "Home", active: true },
+  { href: "/contact", label: "Contact" },
+  { href: "/about", label: "About" },
 ];
 
 const Navbar = () => {
@@ -79,9 +79,9 @@ const Navbar = () => {
           </div>
           {/* Main nav */}
           <div className="flex items-center gap-6">
-            <a href="#" className="text-primary hover:text-primary/90">
+            <Link to="/" className="text-primary hover:text-primary/90">
               <Logo />
-            </a>
+            </Link>
             {/* Navigation menu */}
             <NavigationMenu className="h-full *:h-full max-md:hidden">
               <NavigationMenuList className="h-full gap-2">
