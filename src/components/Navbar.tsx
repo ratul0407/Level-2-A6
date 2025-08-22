@@ -17,6 +17,7 @@ import {
   useLogOutMutation,
 } from "@/redux/features/auth/auth.api";
 import { useAppDispatch } from "@/redux/hooks";
+
 import { Link } from "react-router";
 
 // Navigation links array to be used in both desktop and mobile menus
@@ -34,7 +35,7 @@ const Navbar = () => {
     await logout(undefined);
     dispatch(authApi.util.resetApiState());
   };
-  console.log(data);
+  const avatarName = data?.data?.data?.name?.[0].toUpperCase();
   return (
     <header className="border-b px-4 md:px-6">
       <div className="flex h-16 justify-between gap-4">
@@ -118,6 +119,11 @@ const Navbar = () => {
         <div className="flex items-center gap-2">
           {data?.success ? (
             <>
+              <Link to="/dashboard">
+                <div className="rounded-full bg-green-500 text-white size-8 flex flex-col items-center justify-center">
+                  {avatarName}
+                </div>
+              </Link>
               <Button onClick={handleLogOut} variant={"outline"}>
                 Log out
               </Button>
