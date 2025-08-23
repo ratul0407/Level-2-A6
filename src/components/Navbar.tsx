@@ -126,7 +126,7 @@ const Navbar = () => {
         <div className="flex items-center gap-2">
           {data?.success ? (
             <>
-              <Link to="/admin">
+              <Link to="/sender">
                 <div className="rounded-full bg-green-500 text-white size-8 flex flex-col items-center justify-center">
                   {avatarName}
                 </div>

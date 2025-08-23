@@ -1,6 +1,5 @@
 import MyParcel from "@/pages/Sender/MyParcel";
 import { ISidebarItems } from "@/types";
-import { withAuth } from "@/utils/withAuth";
 
 export const adminSidebarItems: ISidebarItems[] = [
   {
