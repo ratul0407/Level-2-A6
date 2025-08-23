@@ -1,11 +1,17 @@
 import App from "@/App";
+import DashboardLayout from "@/components/layout/DashboardLayout";
+import { role } from "@/constants/role";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import HomePage from "@/pages/HomePage";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
+import { TRole } from "@/types";
+import { generateRoute } from "@/utils/generateRoutes";
+import { withAuth } from "@/utils/withAuth";
 
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
+import { adminSidebarItems } from "./adminSidebarRoutes";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +30,14 @@ const router = createBrowserRouter([
         path: "/contact",
         Component: Contact,
       },
+    ],
+  },
+  {
+    path: "/admin",
+    Component: DashboardLayout,
+    children: [
+      { index: true, element: <Navigate to="/admin/my-parcel" /> },
+      ...generateRoute(adminSidebarItems),
     ],
   },
   {

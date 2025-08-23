@@ -11,21 +11,22 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { role } from "@/constants/role";
 import {
   authApi,
   useGetMeQuery,
   useLogOutMutation,
 } from "@/redux/features/auth/auth.api";
 import { useAppDispatch } from "@/redux/hooks";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 import { Link, useLocation } from "react-router";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
-  { href: "/", label: "Home", active: true },
-  { href: "/contact", label: "Contact", active: false },
-  { href: "/about", label: "About", active: false },
+  { href: "/", label: "Home" },
+  { href: "/contact", label: "Contact" },
+  { href: "/about", label: "About" },
 ];
 
 const Navbar = () => {
@@ -125,7 +126,7 @@ const Navbar = () => {
         <div className="flex items-center gap-2">
           {data?.success ? (
             <>
-              <Link to="/dashboard">
+              <Link to="/admin">
                 <div className="rounded-full bg-green-500 text-white size-8 flex flex-col items-center justify-center">
                   {avatarName}
                 </div>
