@@ -18,8 +18,11 @@ import {
 } from "@/components/ui/select";
 import { division } from "@/constants/division";
 import { cn } from "@/lib/utils";
+import { useGetMeQuery } from "@/redux/features/auth/auth.api";
+import { useCreateParcelMutation } from "@/redux/features/parcel/parcel.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 
 const createParcelSchema = z.object({
@@ -32,6 +35,9 @@ const createParcelSchema = z.object({
   weight: z.string(),
 });
 const CreateParcel = () => {
+  const [createParcel] = useCreateParcelMutation();
+  const { data: senderData } = useGetMeQuery(undefined);
+  const senderDivision = senderData?.data?.data?.address?.division;
   const form = useForm<z.infer<typeof createParcelSchema>>({
     resolver: zodResolver(createParcelSchema),
     defaultValues: {
@@ -41,11 +47,34 @@ const CreateParcel = () => {
       zip: "",
       city: "",
       street: "",
-      weight: "",
+      weight: "0",
     },
   });
-  const onSubmit = (data: z.infer<typeof createParcelSchema>) => {
-    console.log(data);
+  const onSubmit = async (data: z.infer<typeof createParcelSchema>) => {
+    const { division, street, city, zip, ...rest } = data;
+    const parcelData = {
+      ...rest,
+      deliveryLocation: {
+        division,
+        street,
+        city,
+        zip: Number(zip),
+      },
+      sameDivision: senderDivision === data?.division,
+      weight: Number(data?.weight),
+    };
+    console.log(parcelData);
+    const toastId = toast.loading("creating parcel....");
+    try {
+      const res = await createParcel(parcelData).unwrap();
+      console.log(res);
+      if (res.success) {
+        toast.success(res?.message, { id: toastId });
+      }
+    } catch (error: unknown) {
+      toast.error(error?.data?.message, { id: toastId });
+      console.log(error);
+    }
   };
   return (
     <div className="grid justify-center items-center min-h-screen min-w-full">
@@ -209,7 +238,7 @@ const CreateParcel = () => {
                       <FormControl>
                         <Input
                           placeholder="enter the weight in kg"
-                          type="text"
+                          type="number"
                           {...field}
                         />
                       </FormControl>
@@ -222,7 +251,7 @@ const CreateParcel = () => {
                 />
 
                 <Button className="dark:text-white" type="submit">
-                  Login
+                  Confirm Parcel
                 </Button>
               </form>
             </Form>
