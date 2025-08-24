@@ -20,11 +20,9 @@ import {
 import { division } from "@/constants/division";
 import { cn } from "@/lib/utils";
 import { useGetMeQuery } from "@/redux/features/auth/auth.api";
-import { useCreateParcelMutation } from "@/redux/features/parcel/parcel.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import z from "zod";
 
 const createParcelSchema = z.object({
@@ -36,11 +34,12 @@ const createParcelSchema = z.object({
   zip: z.string().min(4).max(4),
   city: z.string(),
   street: z.string().min(3, { error: "Invalid street address" }),
-  weight: z.number({ error: "please provide a weight" }),
+  weight: z.string(),
 });
 const CreateParcel = () => {
-  const [parcelData, setParcelData] = useState({});
-  const [createParcel] = useCreateParcelMutation();
+  const [parcelInfo, setParcelInfo] = useState({});
+  const [open, setOpen] = useState(false);
+
   const { data: senderData } = useGetMeQuery(undefined);
   const senderDivision = senderData?.data?.data?.address?.division;
 
@@ -53,10 +52,10 @@ const CreateParcel = () => {
       zip: undefined,
       city: "",
       street: "",
-      weight: 0,
+      weight: "0",
     },
   });
-  const formValues = form.watch();
+  // const formValues = form.watch();
   console.log(form);
   const onSubmit = async (data: z.infer<typeof createParcelSchema>) => {
     const { division, street, city, zip, ...rest } = data;
@@ -71,23 +70,13 @@ const CreateParcel = () => {
       sameDivision: senderDivision === data?.division,
       weight: Number(data?.weight),
     };
+    setOpen(true);
     console.log(parcelData);
-    setParcelData(parcelData);
-    const toastId = toast.loading("creating parcel....");
-    try {
-      const res = await createParcel(parcelData).unwrap();
-      console.log(res);
-      if (res.success) {
-        toast.success(res?.message, { id: toastId });
-      }
-    } catch (error: unknown) {
-      toast.error(error?.data?.message, { id: toastId });
-      console.log(error);
-    }
+    return setParcelInfo(parcelData);
   };
   return (
-    <div className="min-h-screen min-w-full grid grid-cols-2">
-      <div className="max-w-xl text-left">
+    <div className="min-h-screen min-w-full grid justify-center items-center">
+      <div className="max-w-xl">
         <div className="flex flex-col  justify-center gap-2 text-center">
           <h1 className="text-2xl font-bold">Create a Parcel</h1>
           <p className="text-muted-foreground text-sm text-balance">
@@ -260,16 +249,20 @@ const CreateParcel = () => {
                 />
 
                 <Button type="submit">submit</Button>
-                {/* <ConfirmParcelModal /> */}
+                <ConfirmParcelModal
+                  open={open}
+                  setOpen={setOpen}
+                  parcelData={parcelInfo}
+                />
               </form>
             </Form>
           </div>
         </div>
       </div>
       <div>
-        <h3>A parcel from, {senderData?.data?.data?.name}</h3>
+        {/* <h3>A parcel from, {senderData?.data?.data?.name}</h3>
         <p>To: {formValues.receiver}</p>
-        <p>Estimated Delivery Time: </p>
+        <p>Estimated Delivery Time: </p> */}
       </div>
     </div>
   );
