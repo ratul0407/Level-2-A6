@@ -1,3 +1,4 @@
+import ConfirmParcelModal from "@/components/modules/ConfirmParcelModal";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -21,6 +22,7 @@ import { cn } from "@/lib/utils";
 import { useGetMeQuery } from "@/redux/features/auth/auth.api";
 import { useCreateParcelMutation } from "@/redux/features/parcel/parcel.api";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
@@ -28,28 +30,34 @@ import z from "zod";
 const createParcelSchema = z.object({
   name: z.string(),
   receiver: z.email(),
-  division: z.enum(Object.values(division)),
+  division: z.enum(Object.values(division), {
+    error: "Please select one from the drop down",
+  }),
   zip: z.string().min(4).max(4),
   city: z.string(),
-  street: z.string(),
-  weight: z.string(),
+  street: z.string().min(3, { error: "Invalid street address" }),
+  weight: z.number({ error: "please provide a weight" }),
 });
 const CreateParcel = () => {
+  const [parcelData, setParcelData] = useState({});
   const [createParcel] = useCreateParcelMutation();
   const { data: senderData } = useGetMeQuery(undefined);
   const senderDivision = senderData?.data?.data?.address?.division;
+
   const form = useForm<z.infer<typeof createParcelSchema>>({
     resolver: zodResolver(createParcelSchema),
     defaultValues: {
       name: "",
       receiver: "",
       division: "",
-      zip: "",
+      zip: undefined,
       city: "",
       street: "",
-      weight: "0",
+      weight: 0,
     },
   });
+  const formValues = form.watch();
+  console.log(form);
   const onSubmit = async (data: z.infer<typeof createParcelSchema>) => {
     const { division, street, city, zip, ...rest } = data;
     const parcelData = {
@@ -64,6 +72,7 @@ const CreateParcel = () => {
       weight: Number(data?.weight),
     };
     console.log(parcelData);
+    setParcelData(parcelData);
     const toastId = toast.loading("creating parcel....");
     try {
       const res = await createParcel(parcelData).unwrap();
@@ -77,8 +86,8 @@ const CreateParcel = () => {
     }
   };
   return (
-    <div className="grid justify-center items-center min-h-screen min-w-full">
-      <div className="flex flex-col justify-center w-xl max-w-2xl min-w-lg min-h-screen">
+    <div className="min-h-screen min-w-full grid grid-cols-2">
+      <div className="max-w-xl text-left">
         <div className="flex flex-col  justify-center gap-2 text-center">
           <h1 className="text-2xl font-bold">Create a Parcel</h1>
           <p className="text-muted-foreground text-sm text-balance">
@@ -106,7 +115,7 @@ const CreateParcel = () => {
                       <FormDescription className="sr-only">
                         This is a field for the name of the parcel
                       </FormDescription>
-                      <FormMessage />
+                      <FormMessage className="text-left" />
                     </FormItem>
                   )}
                 />
@@ -126,7 +135,7 @@ const CreateParcel = () => {
                       <FormDescription className="sr-only">
                         This is a field for the receiver email
                       </FormDescription>
-                      <FormMessage />
+                      <FormMessage className="text-left" />
                     </FormItem>
                   )}
                 />
@@ -161,7 +170,7 @@ const CreateParcel = () => {
                         <FormDescription className="sr-only">
                           This is a field for the division select input
                         </FormDescription>
-                        <FormMessage />
+                        <FormMessage className="text-left" />
                       </FormItem>
                     )}
                   />
@@ -183,7 +192,7 @@ const CreateParcel = () => {
                           <FormDescription className="sr-only">
                             This is a field for the city input
                           </FormDescription>
-                          <FormMessage />
+                          <FormMessage className="text-left" />
                         </FormItem>
                       )}
                     />
@@ -203,7 +212,7 @@ const CreateParcel = () => {
                           <FormDescription className="sr-only">
                             This is a field for the zip code input
                           </FormDescription>
-                          <FormMessage />
+                          <FormMessage className="text-left" />
                         </FormItem>
                       )}
                     />
@@ -224,7 +233,7 @@ const CreateParcel = () => {
                         <FormDescription className="sr-only">
                           This is a field for the street address input
                         </FormDescription>
-                        <FormMessage />
+                        <FormMessage className="text-left" />
                       </FormItem>
                     )}
                   />
@@ -245,18 +254,22 @@ const CreateParcel = () => {
                       <FormDescription className="sr-only">
                         Enter your parcels weight
                       </FormDescription>
-                      <FormMessage />
+                      <FormMessage className="text-left" />
                     </FormItem>
                   )}
                 />
 
-                <Button className="dark:text-white" type="submit">
-                  Confirm Parcel
-                </Button>
+                <Button type="submit">submit</Button>
+                {/* <ConfirmParcelModal /> */}
               </form>
             </Form>
           </div>
         </div>
+      </div>
+      <div>
+        <h3>A parcel from, {senderData?.data?.data?.name}</h3>
+        <p>To: {formValues.receiver}</p>
+        <p>Estimated Delivery Time: </p>
       </div>
     </div>
   );
