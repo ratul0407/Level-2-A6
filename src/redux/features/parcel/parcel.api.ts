@@ -9,7 +9,13 @@ export const parcelApi = baseApi.injectEndpoints({
         data: parcelInfo,
       }),
     }),
+    getMyParcels: builder.query({
+      query: () => ({
+        url: "/parcel/my-parcels",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useCreateParcelMutation } = parcelApi;
+export const { useCreateParcelMutation, useGetMyParcelsQuery } = parcelApi;
