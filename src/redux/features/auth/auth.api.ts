@@ -38,6 +38,15 @@ export const authApi = baseApi.injectEndpoints({
         method: "GET",
         params,
       }),
+      providesTags: ["USER"],
+    }),
+    changeUserActivity: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/user/change-activity/${id}`,
+        method: "PATCH",
+        data,
+      }),
+      invalidatesTags: ["USER"],
     }),
   }),
 });
@@ -48,4 +57,5 @@ export const {
   useLogOutMutation,
   useLoginMutation,
   useGetAllUsersQuery,
+  useChangeUserActivityMutation,
 } = authApi;

@@ -6,9 +6,10 @@ import { ColumnDef } from "@tanstack/react-table";
 
 export const columns: ColumnDef<IParcel>[] = [
   { accessorKey: "name", header: "Name" },
-  { accessorKey: "sender", header: "sender" },
+  { accessorKey: "trackingId", header: "Tracking ID" },
   { accessorKey: "weight", header: "weight" },
   { accessorKey: "createdAt", header: "Created At" },
+  { accessorKey: "sender", header: "sender" },
   { accessorKey: "receiver", header: "receiver" },
   { accessorKey: "deliveryDriver", header: "Delivery Man" },
   {
