@@ -1,4 +1,5 @@
 import TableRowActions from "@/components/modules/Admin/Parcel/TableRowActions";
+import { parcelStatus } from "@/constants/parcelStatus";
 import { cn } from "@/lib/utils";
 import { IParcel } from "@/types/response/parcel";
 import { ColumnDef } from "@tanstack/react-table";
@@ -22,10 +23,14 @@ export const columns: ColumnDef<IParcel>[] = [
           <span
             className={cn(
               "px-2 py-1 rounded text-xs font-medium",
-              status === "REQUESTED" && "bg-yellow-100 text-yellow-800",
-              status === "DELIVERED" && "bg-green-100 text-green-800",
-              status === "CANCELLED" && "bg-red-100 text-red-800",
-              status === "RETURNED" && "bg-purple-100 text-purple-800"
+              status === parcelStatus.requested &&
+                "bg-yellow-100 text-yellow-800",
+              status === parcelStatus.delivered &&
+                "bg-green-100 text-green-800",
+              status === parcelStatus.cancelled && "bg-red-100 text-red-800",
+              status === parcelStatus.returned &&
+                "bg-purple-100 text-purple-800",
+              status === parcelStatus.approved && "bg-blue-100 text-blue-800"
             )}
           >
             {status}

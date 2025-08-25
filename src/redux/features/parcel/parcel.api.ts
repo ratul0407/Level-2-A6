@@ -33,6 +33,14 @@ export const parcelApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["PARCEL"],
     }),
+    approveParcel: builder.mutation({
+      query: ({ tracking_id, data }) => ({
+        url: `/parcel/approve/${tracking_id}`,
+        method: "PATCH",
+        data,
+      }),
+      invalidatesTags: ["PARCEL"],
+    }),
   }),
 });
 
@@ -41,4 +49,5 @@ export const {
   useGetMyParcelsQuery,
   useGetAllParcelsQuery,
   useCancelParcelsMutation,
+  useApproveParcelMutation,
 } = parcelApi;
