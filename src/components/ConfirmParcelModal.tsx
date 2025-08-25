@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { addDays, format, parse } from "date-fns";
-import { Button } from "../ui/button";
+import { Button } from "./ui/button";
 import { toast } from "sonner";
 import { useCreateParcelMutation } from "@/redux/features/parcel/parcel.api";
 import { useNavigate } from "react-router";

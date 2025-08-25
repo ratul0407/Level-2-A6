@@ -1,4 +1,4 @@
-import ConfirmParcelModal from "@/components/modules/ConfirmParcelModal";
+import ConfirmParcelModal from "@/components/ConfirmParcelModal";
 import { Button } from "@/components/ui/button";
 import {
   Form,
