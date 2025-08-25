@@ -22,9 +22,9 @@ const ParcelDetails = (parcel: IParcel) => {
     <Card
       className={`${
         UserRole === role.superAdmin || UserRole === role.admin
-          ? "min-w-3xl"
+          ? "md:min-w-3xl"
           : ""
-      } max-w-3xl md:min-w-3xl mx-auto shadow-lg`}
+      } max-w-3xl  mx-auto shadow-lg`}
     >
       <CardHeader>
         <CardTitle className="flex justify-between items-center">
@@ -115,12 +115,12 @@ const ParcelDetails = (parcel: IParcel) => {
                 <TableHead>Time</TableHead>
               </TableRow>
             </TableHeader>
-            <TableBody c>
+            <TableBody>
               {parcel?.trackingEvents.map((event, index) => (
                 <TableRow key={index}>
                   <TableCell className="font-medium">{event.status}</TableCell>
                   <TableCell>{event.updatedBy}</TableCell>
-                  <TableCell>{format(event.at, "dd/MM/yy")}</TableCell>
+                  <TableCell>{format(event.at, "PPpp")}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

@@ -44,8 +44,6 @@ const DataTable = <TData, TValue>({
     manualPagination: true,
     pageCount: totalPage,
   });
-
-  console.log(columns, typeof getCoreRowModel);
   return (
     <div>
       <Table>
@@ -98,7 +96,6 @@ const DataTable = <TData, TValue>({
           </PaginationItem>
           {Array.from({ length: totalPage }, (_, index) => index + 1).map(
             (currentPage) => {
-              console.log(currentPage);
               return (
                 <PaginationItem
                   key={currentPage}

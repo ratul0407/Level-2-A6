@@ -23,13 +23,15 @@ export const parcelApi = baseApi.injectEndpoints({
         method: "GET",
         params,
       }),
+      providesTags: ["PARCEL"],
     }),
     cancelParcels: builder.mutation({
-      query: (params) => ({
-        url: "/parcel/all-parcels",
+      query: ({ tracking_id, data }) => ({
+        url: `/parcel/cancel/${tracking_id}`,
         method: "PATCH",
-        params,
+        data,
       }),
+      invalidatesTags: ["PARCEL"],
     }),
   }),
 });

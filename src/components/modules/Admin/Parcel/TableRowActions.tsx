@@ -1,7 +1,6 @@
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
@@ -13,10 +12,10 @@ import AssignParcelModal from "./AssignParcelModal";
 import CancelParcelModal from "./CancelParcelModal";
 const TableRowActions = (parcel: IParcel) => {
   const [openDetails, setOpenDetails] = useState(false);
-  console.log(parcel);
+
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
         <Button type="button" variant="ghost" className="h-6 w-6 p-0">
           <MoreHorizontal className="h-4 w-4" />
         </Button>

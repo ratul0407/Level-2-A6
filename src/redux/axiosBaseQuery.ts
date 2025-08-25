@@ -23,7 +23,6 @@ const axiosBaseQuery =
         params,
         headers,
       });
-      console.log(data);
       return { data: result.data };
     } catch (axiosError) {
       const err = axiosError as AxiosError;

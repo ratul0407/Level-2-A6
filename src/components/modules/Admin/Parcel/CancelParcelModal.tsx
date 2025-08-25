@@ -17,13 +17,38 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { parcelStatus } from "@/constants/parcelStatus";
 import { useCancelParcelsMutation } from "@/redux/features/parcel/parcel.api";
 import { IParcel } from "@/types/response/parcel";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import z from "zod";
 const CancelParcelModal = (parcel: IParcel) => {
-  const form = useForm();
-  const [cancelParcel] = useCancelParcelsMutation();
+  console.log(parcel?.trackingId);
+  const cancelSchema = z.object({
+    parcel_name: z.string(),
+  });
 
+  const form = useForm<z.infer<typeof cancelSchema>>({
+    resolver: zodResolver(cancelSchema),
+    defaultValues: {
+      parcel_name: "",
+    },
+  });
+  const [cancelParcel] = useCancelParcelsMutation();
+  form.watch();
+  const onSubmit = async (data: z.infer<typeof cancelSchema>) => {
+    console.log(data);
+    try {
+      const res = await cancelParcel({
+        tracking_id: parcel?.trackingId,
+        data: { status: parcelStatus.cancelled },
+      }).unwrap();
+      console.log(res);
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
   return (
     <Dialog>
       <DialogTrigger
@@ -43,13 +68,13 @@ const CancelParcelModal = (parcel: IParcel) => {
             Type in the parcel name to delete it.
           </DialogDescription>
           <Form {...form}>
-            <form>
+            <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
               <FormField
                 control={form.control}
-                name="name"
+                name="parcel_name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>To delete type "{parcel.name}" below</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="enter the parcel name"
@@ -64,11 +89,15 @@ const CancelParcelModal = (parcel: IParcel) => {
                   </FormItem>
                 )}
               />
+              <Button
+                disabled={parcel.name !== form.getValues("parcel_name")}
+                className="bg-red-400 text-white  border border-red-400 hover:text-black hover:bg-red-400 hover:cursor-pointer disabled:bg-white disabled:text-red-500"
+                variant="outline"
+              >
+                Delete
+              </Button>
             </form>
           </Form>
-          <Button className="bg-red-500 hover:bg-red-300 hover:cursor-pointer">
-            Delete
-          </Button>
         </DialogHeader>
       </DialogContent>
     </Dialog>
