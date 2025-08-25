@@ -1,4 +1,4 @@
-import MyParcel from "@/pages/Sender/MyParcel";
+import AllParcels from "@/pages/Admin/AllParcels";
 import { ISidebarItems } from "@/types";
 
 export const adminSidebarItems: ISidebarItems[] = [
@@ -7,9 +7,9 @@ export const adminSidebarItems: ISidebarItems[] = [
     url: "#",
     items: [
       {
-        title: "something",
-        url: "/admin/my-parcel",
-        component: MyParcel,
+        title: "All Parcels",
+        url: "/admin/all-parcels",
+        component: AllParcels,
       },
     ],
   },

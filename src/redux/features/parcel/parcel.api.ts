@@ -15,7 +15,19 @@ export const parcelApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    // admin routes
+    getAllParcels: builder.query({
+      query: () => ({
+        url: "/parcel/all-parcels",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useCreateParcelMutation, useGetMyParcelsQuery } = parcelApi;
+export const {
+  useCreateParcelMutation,
+  useGetMyParcelsQuery,
+  useGetAllParcelsQuery,
+} = parcelApi;
