@@ -37,6 +37,8 @@ const ParcelDetails = (parcel: IParcel) => {
                 "bg-yellow-100 text-yellow-800",
               parcel?.currentStatus === "DELIVERED" &&
                 "bg-green-100 text-green-800",
+              parcel?.currentStatus === "APPROVED" &&
+                "bg-blue-100 text-blue-800",
               parcel?.currentStatus === "CANCELLED" &&
                 "bg-red-100 text-red-800",
               parcel?.currentStatus === "RETURNED" &&
