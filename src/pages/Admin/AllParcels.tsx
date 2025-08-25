@@ -9,6 +9,7 @@ const AllParcels = () => {
   console.log(page);
   const { data, isLoading } = useGetAllParcelsQuery({ page });
   console.log(data?.data?.data);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const parcels = data?.data?.data?.map((parcel: any) => ({
     ...parcel,
     sender: parcel?.sender?.email ?? "",
@@ -20,8 +21,10 @@ const AllParcels = () => {
   console.log(data);
   console.log(parcels);
   return (
-    <div>
-      <h1>AllParcels</h1>
+    <div className="space-y-12">
+      <div>
+        <h1 className="font-bold text-3xl">All Parcels</h1>
+      </div>
       {!isLoading && (
         <DataTable
           columns={columns}

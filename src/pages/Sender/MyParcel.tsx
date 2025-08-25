@@ -8,12 +8,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { format } from "date-fns";
+
 const MyParcel = () => {
   const { data } = useGetMyParcelsQuery(undefined);
   console.log(data);
   return (
     <div className="grid grid-cols-3 gap-4">
-      {data?.data?.data.map((item) => (
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      {data?.data?.data.map((item: any) => (
         <Card key={item._id} className="shadow-lg">
           <CardHeader>
             <CardTitle>{item?.name}</CardTitle>
