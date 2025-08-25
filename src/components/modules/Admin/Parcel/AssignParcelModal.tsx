@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -13,7 +14,14 @@ const AssignParcelModal = (parcel: IParcel) => {
   console.log(data);
   return (
     <Dialog>
-      <DialogTrigger className="block text-sm ml-2">
+      <DialogTrigger
+        disabled={
+          parcel.currentStatus === "CANCELLED" ||
+          parcel.currentStatus === "DELIVERED" ||
+          parcel.currentStatus === "RETURNED"
+        }
+        className="block text-sm ml-2 disabled:opacity-50"
+      >
         Assign Delivery
       </DialogTrigger>
       <DialogContent className="md:max-w-4xl">

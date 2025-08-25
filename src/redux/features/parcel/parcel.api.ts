@@ -24,6 +24,13 @@ export const parcelApi = baseApi.injectEndpoints({
         params,
       }),
     }),
+    cancelParcels: builder.mutation({
+      query: (params) => ({
+        url: "/parcel/all-parcels",
+        method: "PATCH",
+        params,
+      }),
+    }),
   }),
 });
 
@@ -31,4 +38,5 @@ export const {
   useCreateParcelMutation,
   useGetMyParcelsQuery,
   useGetAllParcelsQuery,
+  useCancelParcelsMutation,
 } = parcelApi;

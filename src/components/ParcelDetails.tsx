@@ -106,6 +106,7 @@ const ParcelDetails = (parcel: IParcel) => {
 
         <div>
           <h3 className="text-lg font-semibold mb-2">Tracking History</h3>
+
           <Table>
             <TableHeader>
               <TableRow>
@@ -114,7 +115,7 @@ const ParcelDetails = (parcel: IParcel) => {
                 <TableHead>Time</TableHead>
               </TableRow>
             </TableHeader>
-            <TableBody>
+            <TableBody c>
               {parcel?.trackingEvents.map((event, index) => (
                 <TableRow key={index}>
                   <TableCell className="font-medium">{event.status}</TableCell>
