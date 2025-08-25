@@ -7,14 +7,22 @@ const AllParcels = () => {
   const [page, setPageChange] = useState(1);
   const { data, isLoading } = useGetAllParcelsQuery(undefined);
   console.log(data?.data?.data);
-  console.log(data?.data?.meta?.totalPage);
+  const parcels = data?.data?.data?.map((parcel: any) => ({
+    ...parcel,
+    sender: parcel?.sender?.name ?? "",
+    receiver: parcel?.receiver?.name ?? "",
+    deliveryDriver: parcel?.deliveryDriver?.name ?? "",
+  }));
+
+  console.log(data);
+  console.log(parcels);
   return (
     <div>
       <h1>AllParcels</h1>
       {!isLoading && (
         <DataTable
           columns={columns}
-          data={data?.data?.data}
+          data={parcels}
           page={data?.data?.meta?.page}
           totalPage={data?.data?.meta?.totalPage}
           onPageChange={setPageChange}

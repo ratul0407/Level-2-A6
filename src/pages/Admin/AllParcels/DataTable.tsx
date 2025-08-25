@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -15,6 +14,15 @@ import {
   getPaginationRowModel,
 } from "@tanstack/react-table";
 
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -80,25 +88,36 @@ const DataTable = <TData, TValue>({
       </Table>
 
       {/* Pagination Controls */}
-      <div className="flex items-center justify-between py-4">
-        <Button
-          variant="outline"
-          disabled={page <= 1}
-          onClick={() => onPageChange(page - 1)}
-        >
-          Previous
-        </Button>
-        <span>
-          Page {page} of {totalPage}
-        </span>
-        <Button
-          variant="outline"
-          disabled={page >= totalPage}
-          onClick={() => onPageChange(page + 1)}
-        >
-          Next
-        </Button>
-      </div>
+
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem
+            onClick={handlePrevPage}
+            className={`${page === 1 && "opacity-50 pointer-events-none"}`}
+          >
+            <PaginationPrevious href="#" />
+          </PaginationItem>
+          {Array.from({ length: totalPage }, (_, index) => index + 1).map(
+            (currentPage) => {
+              return (
+                <PaginationItem key={page} onClick={() => onPageChange(page)}>
+                  <PaginationLink isActive={page === currentPage}>
+                    {page}
+                  </PaginationLink>
+                </PaginationItem>
+              );
+            }
+          )}
+          <PaginationItem
+            onClick={handleNextPage}
+            className={`${
+              page === totalPage && "opacity-50 pointer-events-none"
+            } `}
+          >
+            <PaginationNext href="#" />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </div>
   );
 };
