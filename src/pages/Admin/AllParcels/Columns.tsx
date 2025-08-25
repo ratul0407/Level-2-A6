@@ -3,9 +3,14 @@ export interface IParcel {
   _id: string;
   name: string;
   cost: number;
-  receiver: string;
+  receiver: {
+    name: string;
+  };
   weight: number;
   createdAt: string;
+  sender: {
+    name: string;
+  };
 }
 
 export const columns: ColumnDef<IParcel>[] = [
