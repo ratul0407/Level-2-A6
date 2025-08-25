@@ -12,10 +12,20 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { IParcel } from "@/types/response/parcel";
-
+import { useGetMeQuery } from "@/redux/features/auth/auth.api";
+import { role } from "@/constants/role";
 const ParcelDetails = (parcel: IParcel) => {
+  const { data } = useGetMeQuery(undefined);
+  const UserRole = data?.data?.data?.role;
+  console.log(UserRole === role.superAdmin || UserRole === role.admin);
   return (
-    <Card className="max-w-3xl mx-auto shadow-lg">
+    <Card
+      className={`${
+        UserRole === role.superAdmin || UserRole === role.admin
+          ? "min-w-3xl"
+          : ""
+      } max-w-3xl md:min-w-3xl mx-auto shadow-lg`}
+    >
       <CardHeader>
         <CardTitle className="flex justify-between items-center">
           Tracking ID:{" "}
@@ -38,6 +48,16 @@ const ParcelDetails = (parcel: IParcel) => {
         </CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4">
+        {(data?.data?.data?.role === role.superAdmin ||
+          data?.data?.data?.role === role.admin) && (
+          <div>
+            Delivery Man:{" "}
+            {parcel?.deliveryDriver
+              ? parcel.deliveryDriver
+              : "Not Assigned yet!"}
+          </div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <h3 className="text-lg font-semibold mb-2">Sender Information</h3>

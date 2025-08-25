@@ -11,6 +11,7 @@ export interface IParcel {
   trackingEvents: TrackingEvent[];
   weight: number;
   cost: number;
+  deliveryDriver?: string;
   createdAt: string;
   updatedAt: string;
   trackingId: string;

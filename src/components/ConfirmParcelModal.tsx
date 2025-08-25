@@ -66,7 +66,8 @@ const ConfirmParcelModal = ({ open, setOpen, parcelData }: IProps) => {
         toast.success(res?.message, { id: toastId });
         navigate("/sender/my-parcel");
       }
-    } catch (error: unknown) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       toast.error(error?.data?.message, { id: toastId });
       console.log(error);
     }

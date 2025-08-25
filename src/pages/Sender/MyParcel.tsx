@@ -1,17 +1,4 @@
 import { useGetMyParcelsQuery } from "@/redux/features/parcel/parcel.api";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { format } from "date-fns";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
 import ParcelDetails from "@/components/ParcelDetails";
 import { IParcel } from "@/types/response/parcel";
 

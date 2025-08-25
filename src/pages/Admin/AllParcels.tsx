@@ -6,9 +6,7 @@ import { format } from "date-fns";
 
 const AllParcels = () => {
   const [page, setPageChange] = useState(1);
-  console.log(page);
   const { data, isLoading } = useGetAllParcelsQuery({ page });
-  console.log(data?.data?.data);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const parcels = data?.data?.data?.map((parcel: any) => ({
     ...parcel,
@@ -18,8 +16,6 @@ const AllParcels = () => {
     createdAt: format(new Date(parcel?.createdAt), "dd-MMM-yyyy"),
   }));
 
-  console.log(data);
-  console.log(parcels);
   return (
     <div className="space-y-12">
       <div>
