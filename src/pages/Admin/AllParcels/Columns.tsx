@@ -8,9 +8,8 @@ export interface IParcel {
   };
   weight: number;
   createdAt: string;
-  sender: {
-    name: string;
-  };
+  sender: string;
+  status: string;
 }
 
 export const columns: ColumnDef<IParcel>[] = [
@@ -20,4 +19,5 @@ export const columns: ColumnDef<IParcel>[] = [
   { accessorKey: "weight", header: "weight" },
   { accessorKey: "createdAt", header: "Created At" },
   { accessorKey: "receiver", header: "receiver" },
+  { accessorKey: "status", header: "Status" },
 ];

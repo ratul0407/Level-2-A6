@@ -17,7 +17,6 @@ import {
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -89,27 +88,31 @@ const DataTable = <TData, TValue>({
 
       {/* Pagination Controls */}
 
-      <Pagination>
+      <Pagination className="mt-16 ">
         <PaginationContent>
           <PaginationItem
-            onClick={handlePrevPage}
+            onClick={() => onPageChange(page - 1)}
             className={`${page === 1 && "opacity-50 pointer-events-none"}`}
           >
             <PaginationPrevious href="#" />
           </PaginationItem>
           {Array.from({ length: totalPage }, (_, index) => index + 1).map(
             (currentPage) => {
+              console.log(currentPage);
               return (
-                <PaginationItem key={page} onClick={() => onPageChange(page)}>
+                <PaginationItem
+                  key={currentPage}
+                  onClick={() => onPageChange(currentPage)}
+                >
                   <PaginationLink isActive={page === currentPage}>
-                    {page}
+                    {currentPage}
                   </PaginationLink>
                 </PaginationItem>
               );
             }
           )}
           <PaginationItem
-            onClick={handleNextPage}
+            onClick={() => onPageChange(page + 1)}
             className={`${
               page === totalPage && "opacity-50 pointer-events-none"
             } `}

@@ -2,16 +2,19 @@ import { useGetAllParcelsQuery } from "@/redux/features/parcel/parcel.api";
 import DataTable from "./AllParcels/DataTable";
 import { columns } from "./AllParcels/Columns";
 import { useState } from "react";
+import { format } from "date-fns";
 
 const AllParcels = () => {
   const [page, setPageChange] = useState(1);
-  const { data, isLoading } = useGetAllParcelsQuery(undefined);
+  console.log(page);
+  const { data, isLoading } = useGetAllParcelsQuery({ page });
   console.log(data?.data?.data);
   const parcels = data?.data?.data?.map((parcel: any) => ({
     ...parcel,
-    sender: parcel?.sender?.name ?? "",
-    receiver: parcel?.receiver?.name ?? "",
-    deliveryDriver: parcel?.deliveryDriver?.name ?? "",
+    sender: parcel?.sender?.email ?? "",
+    receiver: parcel?.receiver?.email ?? "",
+    deliveryDriver: parcel?.deliveryDriver?.email ?? "",
+    createdAt: format(new Date(parcel?.createdAt), "dd-MMM-yyyy"),
   }));
 
   console.log(data);

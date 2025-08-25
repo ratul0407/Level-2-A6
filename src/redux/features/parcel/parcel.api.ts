@@ -18,9 +18,10 @@ export const parcelApi = baseApi.injectEndpoints({
 
     // admin routes
     getAllParcels: builder.query({
-      query: () => ({
+      query: (params) => ({
         url: "/parcel/all-parcels",
         method: "GET",
+        params,
       }),
     }),
   }),
