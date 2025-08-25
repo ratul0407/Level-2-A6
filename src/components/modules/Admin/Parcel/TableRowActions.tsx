@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { IParcel } from "@/types/response/parcel";
 import ParcelDetailsModal from "./ParcelDetailsModal";
 import { useState } from "react";
+import AssignParcelModal from "./AssignParcelModal";
 const TableRowActions = (parcel: IParcel) => {
   const [openDetails, setOpenDetails] = useState(false);
   console.log(parcel);
@@ -27,18 +28,7 @@ const TableRowActions = (parcel: IParcel) => {
           parcel={parcel}
         />
         {/* </DropdownMenuItem> */}
-        <DropdownMenuItem
-          disabled={
-            parcel.currentStatus === "CANCELLED" ||
-            parcel.currentStatus === "DELIVERED" ||
-            parcel.currentStatus === "RETURNED"
-          }
-          onClick={() => {
-            // call API to update status
-          }}
-        >
-          Assign Delivery
-        </DropdownMenuItem>
+        <AssignParcelModal {...parcel} />
         <DropdownMenuItem
           disabled={
             parcel.currentStatus === "CANCELLED" ||

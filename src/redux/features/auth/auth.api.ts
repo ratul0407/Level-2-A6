@@ -30,6 +30,15 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["USER"],
     }),
+
+    // admin apis
+    getAllUsers: builder.query({
+      query: (params) => ({
+        url: "/user/all-users",
+        method: "GET",
+        params,
+      }),
+    }),
   }),
 });
 
@@ -38,4 +47,5 @@ export const {
   useGetMeQuery,
   useLogOutMutation,
   useLoginMutation,
+  useGetAllUsersQuery,
 } = authApi;
