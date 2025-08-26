@@ -29,6 +29,11 @@ import { useRegisterMutation } from "@/redux/features/auth/auth.api";
 import { toast } from "sonner";
 import { role } from "@/constants/role";
 
+const registrationRole = {
+  Sender: role.sender,
+  Receiver: role.receiver,
+  "Delivery Personnel": role.delivery_personnel,
+};
 const registerSchema = z
   .object({
     name: z
@@ -36,6 +41,9 @@ const registerSchema = z
       .min(3, { error: "Name is too short" })
       .max(50, { error: "Name is too big" }),
     email: z.email(),
+    role: z.enum(Object.values(registrationRole), {
+      error: "Please select role",
+    }),
     password: z
       .string()
       .min(6, { error: "password must be 6 characters long" }),
@@ -47,14 +55,18 @@ const registerSchema = z
       .regex(/^(?:\+8801\d{9}|01\d{9})$/, {
         message: "Invalid BD phone number",
       }),
-    division: z.enum(Object.values(division)),
-    city: z.string({ error: "city should be string" }),
+    division: z.enum(Object.values(division), {
+      error: "please select division",
+    }),
+    city: z
+      .string({ error: "city should be string" })
+      .min(2, { error: "city address required" }),
     zip: z
       .string({ error: "zip code must be in number" })
       .min(4, { error: "Zip code must be of 4 numbers" })
       .max(4, { error: "zip code must be of 4 numbers" }),
 
-    street: z.string({ error: "street should be string" }),
+    street: z.string().min(2, { error: "street address required" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Password do not match",
@@ -68,6 +80,7 @@ const Register = () => {
     defaultValues: {
       name: "",
       email: "",
+      role: "",
       password: "",
       confirmPassword: "",
       phone: "",
@@ -89,7 +102,6 @@ const Register = () => {
         zip: Number(zip),
         street,
       },
-      role: role.sender,
     };
     try {
       const res = await register(userData).unwrap();
@@ -112,7 +124,7 @@ const Register = () => {
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className={cn(" flex flex-col gap-6 justify-center px-12")}
+                className={cn(" flex flex-col gap-3 justify-center px-12")}
               >
                 <FormField
                   control={form.control}
@@ -130,7 +142,7 @@ const Register = () => {
                       <FormDescription className="sr-only">
                         This is a field for the name input
                       </FormDescription>
-                      <FormMessage />
+                      <FormMessage className="text-left" />
                     </FormItem>
                   )}
                 />
@@ -150,7 +162,40 @@ const Register = () => {
                       <FormDescription className="sr-only">
                         This is a field for the email input
                       </FormDescription>
-                      <FormMessage />
+                      <FormMessage className="text-left" />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="role"
+                  render={({ field }) => (
+                    <FormItem className="flex-1">
+                      <FormLabel>Role</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl className="w-full">
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select Your Role" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="w-full">
+                          {Object.entries(registrationRole)?.map(
+                            ([key, value]) => (
+                              <SelectItem key={key} value={value}>
+                                {key}
+                              </SelectItem>
+                            )
+                          )}
+                        </SelectContent>
+                      </Select>
+                      <FormDescription className="sr-only">
+                        This is a field for the role select input
+                      </FormDescription>
+                      <FormMessage className="text-left" />
                     </FormItem>
                   )}
                 />
@@ -200,7 +245,7 @@ const Register = () => {
                       <FormDescription className="sr-only">
                         This is a field for the division select input
                       </FormDescription>
-                      <FormMessage />
+                      <FormMessage className="text-left" />
                     </FormItem>
                   )}
                 />
@@ -222,7 +267,7 @@ const Register = () => {
                         <FormDescription className="sr-only">
                           This is a field for the city input
                         </FormDescription>
-                        <FormMessage />
+                        <FormMessage className="text-left" />
                       </FormItem>
                     )}
                   />
@@ -242,7 +287,7 @@ const Register = () => {
                         <FormDescription className="sr-only">
                           This is a field for the zip code input
                         </FormDescription>
-                        <FormMessage />
+                        <FormMessage className="text-left" />
                       </FormItem>
                     )}
                   />
@@ -263,7 +308,7 @@ const Register = () => {
                       <FormDescription className="sr-only">
                         This is a field for the street address input
                       </FormDescription>
-                      <FormMessage />
+                      <FormMessage className="text-left" />
                     </FormItem>
                   )}
                 />
@@ -280,7 +325,7 @@ const Register = () => {
                       <FormDescription className="sr-only">
                         This is a field for the password input
                       </FormDescription>
-                      <FormMessage />
+                      <FormMessage className="text-left" />
                     </FormItem>
                   )}
                 />
@@ -296,7 +341,7 @@ const Register = () => {
                       <FormDescription className="sr-only">
                         This is a field to confirm your password
                       </FormDescription>
-                      <FormMessage />
+                      <FormMessage className="text-left" />
                     </FormItem>
                   )}
                 />

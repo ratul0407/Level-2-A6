@@ -6,7 +6,7 @@ import { format } from "date-fns";
 
 const AllParcels = () => {
   const [page, setPageChange] = useState(1);
-  const { data, isLoading } = useGetAllParcelsQuery({ page });
+  const { data, isLoading, isError } = useGetAllParcelsQuery({ page });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const parcels = data?.data?.data?.map((parcel: any) => ({
     ...parcel,
@@ -21,7 +21,15 @@ const AllParcels = () => {
       <div>
         <h1 className="font-bold text-3xl">All Parcels</h1>
       </div>
-      {!isLoading && (
+
+      {isError && (
+        <div className="flex items-center justify-center w-full min-h-[60vh]">
+          <h3 className="text-muted-foreground text-3xl">
+            Something went wrong please try again later!
+          </h3>
+        </div>
+      )}
+      {!isLoading && !isError && (
         <DataTable
           columns={columns}
           data={parcels}
