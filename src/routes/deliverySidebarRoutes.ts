@@ -1,8 +1,3 @@
-import AllParcels from "@/pages/Admin/AllParcels";
-import AllUsers from "@/pages/Admin/AllUsers";
-import Overview from "@/pages/Admin/Overview";
-import { ISidebarItems } from "@/types";
-
 export const adminSidebarItems: ISidebarItems[] = [
   {
     title: "Dashboard",
@@ -19,9 +14,9 @@ export const adminSidebarItems: ISidebarItems[] = [
         component: AllUsers,
       },
       {
-        title: "All Parcels",
-        url: "/admin/all-parcels",
-        component: AllParcels,
+        title: "My Parcels",
+        url: "/delivery/my-parcels",
+        component: Myparcels,
       },
     ],
   },
