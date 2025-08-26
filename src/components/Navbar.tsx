@@ -33,6 +33,7 @@ const Navbar = () => {
   const { pathname } = useLocation();
   console.log(pathname);
   const { data } = useGetMeQuery(undefined);
+  console.log(data);
   const [logout] = useLogOutMutation();
   const dispatch = useAppDispatch();
   const handleLogOut = async () => {
@@ -40,6 +41,7 @@ const Navbar = () => {
     dispatch(authApi.util.resetApiState());
   };
   const avatarName = data?.data?.data?.name?.[0].toUpperCase();
+  const userRole = data?.data?.data?.role;
   // useEffect(() => {
   //   navigationLinks.forEach((item) => {
   //     item.active = item.href === pathname;
@@ -128,11 +130,11 @@ const Navbar = () => {
             <>
               <Link
                 to={
-                  role.sender
+                  userRole === role.sender
                     ? "/sender"
-                    : role.receiver
+                    : userRole === role.receiver
                     ? "/receiver"
-                    : role.delivery_personnel
+                    : userRole === role.delivery_personnel
                     ? "/delivery"
                     : "/admin"
                 }

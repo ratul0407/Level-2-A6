@@ -10,6 +10,7 @@ import { generateRoute } from "@/utils/generateRoutes";
 import { createBrowserRouter, Navigate } from "react-router";
 import { adminSidebarItems } from "./adminSidebarRoutes";
 import { senderSidebarItems } from "./senderSidebarRoutes";
+import { receiverSidebarItems } from "./receiverSidebarRoutes";
 
 const router = createBrowserRouter([
   {
@@ -42,8 +43,16 @@ const router = createBrowserRouter([
     path: "/sender",
     Component: DashboardLayout,
     children: [
-      { index: true, element: <Navigate to="/sender/send-parcel" /> },
+      { index: true, element: <Navigate to="/sender/create-parcel" /> },
       ...generateRoute(senderSidebarItems),
+    ],
+  },
+  {
+    path: "/receiver",
+    Component: DashboardLayout,
+    children: [
+      { index: true, element: <Navigate to="/receiver/my-parcels" /> },
+      ...generateRoute(receiverSidebarItems),
     ],
   },
   {
