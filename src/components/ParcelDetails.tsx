@@ -24,7 +24,7 @@ const ParcelDetails = (parcel: IParcel) => {
         UserRole === role.superAdmin || UserRole === role.admin
           ? "md:min-w-3xl"
           : ""
-      } max-w-3xl  mx-auto shadow-lg`}
+      } md:max-w-3xl w-fit   mx-auto shadow-lg `}
     >
       <CardHeader>
         <CardTitle className="flex justify-between items-center">

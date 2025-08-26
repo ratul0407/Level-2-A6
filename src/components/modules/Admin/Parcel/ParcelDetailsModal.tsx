@@ -20,7 +20,7 @@ const ParcelDetailsModal = ({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className="text-sm ml-2">Show details</DialogTrigger>
       <DialogContent className="md:min-w-4xl">
-        <DialogHeader className="min-w-3xl">
+        <DialogHeader className="md:min-w-3xl">
           <DialogTitle className="sr-only">Parcel Overview</DialogTitle>
           <ParcelDetails {...parcel} />
         </DialogHeader>

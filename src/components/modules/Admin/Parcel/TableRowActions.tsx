@@ -29,7 +29,7 @@ const TableRowActions = (parcel: IParcel) => {
         />
         {/* </DropdownMenuItem> */}
         <AssignParcelModal {...parcel} />
-        <CancelParcelModal {...parcel} />
+        <CancelParcelModal parcel={parcel} button={false} />
       </DropdownMenuContent>
     </DropdownMenu>
   );

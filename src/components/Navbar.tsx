@@ -149,10 +149,10 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Button asChild variant="ghost" size="sm" className="text-sm">
+              <Button asChild size="sm" className="text-sm">
                 <Link to="/login">Log In</Link>
               </Button>
-              <Button asChild size="sm" className="text-sm">
+              <Button asChild variant="outline" size="sm" className="text-sm">
                 <Link to="/register">Get Started</Link>
               </Button>
             </>

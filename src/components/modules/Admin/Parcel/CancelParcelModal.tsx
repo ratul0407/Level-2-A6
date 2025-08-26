@@ -68,13 +68,15 @@ const CancelParcelModal = ({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         disabled={
-          parcel.currentStatus === "CANCELLED" ||
-          parcel.currentStatus === "DELIVERED" ||
-          parcel.currentStatus === "RETURNED"
+          parcel?.currentStatus === "CANCELLED" ||
+          parcel?.currentStatus === "DELIVERED" ||
+          parcel?.currentStatus === "RETURNED"
         }
         className={`${
-          !button && "disabled:opacity-50 ml-2 block text-sm"
-        } bg-red-800 text-white px-1 py-1 rounded-sm disabled:bg-red-200`}
+          !button
+            ? "disabled:opacity-50 ml-2 block text-sm"
+            : "bg-red-800 text-white px-1 py-1 rounded-sm disabled:bg-red-200"
+        } `}
       >
         Cancel
       </DialogTrigger>
