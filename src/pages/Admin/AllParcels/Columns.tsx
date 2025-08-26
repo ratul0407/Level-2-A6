@@ -3,11 +3,24 @@ import { parcelStatus } from "@/constants/parcelStatus";
 import { cn } from "@/lib/utils";
 import { IParcel } from "@/types/response/parcel";
 import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown } from "lucide-react";
 
 export const columns: ColumnDef<IParcel>[] = [
   { accessorKey: "name", header: "Name" },
   { accessorKey: "trackingId", header: "Tracking ID" },
-  { accessorKey: "weight", header: "weight" },
+  {
+    accessorKey: "weight",
+    header: ({ column }) => (
+      <button
+        className="flex items-center"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Weight
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </button>
+    ),
+    cell: ({ row }) => row.original.weight,
+  },
   { accessorKey: "createdAt", header: "Created At" },
   { accessorKey: "sender", header: "sender" },
   { accessorKey: "receiver", header: "receiver" },
