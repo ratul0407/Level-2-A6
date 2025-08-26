@@ -22,14 +22,22 @@ import { parcelStatus } from "@/constants/parcelStatus";
 import { useCancelParcelsMutation } from "@/redux/features/parcel/parcel.api";
 import { IParcel } from "@/types/response/parcel";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
-const CancelParcelModal = (parcel: IParcel) => {
+const CancelParcelModal = ({
+  parcel,
+  button = false,
+}: {
+  parcel: IParcel;
+  button: boolean;
+}) => {
   console.log(parcel?.trackingId);
   const cancelSchema = z.object({
     parcel_name: z.string(),
   });
-
+  const [open, setOpen] = useState(false);
   const form = useForm<z.infer<typeof cancelSchema>>({
     resolver: zodResolver(cancelSchema),
     defaultValues: {
@@ -40,25 +48,33 @@ const CancelParcelModal = (parcel: IParcel) => {
   form.watch();
   const onSubmit = async (data: z.infer<typeof cancelSchema>) => {
     console.log(data);
+    const toastId = toast.loading("Loading.....");
     try {
       const res = await cancelParcel({
         tracking_id: parcel?.trackingId,
         data: { status: parcelStatus.cancelled },
       }).unwrap();
       console.log(res);
+      if (res.success) {
+        toast.info("Parcel has been cancelled", { id: toastId });
+        setOpen(false);
+      }
     } catch (error: any) {
       console.log(error);
+      toast.error(error?.data?.message, { id: toastId });
     }
   };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         disabled={
           parcel.currentStatus === "CANCELLED" ||
           parcel.currentStatus === "DELIVERED" ||
           parcel.currentStatus === "RETURNED"
         }
-        className="disabled:opacity-50 ml-2 block text-sm"
+        className={`${
+          !button && "disabled:opacity-50 ml-2 block text-sm"
+        } bg-red-800 text-white px-1 py-1 rounded-sm disabled:bg-red-200`}
       >
         Cancel
       </DialogTrigger>

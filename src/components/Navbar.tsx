@@ -126,7 +126,17 @@ const Navbar = () => {
         <div className="flex items-center gap-2">
           {data?.success ? (
             <>
-              <Link to="/sender">
+              <Link
+                to={
+                  role.sender
+                    ? "/sender"
+                    : role.receiver
+                    ? "/receiver"
+                    : role.delivery_personnel
+                    ? "/delivery"
+                    : "/admin"
+                }
+              >
                 <div className="rounded-full bg-green-500 text-white size-8 flex flex-col items-center justify-center">
                   {avatarName}
                 </div>

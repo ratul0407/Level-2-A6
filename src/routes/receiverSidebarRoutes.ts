@@ -1,7 +1,3 @@
-import CreateParcel from "@/pages/Sender/CreateParcel";
-import MyParcel from "@/pages/Shared/MyParcels";
-import SendParcel from "@/pages/Sender/SendParcel";
-
 import { ISidebarItems } from "@/types";
 
 export const senderSidebarItems: ISidebarItems[] = [

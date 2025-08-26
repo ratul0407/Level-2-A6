@@ -8,12 +8,14 @@ export const parcelApi = baseApi.injectEndpoints({
         method: "POST",
         data: parcelInfo,
       }),
+      invalidatesTags: ["PARCEL"],
     }),
     getMyParcels: builder.query({
       query: () => ({
         url: "/parcel/my-parcels",
         method: "GET",
       }),
+      providesTags: ["PARCEL"],
     }),
 
     // admin routes
