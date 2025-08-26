@@ -20,7 +20,6 @@ import { useGetMeQuery } from "@/redux/features/auth/auth.api";
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: userData } = useGetMeQuery(undefined);
   const { pathname } = useLocation();
-  console.log(pathname);
   const data = {
     navMain: getSidebarItems(userData?.data?.data?.role),
   };

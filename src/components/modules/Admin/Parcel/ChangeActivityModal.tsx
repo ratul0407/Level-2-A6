@@ -29,7 +29,6 @@ import { toast } from "sonner";
 import { useState } from "react";
 const ChangeActivityModal = (user: any) => {
   const [open, setOpen] = useState(false);
-  console.log(user);
   const [changeActivity] = useChangeUserActivityMutation();
   const form = useForm();
   const onSubmit = async (data: unknown) => {

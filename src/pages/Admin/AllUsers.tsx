@@ -28,6 +28,8 @@ import { userActivity } from "@/constants/userActivity";
 import { cn } from "@/lib/utils";
 import { useGetAllUsersQuery } from "@/redux/features/auth/auth.api";
 import { useGetUserStatsQuery } from "@/redux/features/user/user.api";
+import { UsersBarChart } from "@/components/modules/Admin/User/UsersBarChart";
+import UsersByRolePie from "@/components/modules/Admin/User/UsersRoleByPie";
 
 const AllUsers = () => {
   const { data, isLoading, isError } = useGetAllUsersQuery(undefined);
@@ -69,68 +71,29 @@ const AllUsers = () => {
       color: "var(--chart-5)",
     },
   } satisfies ChartConfig;
+
+  const barData = userStatsData?.data?.usersCreatedOverTheLast30Days?.map(
+    (item) => ({
+      date: item._id,
+      users: item.count,
+    })
+  );
+  const pieData = userStatsData?.data?.usersByRole?.map((item) => ({
+    role: item._id,
+    value: item.count,
+  }));
   return (
     <div className="space-y-12">
       <div>
         <h1 className="font-bold text-3xl">All Users</h1>
       </div>
-      <div className="grid grid-cols-2">
-        <Card className="flex flex-col">
-          <CardHeader className="items-center pb-0">
-            <CardTitle>Pie Chart</CardTitle>
-            <CardDescription>January - June 2024</CardDescription>
-          </CardHeader>
-          <CardContent className="flex-1 pb-0">
-            <ChartContainer
-              config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
-              <PieChart>
-                <ChartTooltip
-                  cursor={false}
-                  content={<ChartTooltipContent hideLabel />}
-                />
-                <Pie data={chartData} dataKey="visitors" nameKey="users" />
-              </PieChart>
-            </ChartContainer>
-          </CardContent>
-          <CardFooter className="flex-col gap-2 text-sm">
-            <div className="flex items-center gap-2 leading-none font-medium">
-              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-            </div>
-            <div className="text-muted-foreground leading-none">
-              Showing total visitors for the last 6 months
-            </div>
-          </CardFooter>
-        </Card>
-        <Card className="flex flex-col">
-          <CardHeader className="items-center pb-0">
-            <CardTitle>Pie Chart</CardTitle>
-            <CardDescription>January - June 2024</CardDescription>
-          </CardHeader>
-          <CardContent className="flex-1 pb-0">
-            <ChartContainer
-              config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
-              <PieChart>
-                <ChartTooltip
-                  cursor={false}
-                  content={<ChartTooltipContent hideLabel />}
-                />
-                <Pie data={chartData} dataKey="visitors" nameKey="browser" />
-              </PieChart>
-            </ChartContainer>
-          </CardContent>
-          <CardFooter className="flex-col gap-2 text-sm">
-            <div className="flex items-center gap-2 leading-none font-medium">
-              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-            </div>
-            <div className="text-muted-foreground leading-none">
-              Showing total visitors for the last 6 months
-            </div>
-          </CardFooter>
-        </Card>
+      <div className="grid grid-cols-2 gap-3">
+        {!userStatsLoading && (
+          <>
+            <UsersBarChart data={barData} />
+            <UsersByRolePie data={pieData} />
+          </>
+        )}
       </div>
       {isLoading && <Loading />}
       {isError && (
