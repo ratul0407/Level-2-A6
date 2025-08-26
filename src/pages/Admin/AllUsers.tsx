@@ -8,22 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { TrendingUp } from "lucide-react";
-import { Pie, PieChart } from "recharts";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
+
 import { userActivity } from "@/constants/userActivity";
 import { cn } from "@/lib/utils";
 import { useGetAllUsersQuery } from "@/redux/features/auth/auth.api";
@@ -38,39 +23,6 @@ const AllUsers = () => {
   console.log(userStatsData);
   const users = data?.data;
   console.log(users);
-
-  const chartData = [
-    { user: "Delivery Personnel", visitors: 275, fill: "var(--color-chrome)" },
-    { user: "Sender", visitors: 200, fill: "var(--color-safari)" },
-    { user: "Receiver", visitors: 187, fill: "var(--color-firefox)" },
-    { user: "Admin", visitors: 173, fill: "var(--color-edge)" },
-    { user: "Super Admin", visitors: 90, fill: "var(--color-other)" },
-  ];
-  const chartConfig = {
-    visitors: {
-      label: "Visitors",
-    },
-    chrome: {
-      label: "Chrome",
-      color: "var(--chart-1)",
-    },
-    safari: {
-      label: "Safari",
-      color: "var(--chart-2)",
-    },
-    firefox: {
-      label: "Firefox",
-      color: "var(--chart-3)",
-    },
-    edge: {
-      label: "Edge",
-      color: "var(--chart-4)",
-    },
-    other: {
-      label: "Other",
-      color: "var(--chart-5)",
-    },
-  } satisfies ChartConfig;
 
   const barData = userStatsData?.data?.usersCreatedOverTheLast30Days?.map(
     (item) => ({

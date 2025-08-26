@@ -11,6 +11,7 @@ import { createBrowserRouter, Navigate } from "react-router";
 import { adminSidebarItems } from "./adminSidebarRoutes";
 import { senderSidebarItems } from "./senderSidebarRoutes";
 import { receiverSidebarItems } from "./receiverSidebarRoutes";
+import { deliverySidebarItems } from "./deliverySidebarRoutes";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,14 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Navigate to="/receiver/my-parcels" /> },
       ...generateRoute(receiverSidebarItems),
+    ],
+  },
+  {
+    path: "/delivery",
+    Component: DashboardLayout,
+    children: [
+      { index: true, element: <Navigate to="/delivery/my-parcels" /> },
+      ...generateRoute(deliverySidebarItems),
     ],
   },
   {

@@ -28,7 +28,6 @@ interface DataTableProps<TData, TValue> {
   page: number;
   totalPage: number;
   onPageChange: (page: number) => void;
-  setSorting: React.Dispatch<React.SetStateAction<undefined>>;
 }
 const DataTable = <TData, TValue>({
   columns,

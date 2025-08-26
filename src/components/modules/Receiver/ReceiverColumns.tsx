@@ -1,4 +1,3 @@
-import TableRowActions from "@/components/modules/Admin/Parcel/TableRowActions";
 import { parcelStatus } from "@/constants/parcelStatus";
 import { cn } from "@/lib/utils";
 import { IParcel } from "@/types/response/parcel";

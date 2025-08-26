@@ -1,29 +1,19 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useGetMyParcelsQuery } from "@/redux/features/parcel/parcel.api";
+
 import { format } from "date-fns";
 import { Input } from "@/components/ui/input";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { useDebounce } from "use-debounce";
 import Loading from "@/components/ui/Loading/Loading";
 import DataTable from "@/components/modules/Shared/DataTable";
 import { receiverColumns } from "@/components/modules/Receiver/ReceiverColumns";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { parcelStatus } from "@/constants/parcelStatus";
-const ReceiverParcels = () => {
+
+const DeliveryParcels = () => {
   const [page, setPageChange] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebounce(search, 500);
-  const [status, setStatus] = useState({});
   const { data, isLoading, isError } = useGetMyParcelsQuery({
-    page,
     searchTerm: debouncedSearch || undefined,
-    currentStatus: status,
   });
   const parcels = data?.data?.data?.map((parcel: any) => ({
     ...parcel,
@@ -34,29 +24,15 @@ const ReceiverParcels = () => {
   }));
   console.log(parcels);
   return (
-    <div className="space-y-12">
-      <div>
-        <h1 className="text-3xl font-bold">My Parcels</h1>
-      </div>
-      <div className="flex justify-between ">
-        <Input
-          placeholder="Search by Tracking ID..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="max-w-sm"
-        />
-        <Select onValueChange={(e) => setStatus(e)}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Theme" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="DELIVERED">View Delivery History</SelectItem>
-            <SelectItem value="Invalid">Dark</SelectItem>
-            <SelectItem value="system">System</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
+    <div>
+      <div></div>
+      {/* <MyParcels /> */}
+      <Input
+        placeholder="Search by Tracking ID..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="max-w-sm"
+      />
       {isError && (
         <div className="flex items-center justify-center w-full min-h-[60vh]">
           <h3 className="text-muted-foreground text-3xl">
@@ -78,4 +54,4 @@ const ReceiverParcels = () => {
   );
 };
 
-export default ReceiverParcels;
+export default DeliveryParcels;
