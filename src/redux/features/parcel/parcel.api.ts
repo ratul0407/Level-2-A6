@@ -11,9 +11,10 @@ export const parcelApi = baseApi.injectEndpoints({
       invalidatesTags: ["PARCEL"],
     }),
     getMyParcels: builder.query({
-      query: () => ({
+      query: (params) => ({
         url: "/parcel/my-parcels",
         method: "GET",
+        params,
       }),
       providesTags: ["PARCEL"],
     }),
