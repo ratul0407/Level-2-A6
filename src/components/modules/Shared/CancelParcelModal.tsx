@@ -28,10 +28,12 @@ import { toast } from "sonner";
 import z from "zod";
 const CancelParcelModal = ({
   parcel,
-  button = false,
+  button,
+  closeDropdown,
 }: {
   parcel: IParcel;
   button: boolean;
+  closeDropdown: () => void;
 }) => {
   console.log(parcel?.trackingId);
   const cancelSchema = z.object({
@@ -58,6 +60,7 @@ const CancelParcelModal = ({
       if (res.success) {
         toast.info("Parcel has been cancelled", { id: toastId });
         setOpen(false);
+        closeDropdown();
       }
     } catch (error: any) {
       console.log(error);

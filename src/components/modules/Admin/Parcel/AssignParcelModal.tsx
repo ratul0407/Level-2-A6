@@ -20,8 +20,16 @@ import { role } from "@/constants/role";
 import { useGetAllUsersQuery } from "@/redux/features/auth/auth.api";
 import { useApproveParcelMutation } from "@/redux/features/parcel/parcel.api";
 import { IParcel } from "@/types/response/parcel";
+import { useState } from "react";
 import { toast } from "sonner";
-const AssignParcelModal = (parcel: IParcel) => {
+const AssignParcelModal = ({
+  parcel,
+  closeDropdown,
+}: {
+  parcel: IParcel;
+  closeDropdown: () => void;
+}) => {
+  const [open, setOpen] = useState(false);
   const [approveParcel, { isLoading }] = useApproveParcelMutation();
   const { data } = useGetAllUsersQuery({
     role: role.delivery_personnel,
@@ -39,13 +47,15 @@ const AssignParcelModal = (parcel: IParcel) => {
       if (res.success) {
         toast.success("Parcel approved and assigned successfully");
       }
+      setOpen(false);
+      closeDropdown();
       console.log(res);
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         disabled={parcel.currentStatus !== "REQUESTED"}
         className="block text-sm ml-2 disabled:opacity-50"

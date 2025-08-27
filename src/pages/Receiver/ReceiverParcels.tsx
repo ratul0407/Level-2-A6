@@ -32,7 +32,7 @@ const ReceiverParcels = () => {
     deliveryDriver: parcel?.deliveryDriver?.email ?? "",
     createdAt: format(new Date(parcel?.createdAt), "dd-MMM-yyyy"),
   }));
-  console.log(parcels);
+
   return (
     <div className="space-y-12">
       <div>
@@ -52,6 +52,7 @@ const ReceiverParcels = () => {
           <SelectContent>
             <SelectItem value="DELIVERED">View Delivery History</SelectItem>
             <SelectItem value="OUT_FOR_DELIVERY">In Coming</SelectItem>
+            <SelectItem value="ALL">All</SelectItem>
           </SelectContent>
         </Select>
       </div>
