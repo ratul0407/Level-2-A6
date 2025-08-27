@@ -65,7 +65,7 @@ const DataTable = <TData, TValue>({
           ))}
         </TableHeader>
         <TableBody>
-          {table.getRowModel().rows.length ? (
+          {table?.getRowModel()?.rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow key={row.id}>
                 {row.getVisibleCells().map((cell) => (
@@ -77,7 +77,7 @@ const DataTable = <TData, TValue>({
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
+              <TableCell colSpan={columns?.length} className="h-24 text-center">
                 No results.
               </TableCell>
             </TableRow>
@@ -86,7 +86,7 @@ const DataTable = <TData, TValue>({
       </Table>
 
       {/* Pagination Controls */}
-      {data?.length > 10 && (
+      {
         <Pagination className="mt-16 ">
           <PaginationContent>
             <PaginationItem
@@ -119,7 +119,7 @@ const DataTable = <TData, TValue>({
             </PaginationItem>
           </PaginationContent>
         </Pagination>
-      )}
+      }
     </div>
   );
 };

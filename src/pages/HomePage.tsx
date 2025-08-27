@@ -3,7 +3,7 @@ import HeroSection from "@/components/HomePage/HeroSection";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen mx-auto">
       <HeroSection
         heading="Grow your business with Parcels"
         description="Our delivery men's will delivery your belongings before you even know it"

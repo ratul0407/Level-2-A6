@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -108,8 +109,9 @@ const Register = () => {
       console.log(res);
       toast.success("Account created successfully");
       navigate("/");
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      toast.error(error?.data?.message);
     }
   };
   return (

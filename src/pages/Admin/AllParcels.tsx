@@ -62,6 +62,14 @@ const AllParcels = () => {
     })
   );
   console.log(statsBox);
+  if (isLoading || parcelStatsLoading) {
+    return (
+      <div className="grid justify-center items-center min-h-[70vh]">
+        <Loading />;
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-12">
       <div>
@@ -93,7 +101,6 @@ const AllParcels = () => {
           ))}
         </div>
       )}
-
       <UsersBarChart data={barData} />
       <Input
         placeholder="Search by Tracking ID..."
@@ -108,7 +115,6 @@ const AllParcels = () => {
           </h3>
         </div>
       )}
-      {isLoading && <Loading />}
       {!isLoading && !isError && (
         <DataTable
           columns={columns}

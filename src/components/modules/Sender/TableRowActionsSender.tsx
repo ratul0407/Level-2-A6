@@ -10,10 +10,11 @@ import { useState } from "react";
 import CancelParcelModal from "../Shared/CancelParcelModal";
 import ParcelDetailsModal from "../Admin/Parcel/ParcelDetailsModal";
 const TableRowActionsSender = (parcel: IParcel) => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [openDetails, setOpenDetails] = useState(false);
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
       <DropdownMenuTrigger asChild>
         <Button type="button" variant="ghost" className="h-6 w-6 p-0">
           <MoreHorizontal className="h-4 w-4" />
@@ -26,7 +27,11 @@ const TableRowActionsSender = (parcel: IParcel) => {
           parcel={parcel}
         />
 
-        <CancelParcelModal parcel={parcel} button={false} />
+        <CancelParcelModal
+          closeDropdown={() => setDropdownOpen(false)}
+          parcel={parcel}
+          button={false}
+        />
       </DropdownMenuContent>
     </DropdownMenu>
   );

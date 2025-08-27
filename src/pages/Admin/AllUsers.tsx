@@ -37,19 +37,26 @@ const AllUsers = () => {
       value: item.count,
     })
   );
+
+  if (isLoading || userStatsLoading) {
+    return (
+      <div className="grid justify-center items-center min-h-[70vh]">
+        <Loading />;
+      </div>
+    );
+  }
   return (
     <div className="space-y-12">
       <div>
         <h1 className="font-bold text-3xl">All Users</h1>
       </div>
-      <div className="grid grid-cols-2 gap-3">
-        {!userStatsLoading && (
-          <>
-            <UsersBarChart data={barData} />
-            <UsersByRolePie data={pieData} />
-          </>
-        )}
-      </div>
+
+      {!userStatsLoading && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <UsersBarChart data={barData} />
+          <UsersByRolePie data={pieData} />
+        </div>
+      )}
       {isLoading && <Loading />}
       {isError && (
         <div className="flex items-center justify-center w-full min-h-[60vh]">

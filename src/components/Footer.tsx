@@ -76,8 +76,8 @@ const Footer = ({
   legalLinks = defaultLegalLinks,
 }: Footer7Props) => {
   return (
-    <section className="py-16">
-      <div className="container">
+    <section className="py-16 sm:py-10">
+      <div className="container mx-auto">
         <div className="flex w-full flex-col justify-between gap-10 lg:flex-row lg:items-start lg:text-left">
           <div className="flex w-full flex-col justify-between gap-6 lg:items-start">
             {/* Logo */}
