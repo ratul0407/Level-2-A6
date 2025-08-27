@@ -92,9 +92,24 @@ const UpdateDeliveryStatus = ({
                 Confirm
               </Button>
             </div>
+          ) : nextStatus === "DELIVERED" ? (
+            <div className="space-y-2">
+              <p className="max-w-lg text-muted-foreground">
+                Has the delivery failed? if yes then confirm that the Failed
+                delivery
+              </p>
+              <Button
+                onClick={() => handleStatusChange("FAILED_DELIVERY" as Status)}
+                className="mt-6 bg-red-100 text-red-500 hover:bg-red-200"
+              >
+                Confirm Failed Delivery
+              </Button>
+            </div>
           ) : (
             <div>
-              <p>There is nothing more for you to do!</p>
+              <p className="max-w-lg text-muted-foreground">
+                There is nothing for you to do now
+              </p>
             </div>
           )}
         </div>
