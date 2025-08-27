@@ -11,9 +11,11 @@ import {
 } from "@/components/ui/alert-dialog";
 import { parcelStatus } from "@/constants/parcelStatus";
 import { IParcel } from "@/types/response/parcel";
+import { useState } from "react";
 const ConfirmDeliveryModal = (parcel: IParcel) => {
+  const [open, setOpen] = useState(false);
   return (
-    <AlertDialog>
+    <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger
         disabled={parcel?.currentStatus !== parcelStatus.out_for_delivery}
         className="block ml-2 text-sm disabled:opacity-50"

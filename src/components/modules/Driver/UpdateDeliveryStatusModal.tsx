@@ -35,7 +35,7 @@ const UpdateDeliveryStatus = ({
       }).unwrap();
       console.log(res);
       if (res?.success) {
-        toast.success("Parcel created successfully!");
+        toast.success("Parcel Status Updated successfully!");
         setOpen(false);
         closeDropdown();
       }
@@ -85,30 +85,11 @@ const UpdateDeliveryStatus = ({
                 Confirm that the parcel is out for delivery
               </p>
               <Button
+                disabled={isLoading}
                 onClick={() => handleStatusChange(nextStatus)}
                 className="text-black mt-6"
               >
                 Confirm
-              </Button>
-            </div>
-          ) : nextStatus === "DELIVERED" ? (
-            <div className="space-y-2">
-              <p className="max-w-lg text-muted-foreground">
-                Confirm Parcel Delivery
-              </p>
-              <Button
-                onClick={() => handleStatusChange("DELIVERED" as Status)}
-                className="text-black mt-6"
-              >
-                Delivery Successful
-              </Button>
-              <Button
-                onClick={() => handleStatusChange("FAILED_DELIVERY" as Status)}
-                value="FAILED_DELIVERY"
-                variant={"destructive"}
-                className=" ml-3"
-              >
-                Delivery Failed
               </Button>
             </div>
           ) : (
