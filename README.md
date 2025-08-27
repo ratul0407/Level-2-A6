@@ -5,6 +5,8 @@ This frontend is built with **React + TypeScript + Vite**, styled with **Tailwin
 
 ---
 
+#### Frontend Url: https://parcel-delivery-frontend.vercel.app/
+
 ## 🚀 Project Overview
 
 This system enables **nationwide parcel delivery** with role-based access control.  
