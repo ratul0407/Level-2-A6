@@ -54,6 +54,15 @@ export const parcelApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["PARCEL"],
     }),
+    //confirm delivery route for receiver
+    confirmDelivery: builder.mutation({
+      query: ({ tracking_id, data }) => ({
+        url: `/parcel/confirm-delivery/${tracking_id}`,
+        method: "PATCH",
+        data,
+      }),
+      invalidatesTags: ["PARCEL"],
+    }),
   }),
 });
 
@@ -64,4 +73,5 @@ export const {
   useCancelParcelsMutation,
   useApproveParcelMutation,
   useUpdateParcelStatusMutation,
+  useConfirmDeliveryMutation,
 } = parcelApi;

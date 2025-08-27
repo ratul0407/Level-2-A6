@@ -10,10 +10,29 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { parcelStatus } from "@/constants/parcelStatus";
+import { useConfirmDeliveryMutation } from "@/redux/features/parcel/parcel.api";
 import { IParcel } from "@/types/response/parcel";
 import { useState } from "react";
+import { toast } from "sonner";
 const ConfirmDeliveryModal = (parcel: IParcel) => {
   const [open, setOpen] = useState(false);
+  const [confirmDelivery, { isLoading }] = useConfirmDeliveryMutation();
+
+  const handleConfirmDelivery = async () => {
+    try {
+      const res = await confirmDelivery({
+        data: { delivered: true },
+        tracking_id: parcel?.trackingId,
+      }).unwrap();
+      console.log(res);
+      if (res?.success) {
+        toast.success("Delivery Confirmed");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.data?.message);
+    }
+  };
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger
@@ -24,15 +43,19 @@ const ConfirmDeliveryModal = (parcel: IParcel) => {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>Confirm Delivery</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            If you have received the parcel please confirm the delivery .
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <AlertDialogAction
+            disabled={isLoading}
+            onClick={handleConfirmDelivery}
+          >
+            Confirm
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
