@@ -15,6 +15,7 @@ import { deliverySidebarItems } from "./deliverySidebarRoutes";
 import { withAuth } from "@/utils/withAuth";
 import { role } from "@/constants/role";
 import { TRole } from "@/types";
+import UnAuthorized from "@/pages/UnAuthorized";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     Component: Register,
+  },
+  {
+    path: "/unauthorized",
+    Component: UnAuthorized,
   },
 ]);
 export default router;

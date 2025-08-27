@@ -1,4 +1,7 @@
-import { useGetAllParcelsQuery } from "@/redux/features/parcel/parcel.api";
+import {
+  useGetAllParcelsQuery,
+  useGetParcelStatsQuery,
+} from "@/redux/features/parcel/parcel.api";
 import DataTable from "./AllParcels/DataTable";
 import { columns } from "./AllParcels/Columns";
 import { useState } from "react";
@@ -7,7 +10,7 @@ import Loading from "@/components/ui/Loading/Loading";
 import { Input } from "@/components/ui/input";
 import { useDebounce } from "use-debounce";
 import { Package, PackagePlus, PackageX } from "lucide-react";
-import { useGetParcelStatsQuery } from "@/redux/features/stats/stats.api";
+
 import { UsersBarChart } from "@/components/modules/Admin/User/UsersBarChart";
 const AllParcels = () => {
   const [page, setPageChange] = useState(1);

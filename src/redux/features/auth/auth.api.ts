@@ -48,6 +48,13 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["USER"],
     }),
+    getUserStats: builder.query({
+      query: () => ({
+        url: "/stats/users",
+        method: "Get",
+      }),
+      providesTags: ["USER"],
+    }),
   }),
 });
 
@@ -58,4 +65,5 @@ export const {
   useLoginMutation,
   useGetAllUsersQuery,
   useChangeUserActivityMutation,
+  useGetUserStatsQuery,
 } = authApi;

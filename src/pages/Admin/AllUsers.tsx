@@ -11,12 +11,15 @@ import {
 
 import { userActivity } from "@/constants/userActivity";
 import { cn } from "@/lib/utils";
-import { useGetAllUsersQuery } from "@/redux/features/auth/auth.api";
-import { useGetUserStatsQuery } from "@/redux/features/user/user.api";
+import {
+  useGetAllUsersQuery,
+  useGetUserStatsQuery,
+} from "@/redux/features/auth/auth.api";
+
 import { UsersBarChart } from "@/components/modules/Admin/User/UsersBarChart";
 import UsersByRolePie from "@/components/modules/Admin/User/UsersRoleByPie";
 import { IUser } from "@/types/response/user";
-import { Package, PackagePlus, PackageX, Users } from "lucide-react";
+import { User, UserPen, UserRoundMinus, UserRoundX, Users } from "lucide-react";
 
 const AllUsers = () => {
   const { data, isLoading, isError } = useGetAllUsersQuery(undefined);
@@ -24,7 +27,7 @@ const AllUsers = () => {
     useGetUserStatsQuery(undefined);
 
   const users = data?.data;
-
+  console.log(userStatsData);
   if (isLoading || userStatsLoading) {
     return (
       <div className="grid justify-center items-center min-h-[70vh]">
@@ -52,19 +55,19 @@ const AllUsers = () => {
     },
     "New in 7 days": {
       value: userStatsData?.data?.newUsersInLast7Days,
-      icon: <PackageX />,
+      icon: <UserPen />,
     },
     "Active Users": {
       value: userStatsData?.data?.totalActiveUsers,
-      icon: <PackagePlus />,
-    },
-    "Blocked Users": {
-      value: userStatsData?.data?.totalBlockedUsers,
-      icon: <PackagePlus />,
+      icon: <User />,
     },
     "InActive Users": {
+      value: userStatsData?.data?.totalBlockedUsers,
+      icon: <UserRoundMinus />,
+    },
+    "Blocked Users": {
       value: userStatsData?.data?.totalInactiveUsers,
-      icon: <Package />,
+      icon: <UserRoundX />,
     },
   };
 
@@ -77,7 +80,7 @@ const AllUsers = () => {
       {!userStatsLoading && (
         <>
           <div>
-            <div className="grid grid-cols-2 md:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
               {Object.entries(statsBox)?.map(([key, { value, icon }]) => (
                 <div
                   key={key}

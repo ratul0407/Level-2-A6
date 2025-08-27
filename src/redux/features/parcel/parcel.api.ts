@@ -63,6 +63,15 @@ export const parcelApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["PARCEL"],
     }),
+
+    //stats
+    getParcelStats: builder.query({
+      query: () => ({
+        url: "/stats/parcels",
+        method: "Get",
+      }),
+      providesTags: ["PARCEL"],
+    }),
   }),
 });
 
@@ -74,4 +83,5 @@ export const {
   useApproveParcelMutation,
   useUpdateParcelStatusMutation,
   useConfirmDeliveryMutation,
+  useGetParcelStatsQuery,
 } = parcelApi;
