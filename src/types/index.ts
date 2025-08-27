@@ -16,3 +16,11 @@ export type TRole =
   | "RECEIVER"
   | "DELIVERY_PERSONNEL"
   | "SUPER_ADMIN";
+
+export interface IErrorResponse {
+  data: {
+    message: string;
+    success: boolean;
+    statusCode: number;
+  };
+}

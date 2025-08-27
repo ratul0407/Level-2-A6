@@ -9,7 +9,7 @@ import { IParcel } from "@/types/response/parcel";
 import ParcelDetailsModal from "./ParcelDetailsModal";
 import { useState } from "react";
 import AssignParcelModal from "./AssignParcelModal";
-import CancelParcelModal from "./CancelParcelModal";
+import CancelParcelModal from "../../Shared/CancelParcelModal";
 const TableRowActions = (parcel: IParcel) => {
   const [openDetails, setOpenDetails] = useState(false);
 

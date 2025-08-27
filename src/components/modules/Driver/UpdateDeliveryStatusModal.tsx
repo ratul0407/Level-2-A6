@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
   DialogContent,
@@ -5,6 +6,8 @@ import {
   DialogTrigger,
   DialogHeader,
 } from "@/components/ui/dialog";
+
+import { Input } from "@/components/ui/input";
 import { Status } from "@/constants/statusFlow";
 
 import { useUpdateParcelStatusMutation } from "@/redux/features/parcel/parcel.api";
@@ -21,16 +24,15 @@ const UpdateDeliveryStatus = ({
   closeDropdown: () => void;
 }) => {
   const [open, setOpen] = useState(false);
-  const [statusChange, setStatusChange] = useState("");
+  const [note, setNote] = useState("");
+  console.log(note);
   const [updateStatus, { isLoading }] = useUpdateParcelStatusMutation();
   const nextStatus = getNextStatus(parcel?.currentStatus as Status);
 
   const handleStatusChange = async (value: Status) => {
-    setStatusChange(value);
-
     try {
       const res = await updateStatus({
-        data: { status: value },
+        data: { status: value, note: note },
         tracking_id: parcel.trackingId,
       }).unwrap();
       console.log(res);
@@ -39,7 +41,7 @@ const UpdateDeliveryStatus = ({
         setOpen(false);
         closeDropdown();
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       toast.error(error?.data?.message);
     }
@@ -53,6 +55,14 @@ const UpdateDeliveryStatus = ({
         <DialogHeader className="md:min-w-3xl">
           <DialogTitle>Update Parcel Status</DialogTitle>
         </DialogHeader>
+
+        <Input
+          onChange={(e) => setNote(e.target.value)}
+          maxLength={35}
+          type="text"
+          placeholder="add a little note (max 35 characters)"
+          className="w-sm"
+        />
         <div>
           {nextStatus === "PICKED_UP" ? (
             <div className="space-y-2">

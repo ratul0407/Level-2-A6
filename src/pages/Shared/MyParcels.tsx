@@ -1,4 +1,4 @@
-import CancelParcelModal from "@/components/modules/Admin/Parcel/CancelParcelModal";
+import CancelParcelModal from "@/components/modules/Shared/CancelParcelModal";
 import {
   Table,
   TableBody,

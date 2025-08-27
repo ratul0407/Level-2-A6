@@ -17,6 +17,7 @@ const DeliveryParcels = () => {
     page,
     searchTerm: debouncedSearch || undefined,
   });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const parcels = data?.data?.data?.map((parcel: any) => ({
     ...parcel,
     sender: parcel?.sender?.email ?? "",

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   AlertDialog,
   AlertDialogAction,
@@ -28,7 +29,7 @@ const ConfirmDeliveryModal = (parcel: IParcel) => {
       if (res?.success) {
         toast.success("Delivery Confirmed");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       toast.error(error?.data?.message);
     }

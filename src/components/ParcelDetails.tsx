@@ -103,7 +103,7 @@ const ParcelDetails = (parcel: IParcel) => {
           </div>
           <div>
             <p className="text-xs text-muted-foreground">Cost</p>
-            <p className="font-semibold">${parcel?.cost}</p>
+            <p className="font-semibold">TK. {parcel?.cost}</p>
           </div>
         </div>
 

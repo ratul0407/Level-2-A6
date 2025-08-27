@@ -9,8 +9,7 @@ import { IParcel } from "@/types/response/parcel";
 import { useState } from "react";
 import CancelParcelModal from "../Shared/CancelParcelModal";
 import ParcelDetailsModal from "../Admin/Parcel/ParcelDetailsModal";
-import ConfirmDeliveryModal from "./ConfirmDeliveryModal";
-const TableRowActionsReceiver = (parcel: IParcel) => {
+const TableRowActionsSender = (parcel: IParcel) => {
   const [openDetails, setOpenDetails] = useState(false);
 
   return (
@@ -21,18 +20,16 @@ const TableRowActionsReceiver = (parcel: IParcel) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
-        {/* <DropdownMenuItem onClick={() => setOpenDetails(true)}> */}
         <ParcelDetailsModal
           open={openDetails}
           setOpen={setOpenDetails}
           parcel={parcel}
         />
-        {/* </DropdownMenuItem> */}
-        <ConfirmDeliveryModal {...parcel} />
+
         <CancelParcelModal parcel={parcel} button={false} />
       </DropdownMenuContent>
     </DropdownMenu>
   );
 };
 
-export default TableRowActionsReceiver;
+export default TableRowActionsSender;

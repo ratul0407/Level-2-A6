@@ -6,24 +6,15 @@ import { useState } from "react";
 import { useDebounce } from "use-debounce";
 import Loading from "@/components/ui/Loading/Loading";
 import DataTable from "@/components/modules/Shared/DataTable";
-import { receiverColumns } from "@/components/modules/Receiver/ReceiverColumns";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { senderColumns } from "@/components/modules/Sender/SenderColumns";
 
-const ReceiverParcels = () => {
+const SenderParcels = () => {
   const [page, setPageChange] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebounce(search, 500);
-  const [status, setStatus] = useState({});
   const { data, isLoading, isError } = useGetMyParcelsQuery({
     page,
     searchTerm: debouncedSearch || undefined,
-    currentStatus: status,
   });
   const parcels = data?.data?.data?.map((parcel: any) => ({
     ...parcel,
@@ -45,16 +36,6 @@ const ReceiverParcels = () => {
           onChange={(e) => setSearch(e.target.value)}
           className="max-w-sm"
         />
-        <Select onValueChange={(e) => setStatus(e)}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Theme" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="DELIVERED">View Delivery History</SelectItem>
-            <SelectItem value="Invalid">Dark</SelectItem>
-            <SelectItem value="system">System</SelectItem>
-          </SelectContent>
-        </Select>
       </div>
 
       {isError && (
@@ -67,7 +48,7 @@ const ReceiverParcels = () => {
       {isLoading && <Loading />}
       {!isLoading && !isError && (
         <DataTable
-          columns={receiverColumns}
+          columns={senderColumns}
           data={parcels}
           page={data?.data?.meta?.page}
           totalPage={data?.data?.meta?.totalPage}
@@ -78,4 +59,4 @@ const ReceiverParcels = () => {
   );
 };
 
-export default ReceiverParcels;
+export default SenderParcels;

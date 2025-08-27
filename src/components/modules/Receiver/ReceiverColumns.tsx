@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { IParcel } from "@/types/response/parcel";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
-import TableRowActionsReceiver from "../modules/Receiver/TableRowActionsReceiver";
+import TableRowActionsReceiver from "./TableRowActionsReceiver";
 
 export const receiverColumns: ColumnDef<IParcel>[] = [
   { accessorKey: "name", header: "Name" },

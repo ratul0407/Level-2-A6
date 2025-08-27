@@ -13,7 +13,12 @@ interface TrackingEvent {
   status: string;
   updatedBy: string;
   at: string;
+  note?: string;
 }
+
+// Utility to truncate long notes
+const truncate = (text: string, maxLength = 30) =>
+  text.length > maxLength ? text.substring(0, maxLength) + "…" : text;
 
 export default function TrackingChart({
   trackingEvents,
@@ -32,6 +37,7 @@ export default function TrackingChart({
     status: event.status,
     statusValue: statusOrder[event.status],
     updatedBy: event.updatedBy,
+    note: event.note,
   }));
 
   return (
@@ -52,9 +58,17 @@ export default function TrackingChart({
               }
             />
             <Tooltip
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               formatter={(value: any, name: string, props: any) => {
                 if (name === "statusValue") {
-                  return [props.payload.status, "Status"];
+                  const note = props.payload.note
+                    ? truncate(props.payload.note, 50)
+                    : "No note";
+                  return [
+                    `${props.payload.status} 
+                    (${note})`,
+                    "Status",
+                  ];
                 }
                 return [value, name];
               }}

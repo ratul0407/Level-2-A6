@@ -10,6 +10,7 @@ import { Button } from "./ui/button";
 import { toast } from "sonner";
 import { useCreateParcelMutation } from "@/redux/features/parcel/parcel.api";
 import { useNavigate } from "react-router";
+import { Separator } from "./ui/separator";
 interface IProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -27,6 +28,14 @@ interface IProps {
   };
 }
 
+{
+  /* <p>
+                Delivery Cost:{" "}
+                {parcelData?.sameDivision
+                  ? Math.ceil(60 + parcelData.weight * 5)
+                  : Math.ceil(100 + parcelData.weight * 7)}
+              </p> */
+}
 const ConfirmParcelModal = ({ open, setOpen, parcelData }: IProps) => {
   const navigate = useNavigate();
   const [createParcel] = useCreateParcelMutation();
@@ -82,16 +91,25 @@ const ConfirmParcelModal = ({ open, setOpen, parcelData }: IProps) => {
             Once you're done rechecking everything click on confirm parcel
           </DialogDescription>
           <div>
-            <p>{parcelData?.name}</p>
-            <p>{parcelData?.weight}</p>
-            <p>{parcelData?.receiver}</p>
-            <div>
-              <p className="text-muted-foreground">Delivery Address: </p>
-              <p>{parcelData?.deliveryLocation?.division}</p>
-              <p>{parcelData?.deliveryLocation?.city}</p>
-              <p>{parcelData?.deliveryLocation?.street}</p>
-              <p>{parcelData?.deliveryLocation?.zip}</p>
+            <div className="px-2 py-6">
+              <p className="text-muted-foreground">Sender & Receiver: </p>
+              <p>A parcel from, {parcelData?.name}</p>
 
+              <p>Receiver: {parcelData?.receiver}</p>
+            </div>
+            <div className="py-6 px-2">
+              <p className="text-muted-foreground">Delivery Address: </p>
+              <p>Receiver Division: {parcelData?.deliveryLocation?.division}</p>
+              <p>Receiver City: {parcelData?.deliveryLocation?.city}</p>
+              <p>Receiver Street: {parcelData?.deliveryLocation?.street}</p>
+              <p>Receiver Zip Code: {parcelData?.deliveryLocation?.zip}</p>
+            </div>
+            <Separator />
+            <div className="py-6 px-2">
+              <p className="text-muted-foreground">
+                Additional Parcel Information:{" "}
+              </p>
+              <p>Parcel's weight: {parcelData?.weight}</p>
               <p>
                 Delivery Cost:{" "}
                 {parcelData?.sameDivision

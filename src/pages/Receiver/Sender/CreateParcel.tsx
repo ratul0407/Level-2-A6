@@ -31,7 +31,10 @@ const createParcelSchema = z.object({
   division: z.enum(Object.values(division), {
     error: "Please select one from the drop down",
   }),
-  zip: z.string().min(4).max(4),
+  zip: z
+    .string({ error: "Required" })
+    .min(4, { error: "at least 4 characters" })
+    .max(4, { error: "at least 4 characters" }),
   city: z.string(),
   street: z.string().min(3, { error: "Invalid street address" }),
   weight: z.string(),
