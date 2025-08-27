@@ -15,9 +15,8 @@ const Feature = () => {
             </span>
             <h3 className="mb-2 text-xl font-medium">Performance</h3>
             <p className="leading-7 text-muted-foreground">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
-              beatae tenetur totam aut blanditis ipsa quaerat neque eaque, atque
-              doloremque! Eligendi.
+              We have provided service flawlessly over the last 3 years across
+              all divisions in bangladesh.
             </p>
           </div>
           <div className="rounded-lg bg-accent p-5">
@@ -26,9 +25,8 @@ const Feature = () => {
             </span>
             <h3 className="mb-2 text-xl font-medium">Quality</h3>
             <p className="leading-7 text-muted-foreground">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
-              beatae tenetur totam aut blanditis ipsa quaerat neque eaque, atque
-              doloremque! Eligendi.
+              99% of our parcels have been successfully Delivered. And we are
+              available for contact 24/7
             </p>
           </div>
           <div className="rounded-lg bg-accent p-5">
@@ -37,9 +35,8 @@ const Feature = () => {
             </span>
             <h3 className="mb-2 text-xl font-medium">Innovation</h3>
             <p className="leading-7 text-muted-foreground">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
-              beatae tenetur totam aut blanditis ipsa quaerat neque eaque, atque
-              doloremque! Eligendi.
+              We are always looking to improve our team and hiring talented
+              brains that will help who will help us grow.
             </p>
           </div>
         </div>

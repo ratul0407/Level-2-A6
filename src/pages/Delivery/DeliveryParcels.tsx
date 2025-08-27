@@ -6,9 +6,7 @@ import { useState } from "react";
 import { useDebounce } from "use-debounce";
 import Loading from "@/components/ui/Loading/Loading";
 import DataTable from "@/components/modules/Shared/DataTable";
-
 import { driverColumns } from "@/components/modules/Driver/DriverColumns";
-
 const DeliveryParcels = () => {
   const [page, setPageChange] = useState(1);
   const [search, setSearch] = useState("");

@@ -16,15 +16,22 @@ import { useGetUserStatsQuery } from "@/redux/features/user/user.api";
 import { UsersBarChart } from "@/components/modules/Admin/User/UsersBarChart";
 import UsersByRolePie from "@/components/modules/Admin/User/UsersRoleByPie";
 import { IUser } from "@/types/response/user";
+import { Package, PackagePlus, PackageX, Users } from "lucide-react";
 
 const AllUsers = () => {
   const { data, isLoading, isError } = useGetAllUsersQuery(undefined);
   const { data: userStatsData, isLoading: userStatsLoading } =
     useGetUserStatsQuery(undefined);
-  console.log(userStatsData);
-  const users = data?.data;
-  console.log(users);
 
+  const users = data?.data;
+
+  if (isLoading || userStatsLoading) {
+    return (
+      <div className="grid justify-center items-center min-h-[70vh]">
+        <Loading />;
+      </div>
+    );
+  }
   const barData = userStatsData?.data?.usersCreatedOverTheLast30Days?.map(
     (item: { _id: string; count: number }) => ({
       date: item._id,
@@ -38,13 +45,29 @@ const AllUsers = () => {
     })
   );
 
-  if (isLoading || userStatsLoading) {
-    return (
-      <div className="grid justify-center items-center min-h-[70vh]">
-        <Loading />;
-      </div>
-    );
-  }
+  const statsBox = {
+    "Total Users": {
+      value: userStatsData?.data?.totalUsers,
+      icon: <Users />,
+    },
+    "New in 7 days": {
+      value: userStatsData?.data?.newUsersInLast7Days,
+      icon: <PackageX />,
+    },
+    "Active Users": {
+      value: userStatsData?.data?.totalActiveUsers,
+      icon: <PackagePlus />,
+    },
+    "Blocked Users": {
+      value: userStatsData?.data?.totalBlockedUsers,
+      icon: <PackagePlus />,
+    },
+    "InActive Users": {
+      value: userStatsData?.data?.totalInactiveUsers,
+      icon: <Package />,
+    },
+  };
+
   return (
     <div className="space-y-12">
       <div>
@@ -52,10 +75,39 @@ const AllUsers = () => {
       </div>
 
       {!userStatsLoading && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <UsersBarChart data={barData} />
-          <UsersByRolePie data={pieData} />
-        </div>
+        <>
+          <div>
+            <div className="grid grid-cols-2 md:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+              {Object.entries(statsBox)?.map(([key, { value, icon }]) => (
+                <div
+                  key={key}
+                  className="rounded-xl border border-gray-200 bg-white p-6 shadow-md hover:shadow-lg transition-shadow duration-300"
+                >
+                  <div className="flex items-start gap-2 flex-col ">
+                    <div className="items-center flex justify-center gap-3">
+                      <div className="p-4 rounded-full bg-gradient-to-tr from-primary to-ring text-white flex items-center justify-center">
+                        {icon}
+                      </div>
+                      <p className="text-gray-900 font-extrabold text-3xl md:text-4xl">
+                        {value}
+                      </p>
+                    </div>
+                    <div className="block">
+                      <p className="text-gray-500 uppercase tracking-wide text-sm">
+                        {key}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          s
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <UsersBarChart data={barData} />
+            <UsersByRolePie data={pieData} />
+          </div>
+        </>
       )}
       {isLoading && <Loading />}
       {isError && (

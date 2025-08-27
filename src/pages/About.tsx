@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
-
+import aboutMainImg from "../assets/images/about-main.jpg";
+import logoSrc from "../assets/icons/logo.svg";
+import { Link } from "react-router";
 interface AboutProps {
   title?: string;
   description?: string;
@@ -17,7 +19,7 @@ interface AboutProps {
     title?: string;
     description?: string;
     buttonText?: string;
-    buttonUrl?: string;
+    buttonUrl: string;
   };
   companiesTitle?: string;
   companies?: Array<{
@@ -60,31 +62,27 @@ const defaultCompanies = [
 ];
 
 const defaultAchievements = [
-  { label: "Companies Supported", value: "300+" },
-  { label: "Projects Finalized", value: "800+" },
+  { label: "Customers", value: "300+" },
+  { label: "Parcel Delivered", value: "800+" },
   { label: "Happy Customers", value: "99%" },
   { label: "Recognized Awards", value: "10+" },
 ];
 
 const About = ({
   title = "About Us",
-  description = "Shadcnblocks is a passionate team dedicated to creating innovative solutions that empower businesses to thrive in the digital age.",
+  description = "We are the only Bangladeshi company that will deliver you packages nationwide so that you can be hassle free.",
   mainImage = {
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-1.svg",
-    alt: "placeholder",
-  },
-  secondaryImage = {
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-2.svg",
+    src: aboutMainImg,
     alt: "placeholder",
   },
   breakout = {
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/block-1.svg",
+    src: logoSrc,
     alt: "logo",
-    title: "Hundreds of blocks at Shadcnblocks.com",
+    title: "Our Mission",
     description:
-      "Providing businesses with effective tools to improve workflows, boost efficiency, and encourage growth.",
+      "Our mission is to connect people and businesses across the country through trusted parcel delivery. Every delivery is more than just a package—it’s a promise delivered.",
     buttonText: "Discover more",
-    buttonUrl: "https://shadcnblocks.com",
+    buttonUrl: "/",
   },
   companiesTitle = "Valued by clients worldwide",
   companies = defaultCompanies,
@@ -95,7 +93,7 @@ const About = ({
   return (
     <section className="py-32">
       <div className="container">
-        <div className="mb-14 grid gap-5 text-center md:grid-cols-2 md:text-left">
+        <div className="mb-14 grid gap-5 text-center items-stretch md:grid-cols-2 md:text-left">
           <h1 className="text-5xl font-semibold">{title}</h1>
           <p className="text-muted-foreground">{description}</p>
         </div>
@@ -117,16 +115,23 @@ const About = ({
                 <p className="text-muted-foreground">{breakout.description}</p>
               </div>
               <Button variant="outline" className="mr-auto" asChild>
-                <a href={breakout.buttonUrl} target="_blank">
-                  {breakout.buttonText}
-                </a>
+                <Link to={breakout.buttonUrl}>{breakout.buttonText}</Link>
               </Button>
             </div>
-            <img
-              src={secondaryImage.src}
-              alt={secondaryImage.alt}
-              className="grow basis-0 rounded-xl object-cover md:w-1/2 lg:min-h-0 lg:w-auto"
-            />
+
+            <div className="flex flex-col justify-between gap-6 rounded-xl bg-muted p-7 md:w-1/2 lg:w-auto">
+              <div>
+                <p className="mb-2 text-lg font-semibold">Meet Our Team</p>
+                <p className="text-muted-foreground">
+                  Behind every successful delivery is a passionate team working
+                  round the clock. From our friendly support staff to our
+                  skilled delivery partners.
+                </p>
+              </div>
+              <Button variant="outline" className="mr-auto" asChild>
+                <Link to={breakout.buttonUrl}>{breakout.buttonText}</Link>
+              </Button>
+            </div>
           </div>
         </div>
         <div className="py-32">

@@ -12,57 +12,75 @@ interface FaqItem {
 }
 
 interface Faq3Props {
-  heading: string;
-  description: string;
+  heading?: string;
+  description?: string;
   items?: FaqItem[];
-  supportHeading: string;
-  supportDescription: string;
-  supportButtonText: string;
-  supportButtonUrl: string;
+  supportHeading?: string;
+  supportDescription?: string;
+  supportButtonText?: string;
+  supportButtonUrl?: string;
 }
 
 const faqItems = [
   {
     id: "faq-1",
-    question: "What is a FAQ?",
+    question: "How do I send a parcel?",
     answer:
-      "A FAQ is a list of frequently asked questions and answers on a particular topic.",
+      "To send a parcel, simply create an account, enter the sender and receiver details, choose your preferred delivery option, and schedule a pickup or drop it off at our nearest branch.",
   },
   {
     id: "faq-2",
-    question: "What is the purpose of a FAQ?",
+    question: "How long does delivery take?",
     answer:
-      "The purpose of a FAQ is to provide answers to common questions and help users find the information they need quickly and easily.",
+      "Delivery times vary depending on the destination. Most parcels are delivered within 1–3 business days for major cities and 3–5 business days for remote areas.",
   },
   {
     id: "faq-3",
-    question: "How do I create a FAQ?",
+    question: "Can I track my parcel?",
     answer:
-      "To create a FAQ, you need to compile a list of common questions and answers on a particular topic and organize them in a clear and easy-to-navigate format.",
+      "Yes, every parcel comes with a unique tracking number. You can use it on our website or mobile app to see real-time updates on your shipment.",
   },
   {
     id: "faq-4",
-    question: "What are the benefits of a FAQ?",
+    question: "What items are restricted from shipping?",
     answer:
-      "The benefits of a FAQ include providing quick and easy access to information, reducing the number of support requests, and improving the overall user experience.",
+      "We do not allow shipping of hazardous materials, illegal goods, perishable items, or fragile items without proper packaging. Please check our shipping policy for a full list of restricted items.",
   },
   {
     id: "faq-5",
-    question: "How should I organize my FAQ?",
+    question: "What happens if my parcel is lost or damaged?",
     answer:
-      "You should organize your FAQ in a logical manner, grouping related questions together and ordering them from most basic to more advanced topics.",
+      "In the rare event that your parcel is lost or damaged, we offer compensation based on our delivery terms. Please contact our support team to file a claim.",
   },
   {
     id: "faq-6",
-    question: "How long should FAQ answers be?",
+    question: "Do you offer cash on delivery (COD)?",
     answer:
-      "FAQ answers should be concise and to the point, typically a few sentences or a short paragraph is sufficient for most questions.",
+      "Yes, we support cash on delivery for most locations. The amount will be collected from the receiver at the time of delivery.",
   },
   {
     id: "faq-7",
-    question: "Should I include links in my FAQ?",
+    question: "How much does shipping cost?",
     answer:
-      "Yes, including links to more detailed information or related resources can be very helpful for users who want to learn more about a particular topic.",
+      "Shipping costs depend on the weight, size, and destination of the parcel. You can use our online shipping calculator to get an estimate before booking.",
+  },
+  {
+    id: "faq-8",
+    question: "Can I reschedule my delivery?",
+    answer:
+      "Yes, if your parcel is still in transit, you can request a reschedule through our website or customer support team.",
+  },
+  {
+    id: "faq-9",
+    question: "Do you deliver to rural or remote areas?",
+    answer:
+      "Yes, we deliver parcels all over the country, including rural and remote areas. Delivery times may be slightly longer for such locations.",
+  },
+  {
+    id: "faq-10",
+    question: "How can I contact customer support?",
+    answer:
+      "You can reach our customer support team via live chat, email, or our hotline number, available 7 days a week.",
   },
 ];
 
@@ -72,8 +90,8 @@ const Faq = ({
   items = faqItems,
 }: Faq3Props) => {
   return (
-    <section className="py-32">
-      <div className="container space-y-16">
+    <section className="lg:py-24 py-16">
+      <div className="container space-y-16 mx-auto">
         <div className="mx-auto flex max-w-3xl flex-col text-left md:text-center">
           <h2 className="mb-3 text-3xl font-semibold md:mb-4 lg:mb-6 lg:text-4xl">
             {heading}

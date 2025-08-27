@@ -1,3 +1,4 @@
+import Faq from "@/components/HomePage/FaqSection";
 import Feature from "@/components/HomePage/Feature";
 import HeroSection from "@/components/HomePage/HeroSection";
 
@@ -10,7 +11,7 @@ const HomePage = () => {
         badge="About us"
       />
       <Feature />
-      {/* <Faq /> */}
+      <Faq />
     </div>
   );
 };

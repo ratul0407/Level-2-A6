@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
 interface Contact2Props {
   title?: string;
@@ -18,6 +20,14 @@ const Contact = ({
   email = "email@example.com",
   web = { label: "shadcnblocks.com", url: "https://shadcnblocks.com" },
 }: Contact2Props) => {
+  const navigate = useNavigate();
+  const handleContactFormSubmission = () => {
+    setTimeout(() => {
+      toast.success("Contact form stored. We'll catch you soon!");
+      navigate("/");
+    }, 1000);
+  };
+
   return (
     <section className="py-32">
       <div className="container">
@@ -76,7 +86,9 @@ const Contact = ({
               <Label htmlFor="message">Message</Label>
               <Textarea placeholder="Type your message here." id="message" />
             </div>
-            <Button className="w-full">Send Message</Button>
+            <Button onClick={handleContactFormSubmission} className="w-full">
+              Send Message
+            </Button>
           </div>
         </div>
       </div>
