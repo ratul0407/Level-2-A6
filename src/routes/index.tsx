@@ -12,6 +12,9 @@ import { adminSidebarItems } from "./adminSidebarRoutes";
 import { senderSidebarItems } from "./senderSidebarRoutes";
 import { receiverSidebarItems } from "./receiverSidebarRoutes";
 import { deliverySidebarItems } from "./deliverySidebarRoutes";
+import { withAuth } from "@/utils/withAuth";
+import { role } from "@/constants/role";
+import { TRole } from "@/types";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +37,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    Component: DashboardLayout,
+    Component: withAuth(
+      DashboardLayout,
+      (role.superAdmin as TRole) || (role.admin as TRole)
+    ),
     children: [
       { index: true, element: <Navigate to="/admin/all-parcels" /> },
       ...generateRoute(adminSidebarItems),
@@ -42,7 +48,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/sender",
-    Component: DashboardLayout,
+    Component: withAuth(DashboardLayout, role.sender as TRole),
     children: [
       { index: true, element: <Navigate to="/sender/create-parcel" /> },
       ...generateRoute(senderSidebarItems),
@@ -50,7 +56,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/receiver",
-    Component: DashboardLayout,
+    Component: withAuth(DashboardLayout, role.receiver as TRole),
     children: [
       { index: true, element: <Navigate to="/receiver/my-parcels" /> },
       ...generateRoute(receiverSidebarItems),
@@ -58,7 +64,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/delivery",
-    Component: DashboardLayout,
+    Component: withAuth(DashboardLayout, role.delivery_personnel as TRole),
     children: [
       { index: true, element: <Navigate to="/delivery/my-parcels" /> },
       ...generateRoute(deliverySidebarItems),
