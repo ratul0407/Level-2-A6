@@ -11,7 +11,7 @@ const HomePage = () => {
         badge="About us"
       />
       <Feature />
-      <Faq />
+      {/* <Faq /> */}
     </div>
   );
 };

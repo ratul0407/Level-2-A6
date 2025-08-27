@@ -1,24 +1,15 @@
-import TableRowActions from "@/components/modules/Admin/Parcel/TableRowActions";
 import { parcelStatus } from "@/constants/parcelStatus";
 import { cn } from "@/lib/utils";
 import { IParcel } from "@/types/response/parcel";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import TableRowActionsDriver from "./TableRowActionsDriver";
 
-export const columns: ColumnDef<IParcel>[] = [
+export const driverColumns: ColumnDef<IParcel>[] = [
   { accessorKey: "name", header: "Name" },
   { accessorKey: "trackingId", header: "Tracking ID" },
   {
     accessorKey: "weight",
-    header: ({ column }) => (
-      <button
-        className="flex items-center"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        Weight
-        <ArrowUpDown className="ml-2 h-4 w-4" />
-      </button>
-    ),
+    header: () => <button className="flex items-center">Weight</button>,
     cell: ({ row }) => row.original.weight,
   },
   { accessorKey: "createdAt", header: "Created At" },
@@ -57,7 +48,7 @@ export const columns: ColumnDef<IParcel>[] = [
           >
             {status}
           </span>
-          <TableRowActions {...parcel} />
+          <TableRowActionsDriver {...parcel} />
         </div>
       );
     },

@@ -6,13 +6,15 @@ import { useState } from "react";
 import { useDebounce } from "use-debounce";
 import Loading from "@/components/ui/Loading/Loading";
 import DataTable from "@/components/modules/Shared/DataTable";
-import { receiverColumns } from "@/components/modules/Receiver/ReceiverColumns";
+
+import { driverColumns } from "@/components/modules/Driver/DriverColumns";
 
 const DeliveryParcels = () => {
   const [page, setPageChange] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebounce(search, 500);
   const { data, isLoading, isError } = useGetMyParcelsQuery({
+    page,
     searchTerm: debouncedSearch || undefined,
   });
   const parcels = data?.data?.data?.map((parcel: any) => ({
@@ -43,7 +45,7 @@ const DeliveryParcels = () => {
       {isLoading && <Loading />}
       {!isLoading && !isError && (
         <DataTable
-          columns={receiverColumns}
+          columns={driverColumns}
           data={parcels}
           page={data?.data?.meta?.page}
           totalPage={data?.data?.meta?.totalPage}

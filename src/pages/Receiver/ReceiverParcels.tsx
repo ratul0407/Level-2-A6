@@ -2,11 +2,11 @@
 import { useGetMyParcelsQuery } from "@/redux/features/parcel/parcel.api";
 import { format } from "date-fns";
 import { Input } from "@/components/ui/input";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { useDebounce } from "use-debounce";
 import Loading from "@/components/ui/Loading/Loading";
 import DataTable from "@/components/modules/Shared/DataTable";
-import { receiverColumns } from "@/components/modules/Receiver/ReceiverColumns";
+import { receiverColumns } from "@/components/table/ReceiverColumns";
 import {
   Select,
   SelectContent,
@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { parcelStatus } from "@/constants/parcelStatus";
+
 const ReceiverParcels = () => {
   const [page, setPageChange] = useState(1);
   const [search, setSearch] = useState("");

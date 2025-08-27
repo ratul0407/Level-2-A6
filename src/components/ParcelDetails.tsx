@@ -1,30 +1,25 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { IParcel } from "@/types/response/parcel";
 import { useGetMeQuery } from "@/redux/features/auth/auth.api";
 import { role } from "@/constants/role";
+import TrackingChart from "./TrackingChart";
+import { parcelStatus } from "@/constants/parcelStatus";
 const ParcelDetails = (parcel: IParcel) => {
   const { data } = useGetMeQuery(undefined);
   const UserRole = data?.data?.data?.role;
   console.log(UserRole === role.superAdmin || UserRole === role.admin);
+  console.log(data);
   return (
     <Card
       className={`${
         UserRole === role.superAdmin || UserRole === role.admin
           ? "md:min-w-3xl"
           : ""
-      } md:max-w-3xl w-fit   mx-auto shadow-lg `}
+      } md:max-w-3xl w-full   mx-auto shadow-lg `}
     >
       <CardHeader>
         <CardTitle className="flex justify-between items-center">
@@ -33,16 +28,24 @@ const ParcelDetails = (parcel: IParcel) => {
           <Badge
             className={cn(
               "px-2 py-1 rounded text-xs font-medium",
-              parcel?.currentStatus === "REQUESTED" &&
+              parcel?.currentStatus === parcelStatus.requested &&
                 "bg-yellow-100 text-yellow-800",
-              parcel?.currentStatus === "DELIVERED" &&
+              parcel?.currentStatus === parcelStatus.delivered &&
                 "bg-green-100 text-green-800",
-              parcel?.currentStatus === "APPROVED" &&
-                "bg-blue-100 text-blue-800",
-              parcel?.currentStatus === "CANCELLED" &&
+              parcel?.currentStatus === parcelStatus.cancelled &&
                 "bg-red-100 text-red-800",
-              parcel?.currentStatus === "RETURNED" &&
-                "bg-purple-100 text-purple-800"
+              parcel?.currentStatus === parcelStatus.returned &&
+                "bg-purple-100 text-purple-800",
+              parcel?.currentStatus === parcelStatus.approved &&
+                "bg-blue-100 text-blue-800",
+              parcel?.currentStatus === parcelStatus.picked_up &&
+                "bg-orange-100 text-orange-800",
+              parcel?.currentStatus === parcelStatus.dispatched &&
+                "bg-violet-100 text-violet-800",
+              parcel?.currentStatus === parcelStatus.out_for_delivery &&
+                "bg-amber-100 text-amber-800",
+              parcel?.currentStatus === parcelStatus.failed_delivery &&
+                "bg-red-100 text-red-800"
             )}
           >
             {parcel?.currentStatus}
@@ -109,24 +112,7 @@ const ParcelDetails = (parcel: IParcel) => {
         <div>
           <h3 className="text-lg font-semibold mb-2">Tracking History</h3>
 
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Status</TableHead>
-                <TableHead>Updated By</TableHead>
-                <TableHead>Time</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {parcel?.trackingEvents.map((event, index) => (
-                <TableRow key={index}>
-                  <TableCell className="font-medium">{event.status}</TableCell>
-                  <TableCell>{event.updatedBy}</TableCell>
-                  <TableCell>{format(event.at, "PPpp")}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <TrackingChart trackingEvents={parcel?.trackingEvents} />
         </div>
       </CardContent>
     </Card>

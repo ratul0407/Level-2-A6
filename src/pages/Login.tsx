@@ -13,7 +13,6 @@ import { Input } from "@/components/ui/input";
 import Password from "@/components/ui/Password";
 import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
-import config from "@/config";
 import { Link, useNavigate } from "react-router";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";

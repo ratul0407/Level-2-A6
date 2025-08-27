@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  PieChart,
-  Pie,
-  Cell,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
-} from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
@@ -36,7 +29,7 @@ const UsersByRolePie = ({
               outerRadius={120}
               label
             >
-              {data.map((entry, index) => (
+              {data.map((_, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}

@@ -19,6 +19,16 @@ export const parcelApi = baseApi.injectEndpoints({
       providesTags: ["PARCEL"],
     }),
 
+    //delivery routes
+    updateParcelStatus: builder.mutation({
+      query: ({ data, tracking_id }) => ({
+        url: `/parcel/status/${tracking_id}`,
+        method: "PATCH",
+        data,
+      }),
+      invalidatesTags: ["PARCEL"],
+    }),
+
     // admin routes
     getAllParcels: builder.query({
       query: (params) => ({
@@ -53,4 +63,5 @@ export const {
   useGetAllParcelsQuery,
   useCancelParcelsMutation,
   useApproveParcelMutation,
+  useUpdateParcelStatusMutation,
 } = parcelApi;
