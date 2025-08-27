@@ -15,6 +15,7 @@ import { useGetAllUsersQuery } from "@/redux/features/auth/auth.api";
 import { useGetUserStatsQuery } from "@/redux/features/user/user.api";
 import { UsersBarChart } from "@/components/modules/Admin/User/UsersBarChart";
 import UsersByRolePie from "@/components/modules/Admin/User/UsersRoleByPie";
+import { IUser } from "@/types/response/user";
 
 const AllUsers = () => {
   const { data, isLoading, isError } = useGetAllUsersQuery(undefined);
@@ -25,15 +26,17 @@ const AllUsers = () => {
   console.log(users);
 
   const barData = userStatsData?.data?.usersCreatedOverTheLast30Days?.map(
-    (item) => ({
+    (item: { _id: string; count: number }) => ({
       date: item._id,
       users: item.count,
     })
   );
-  const pieData = userStatsData?.data?.usersByRole?.map((item) => ({
-    role: item._id,
-    value: item.count,
-  }));
+  const pieData = userStatsData?.data?.usersByRole?.map(
+    (item: { _id: string; count: number }) => ({
+      role: item._id,
+      value: item.count,
+    })
+  );
   return (
     <div className="space-y-12">
       <div>
@@ -69,7 +72,7 @@ const AllUsers = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users?.map((user) => (
+            {users?.map((user: IUser) => (
               <TableRow key={user._id}>
                 <TableCell>{user?.name}</TableCell>
                 <TableCell>{user?.email}</TableCell>

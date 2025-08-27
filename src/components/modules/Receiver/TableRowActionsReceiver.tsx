@@ -7,9 +7,9 @@ import { MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { IParcel } from "@/types/response/parcel";
 import { useState } from "react";
-import CancelParcelModal from "../Shared/CancelParcelModal";
 import ParcelDetailsModal from "../Admin/Parcel/ParcelDetailsModal";
 import ConfirmDeliveryModal from "./ConfirmDeliveryModal";
+import CancelParcelModal from "../Shared/CancelParcelModal";
 const TableRowActionsReceiver = (parcel: IParcel) => {
   const [openDetails, setOpenDetails] = useState(false);
 

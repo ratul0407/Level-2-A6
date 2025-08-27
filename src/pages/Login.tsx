@@ -41,7 +41,8 @@ const Login = () => {
         toast.success("Login successful!");
         navigate("/");
       }
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       console.log(error);
       toast.error(error?.data?.message);
     }

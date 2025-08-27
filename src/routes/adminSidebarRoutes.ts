@@ -1,6 +1,5 @@
 import AllParcels from "@/pages/Admin/AllParcels";
 import AllUsers from "@/pages/Admin/AllUsers";
-import Overview from "@/pages/Admin/Overview";
 import { ISidebarItems } from "@/types";
 
 export const adminSidebarItems: ISidebarItems[] = [
@@ -8,11 +7,6 @@ export const adminSidebarItems: ISidebarItems[] = [
     title: "Dashboard",
     url: "#",
     items: [
-      {
-        title: "Overview",
-        url: "/admin/overview",
-        component: Overview,
-      },
       {
         title: "All Users",
         url: "/admin/all-users",

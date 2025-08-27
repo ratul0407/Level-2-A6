@@ -11,10 +11,10 @@ import { useGetParcelStatsQuery } from "@/redux/features/stats/stats.api";
 import { UsersBarChart } from "@/components/modules/Admin/User/UsersBarChart";
 const AllParcels = () => {
   const [page, setPageChange] = useState(1);
-  const [sorting, setSorting] = useState();
+  // const [sorting, setSorting] = useState<{ id: string; desc: boolean }[]>();
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebounce(search, 500);
-
+  // console.log(sorting);
   console.log(search);
   const { data: parcelStats, isLoading: parcelStatsLoading } =
     useGetParcelStatsQuery(undefined);
@@ -22,7 +22,7 @@ const AllParcels = () => {
   console.log(parcelStats);
   const { data, isLoading, isError } = useGetAllParcelsQuery({
     page,
-    sort: sorting?.[0].desc ? "weight" : "-weight",
+    // sort: sorting?.[0].desc ? "weight" : "-weight",
     searchTerm: debouncedSearch || undefined,
   });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -116,8 +116,6 @@ const AllParcels = () => {
           page={data?.data?.meta?.page}
           totalPage={data?.data?.meta?.totalPage}
           onPageChange={setPageChange}
-          sorting={sorting}
-          setSorting={setSorting}
         />
       )}
     </div>

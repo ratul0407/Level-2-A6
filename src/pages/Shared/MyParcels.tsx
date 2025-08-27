@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import CancelParcelModal from "@/components/modules/Shared/CancelParcelModal";
 import {
   Table,
@@ -28,7 +29,7 @@ const MyParcels = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {parcels?.map((parcel) => (
+        {parcels?.map((parcel: any) => (
           <TableRow key={parcel.trackingId} className="*:text-center">
             <TableCell>{parcel?.name}</TableCell>
             <TableCell>{parcel?.trackingId}</TableCell>

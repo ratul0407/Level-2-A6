@@ -28,8 +28,6 @@ interface DataTableProps<TData, TValue> {
   page: number;
   totalPage: number;
   onPageChange: (page: number) => void;
-  sorting: any;
-  setSorting: React.Dispatch<React.SetStateAction<undefined>>;
 }
 const DataTable = <TData, TValue>({
   columns,
@@ -37,18 +35,13 @@ const DataTable = <TData, TValue>({
   page,
   totalPage,
   onPageChange,
-  sorting,
-  setSorting,
 }: DataTableProps<TData, TValue>) => {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    state: {
-      sorting,
-    },
-    onSortingChange: setSorting,
+
     manualSorting: true,
     manualPagination: true,
     pageCount: totalPage,

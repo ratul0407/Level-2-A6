@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Dialog,
   DialogContent,
@@ -11,32 +12,32 @@ import { toast } from "sonner";
 import { useCreateParcelMutation } from "@/redux/features/parcel/parcel.api";
 import { useNavigate } from "react-router";
 import { Separator } from "./ui/separator";
-interface IProps {
+// interface IParcelData {
+//   open: boolean;
+//   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+//   parcelData: {
+//     name: string;
+//     weight: number;
+//     deliveryLocation: {
+//       division: string;
+//       city: string;
+//       zip: number;
+//       street: string;
+//     };
+//     receiver: string;
+//     sameDivision: boolean;
+//   };
+// }
+
+const ConfirmParcelModal = ({
+  open,
+  setOpen,
+  parcelData,
+}: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  parcelData: {
-    name: string;
-    weight: number;
-    deliveryLocation: {
-      division: string;
-      city: string;
-      zip: number;
-      street: string;
-    };
-    receiver: string;
-    sameDivision: boolean;
-  };
-}
-
-{
-  /* <p>
-                Delivery Cost:{" "}
-                {parcelData?.sameDivision
-                  ? Math.ceil(60 + parcelData.weight * 5)
-                  : Math.ceil(100 + parcelData.weight * 7)}
-              </p> */
-}
-const ConfirmParcelModal = ({ open, setOpen, parcelData }: IProps) => {
+  parcelData: any;
+}) => {
   const navigate = useNavigate();
   const [createParcel] = useCreateParcelMutation();
   const today = new Date();
@@ -58,7 +59,6 @@ const ConfirmParcelModal = ({ open, setOpen, parcelData }: IProps) => {
   );
 
   const handleClick = async () => {
-    // setParcelData(parcelData);
     const toastId = toast.loading("creating parcel....");
     try {
       const res = await createParcel({

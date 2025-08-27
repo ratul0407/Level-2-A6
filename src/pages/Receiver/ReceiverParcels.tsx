@@ -47,12 +47,11 @@ const ReceiverParcels = () => {
         />
         <Select onValueChange={(e) => setStatus(e)}>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Theme" />
+            <SelectValue placeholder="Filter" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="DELIVERED">View Delivery History</SelectItem>
-            <SelectItem value="Invalid">Dark</SelectItem>
-            <SelectItem value="system">System</SelectItem>
+            <SelectItem value="OUT_FOR_DELIVERY">In Coming</SelectItem>
           </SelectContent>
         </Select>
       </div>

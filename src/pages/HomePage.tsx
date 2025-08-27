@@ -1,4 +1,3 @@
-import Faq from "@/components/HomePage/FaqSection";
 import Feature from "@/components/HomePage/Feature";
 import HeroSection from "@/components/HomePage/HeroSection";
 

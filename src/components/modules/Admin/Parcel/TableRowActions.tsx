@@ -10,6 +10,7 @@ import ParcelDetailsModal from "./ParcelDetailsModal";
 import { useState } from "react";
 import AssignParcelModal from "./AssignParcelModal";
 import CancelParcelModal from "../../Shared/CancelParcelModal";
+
 const TableRowActions = (parcel: IParcel) => {
   const [openDetails, setOpenDetails] = useState(false);
 
@@ -21,7 +22,6 @@ const TableRowActions = (parcel: IParcel) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
-        {/* <DropdownMenuItem onClick={() => setOpenDetails(true)}> */}
         <ParcelDetailsModal
           open={openDetails}
           setOpen={setOpenDetails}
