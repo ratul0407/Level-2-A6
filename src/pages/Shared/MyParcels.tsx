@@ -11,10 +11,12 @@ import {
 import { parcelStatus } from "@/constants/parcelStatus";
 import { cn } from "@/lib/utils";
 import { useGetMyParcelsQuery } from "@/redux/features/parcel/parcel.api";
+import { useState } from "react";
 const MyParcels = () => {
+  const [dropDown, setDropdownOpen] = useState(false);
   const { data } = useGetMyParcelsQuery(undefined);
   const parcels = data?.data?.data;
-  console.log(parcels);
+  console.log(dropDown);
   return (
     <Table>
       <TableHeader>
@@ -54,7 +56,11 @@ const MyParcels = () => {
               </div>
             </TableCell>
             <TableCell>
-              <CancelParcelModal parcel={parcel} button={true} />
+              <CancelParcelModal
+                closeDropdown={() => setDropdownOpen(false)}
+                parcel={parcel}
+                button={true}
+              />
             </TableCell>
           </TableRow>
         ))}

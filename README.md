@@ -1,69 +1,91 @@
-# React + TypeScript + Vite
+# 📦 Parcel Delivery System – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern parcel delivery management system that allows users to send, receive, and track parcels across the country.  
+This frontend is built with **React + TypeScript + Vite**, styled with **TailwindCSS**, and powered by **Redux Toolkit Query** for state management and API communication.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Project Overview
 
-## Expanding the ESLint configuration
+This system enables **nationwide parcel delivery** with role-based access control.  
+Users can register, login, and interact with the system depending on their role:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Sender** → Create and manage parcel shipments.
+- **Receiver** → Track parcels and confirm delivery.
+- **Delivery Personnel** → Manage assigned deliveries and update statuses.
+- **Admin** → Oversee parcel operations, users, and system reports.
+- **Super Admin** → Full access, including managing admins and system settings.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Key Features:
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- User authentication (JWT + cookies)
+- Role-based dashboards
+- Parcel creation & tracking
+- Real-time status updates
+- Analytics & reports for admins
+- Fully responsive UI
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🛠️ Technology Stack
+
+**Core:**
+
+- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) + [Vite](https://vitejs.dev/)
+- [Redux Toolkit](https://redux-toolkit.js.org/) + RTK Query for state & data fetching
+- [React Router v7](https://reactrouter.com/) for routing
+
+**UI & Styling:**
+
+- [TailwindCSS](https://tailwindcss.com/) + [Radix UI](https://www.radix-ui.com/) components
+- [Lucide Icons](https://lucide.dev/) & [React Icons](https://react-icons.github.io/react-icons/)
+- [Sonner](https://sonner.emilkowal.ski/) for toasts & notifications
+
+**Forms & Validation:**
+
+- [React Hook Form](https://react-hook-form.com/)
+- [Zod](https://zod.dev/) + [@hookform/resolvers](https://react-hook-form.com/get-started#SchemaValidation)
+
+**Data & Utilities:**
+
+- [Axios](https://axios-http.com/) for API requests
+- [Date-fns](https://date-fns.org/) for date formatting
+- [Recharts](https://recharts.org/) for charts & analytics
+- [use-debounce](https://www.npmjs.com/package/use-debounce) for performance
+
+**Dev Tools:**
+
+- ESLint + TypeScript ESLint
+- Vite Hot Reload
+- Tailwind Merge, clsx, and class-variance-authority
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/parcel-delivery-frontend.git
+cd parcel-delivery-frontend
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 2. Install Dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```
+npm install
+# or
+pnpm install
+```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 3. Configure env variables
+
+```
+VITE_API_BASE_URL=https://your-backend-domain.com/api/v1
+```
+
+### Run in development
+
+```
+npm run dev
 ```
