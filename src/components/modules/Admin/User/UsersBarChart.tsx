@@ -29,7 +29,7 @@ export function UsersBarChart({
             <XAxis dataKey="date" />
             <YAxis />
             <Tooltip />
-            <Bar dataKey="users" fill="#3b82f6" radius={[6, 6, 0, 0]} />
+            <Bar dataKey="users" fill="#00c950" radius={[6, 6, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </CardContent>
