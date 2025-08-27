@@ -89,3 +89,18 @@ VITE_API_BASE_URL=https://your-backend-domain.com/api/v1
 ```
 npm run dev
 ```
+
+### Credentials
+
+- admin :
+  - email: super@gmail.com
+  - pass: 12345678
+- sender:
+  - email: test@gmail.com
+  - pass: ratul1122
+- receiver :
+- email: ratul@gmail.com
+- pass: 12345678
+- diver:
+  - email: test.driver@gmail.com
+  - pass: 12345678

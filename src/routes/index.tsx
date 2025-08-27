@@ -16,6 +16,7 @@ import { withAuth } from "@/utils/withAuth";
 import { role } from "@/constants/role";
 import { TRole } from "@/types";
 import UnAuthorized from "@/pages/UnAuthorized";
+import NotFound from "@/pages/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         Component: Contact,
+      },
+      {
+        path: "*",
+        Component: NotFound,
       },
     ],
   },
