@@ -2,8 +2,7 @@ import {
   useGetAllParcelsQuery,
   useGetParcelStatsQuery,
 } from "@/redux/features/parcel/parcel.api";
-import DataTable from "./AllParcels/DataTable";
-import { columns } from "./AllParcels/Columns";
+import { columns } from "../../components/modules/Admin/Parcel/Columns";
 import { useState } from "react";
 import { format } from "date-fns";
 import Loading from "@/components/ui/Loading/Loading";
@@ -12,6 +11,7 @@ import { useDebounce } from "use-debounce";
 import { Package, PackagePlus, PackageX } from "lucide-react";
 
 import { UsersBarChart } from "@/components/modules/Admin/User/UsersBarChart";
+import DataTable from "@/components/modules/Shared/DataTable";
 const AllParcels = () => {
   const [page, setPageChange] = useState(1);
   const [search, setSearch] = useState("");

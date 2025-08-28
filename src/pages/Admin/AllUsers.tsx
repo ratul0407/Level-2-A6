@@ -8,10 +8,10 @@ import { UsersBarChart } from "@/components/modules/Admin/User/UsersBarChart";
 import UsersByRolePie from "@/components/modules/Admin/User/UsersRoleByPie";
 
 import { User, UserPen, UserRoundMinus, UserRoundX, Users } from "lucide-react";
-import DataTable from "./AllParcels/DataTable";
-import { UserColumns } from "./AllUsers/Columns";
+import { UserColumns } from "../../components/modules/Admin/User/Columns";
 import { useState } from "react";
 import Loading from "@/components/ui/Loading/Loading";
+import DataTable from "@/components/modules/Shared/DataTable";
 
 const AllUsers = () => {
   const [page, setPageChange] = useState(1);
