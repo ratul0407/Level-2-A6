@@ -8,7 +8,6 @@ import Register from "@/pages/Register";
 import { generateRoute } from "@/utils/generateRoutes";
 
 import { createBrowserRouter, Navigate } from "react-router";
-import { adminSidebarItems } from "./adminSidebarRoutes";
 import { senderSidebarItems } from "./senderSidebarRoutes";
 import { receiverSidebarItems } from "./receiverSidebarRoutes";
 import { deliverySidebarItems } from "./deliverySidebarRoutes";
@@ -17,6 +16,7 @@ import { role } from "@/constants/role";
 import { TRole } from "@/types";
 import UnAuthorized from "@/pages/UnAuthorized";
 import NotFound from "@/pages/NotFound";
+import { adminSidebarItems } from "./adminSidebarRoutes";
 
 const router = createBrowserRouter([
   {

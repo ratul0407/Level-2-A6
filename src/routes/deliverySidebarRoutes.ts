@@ -1,6 +1,8 @@
-import DeliveryParcels from "@/pages/Delivery/DeliveryParcels";
 import { ISidebarItems } from "@/types";
 
+import { lazy } from "react";
+
+const DeliveryParcels = lazy(() => import("@/pages/Delivery/DeliveryParcels"));
 export const deliverySidebarItems: ISidebarItems[] = [
   {
     title: "Dashboard",

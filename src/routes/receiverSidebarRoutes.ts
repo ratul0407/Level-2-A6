@@ -1,7 +1,7 @@
-import ReceiverParcels from "@/pages/Receiver/ReceiverParcels";
-
 import { ISidebarItems } from "@/types";
+import { lazy } from "react";
 
+const ReceiverParcels = lazy(() => import("@/pages/Receiver/ReceiverParcels"));
 export const receiverSidebarItems: ISidebarItems[] = [
   {
     title: "My Dashboard",
@@ -12,16 +12,6 @@ export const receiverSidebarItems: ISidebarItems[] = [
         url: "/receiver/my-parcels",
         component: ReceiverParcels,
       },
-      //   {
-      //     title: "Send Parcel",
-      //     url: "/sender/send-parcel",
-      //     component: SendParcel,
-      //   },
-      //   {
-      //     title: "Create Parcel",
-      //     url: "/sender/create-parcel",
-      //     component: CreateParcel,
-      //   },
     ],
   },
 ];

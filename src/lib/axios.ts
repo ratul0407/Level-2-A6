@@ -52,32 +52,28 @@ axiosInstance.interceptors.response.use(
 
     console.log("Request Failed: ", error.response);
     if (
-      error.response?.status === 401 && // <-- check 401 not 500
+      error.response.status === 403 &&
       error?.response?.data?.message === "jwt expired" &&
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
-
       if (isRefreshing) {
-        return new Promise((resolve, reject) => {
+        new Promise((resolve, reject) => {
           pendingQueue.push({ resolve, reject });
         })
           .then(() => axiosInstance(originalRequest))
-          .catch((err) => Promise.reject(err));
+          .catch((error) => Promise.reject(error));
       }
-
-      isRefreshing = true;
-      console.log("I was here");
-
+      isRefreshing = false;
       try {
         const res = await axiosInstance.post("/auth/refresh-token");
-        // update tokens in storage if needed here
         console.log(res);
+
         processQueue(null);
         return axiosInstance(originalRequest);
-      } catch (err) {
-        processQueue(err);
-        return Promise.reject(err);
+      } catch (error) {
+        console.log(error);
+        return Promise.reject(error);
       } finally {
         isRefreshing = false;
       }

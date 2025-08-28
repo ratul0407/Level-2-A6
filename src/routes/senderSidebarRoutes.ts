@@ -1,8 +1,9 @@
-import CreateParcel from "@/pages/Receiver/Sender/CreateParcel";
-
 import { ISidebarItems } from "@/types";
-import SenderParcels from "@/pages/Receiver/Sender/SenderParcels";
 
+import { lazy } from "react";
+
+const SenderParcels = lazy(() => import("@/pages/Sender/SenderParcels"));
+const CreateParcel = lazy(() => import("@/pages/Sender/CreateParcel"));
 export const senderSidebarItems: ISidebarItems[] = [
   {
     title: "My Dashboard",
