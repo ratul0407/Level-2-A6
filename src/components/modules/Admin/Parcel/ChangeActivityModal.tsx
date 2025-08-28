@@ -28,7 +28,7 @@ import { toast } from "sonner";
 import { useState } from "react";
 const ChangeActivityModal = (user: any) => {
   const [open, setOpen] = useState(false);
-  const [changeActivity] = useChangeUserActivityMutation();
+  const [changeActivity, { isLoading }] = useChangeUserActivityMutation();
   const form = useForm();
   const onSubmit = async (data: unknown) => {
     console.log(data);
@@ -80,7 +80,7 @@ const ChangeActivityModal = (user: any) => {
                   </FormItem>
                 )}
               />
-              <Button>Change</Button>
+              <Button disabled={isLoading}>Change</Button>
             </form>
           </Form>
         </DialogHeader>
