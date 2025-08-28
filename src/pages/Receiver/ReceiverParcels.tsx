@@ -20,6 +20,7 @@ const ReceiverParcels = () => {
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebounce(search, 500);
   const [status, setStatus] = useState({});
+
   const { data, isLoading, isError } = useGetMyParcelsQuery({
     page,
     searchTerm: debouncedSearch || undefined,
@@ -51,7 +52,7 @@ const ReceiverParcels = () => {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="DELIVERED">View Delivery History</SelectItem>
-            <SelectItem value="OUT_FOR_DELIVERY">In Coming</SelectItem>
+            <SelectItem value="NOT_DELIVERED">In Coming</SelectItem>
             <SelectItem value="ALL">All</SelectItem>
           </SelectContent>
         </Select>

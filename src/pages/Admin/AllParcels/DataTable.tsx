@@ -47,7 +47,10 @@ const DataTable = <TData, TValue>({
     pageCount: totalPage,
   });
 
-  console.log(page);
+  const showPagination =
+    (page < totalPage && data.length === 10) || page === totalPage;
+  console.log(showPagination);
+  console.log(totalPage);
   return (
     <div>
       <Table>
@@ -89,39 +92,40 @@ const DataTable = <TData, TValue>({
       </Table>
 
       {/* Pagination Controls */}
-
-      <Pagination className="mt-16 ">
-        <PaginationContent>
-          <PaginationItem
-            onClick={() => onPageChange(page - 1)}
-            className={`${page === 1 && "opacity-50 pointer-events-none"}`}
-          >
-            <PaginationPrevious href="#" />
-          </PaginationItem>
-          {Array.from({ length: totalPage }, (_, index) => index + 1).map(
-            (currentPage) => {
-              return (
-                <PaginationItem
-                  key={currentPage}
-                  onClick={() => onPageChange(currentPage)}
-                >
-                  <PaginationLink isActive={page === currentPage}>
-                    {currentPage}
-                  </PaginationLink>
-                </PaginationItem>
-              );
-            }
-          )}
-          <PaginationItem
-            onClick={() => onPageChange(page + 1)}
-            className={`${
-              page === totalPage && "opacity-50 pointer-events-none"
-            } `}
-          >
-            <PaginationNext href="#" />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+      {showPagination && (
+        <Pagination className="mt-16 ">
+          <PaginationContent>
+            <PaginationItem
+              onClick={() => onPageChange(page - 1)}
+              className={`${page === 1 && "opacity-50 pointer-events-none"}`}
+            >
+              <PaginationPrevious href="#" />
+            </PaginationItem>
+            {Array.from({ length: totalPage }, (_, index) => index + 1).map(
+              (currentPage) => {
+                return (
+                  <PaginationItem
+                    key={currentPage}
+                    onClick={() => onPageChange(currentPage)}
+                  >
+                    <PaginationLink isActive={page === currentPage}>
+                      {currentPage}
+                    </PaginationLink>
+                  </PaginationItem>
+                );
+              }
+            )}
+            <PaginationItem
+              onClick={() => onPageChange(page + 1)}
+              className={`${
+                page === totalPage && "opacity-50 pointer-events-none"
+              } `}
+            >
+              <PaginationNext href="#" />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
     </div>
   );
 };

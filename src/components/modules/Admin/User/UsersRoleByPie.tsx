@@ -11,7 +11,6 @@ const UsersByRolePie = ({
 }: {
   data: { role: string; value: number }[];
 }) => {
-  console.log(data, "from pie");
   return (
     <Card className="border-none shadow-none">
       <CardHeader>

@@ -45,6 +45,9 @@ const DataTable = <TData, TValue>({
     manualPagination: true,
     pageCount: totalPage,
   });
+  const showPagination =
+    (page < totalPage && data.length === 10) || page === totalPage;
+
   return (
     <div>
       <Table>
@@ -86,7 +89,7 @@ const DataTable = <TData, TValue>({
       </Table>
 
       {/* Pagination Controls */}
-      {
+      {showPagination && (
         <Pagination className="mt-16 ">
           <PaginationContent>
             <PaginationItem
@@ -119,7 +122,7 @@ const DataTable = <TData, TValue>({
             </PaginationItem>
           </PaginationContent>
         </Pagination>
-      }
+      )}
     </div>
   );
 };

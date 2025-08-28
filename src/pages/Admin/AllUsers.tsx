@@ -1,16 +1,4 @@
-import ChangeActivityModal from "@/components/modules/Admin/Parcel/ChangeActivityModal";
-import Loading from "@/components/ui/Loading/Loading";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-
-import { userActivity } from "@/constants/userActivity";
-import { cn } from "@/lib/utils";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   useGetAllUsersQuery,
   useGetUserStatsQuery,
@@ -18,16 +6,25 @@ import {
 
 import { UsersBarChart } from "@/components/modules/Admin/User/UsersBarChart";
 import UsersByRolePie from "@/components/modules/Admin/User/UsersRoleByPie";
-import { IUser } from "@/types/response/user";
+
 import { User, UserPen, UserRoundMinus, UserRoundX, Users } from "lucide-react";
+import DataTable from "./AllParcels/DataTable";
+import { UserColumns } from "./AllUsers/Columns";
+import { useState } from "react";
+import Loading from "@/components/ui/Loading/Loading";
 
 const AllUsers = () => {
-  const { data, isLoading, isError } = useGetAllUsersQuery(undefined);
+  const [page, setPageChange] = useState(1);
+  const { data, isLoading, isError } = useGetAllUsersQuery({ page });
   const { data: userStatsData, isLoading: userStatsLoading } =
     useGetUserStatsQuery(undefined);
 
   const users = data?.data;
-  console.log(userStatsData);
+
+  const tableUsers = users?.map((user: any) => ({
+    ...user,
+    parcels: user?.parcels?.length,
+  }));
   if (isLoading || userStatsLoading) {
     return (
       <div className="grid justify-center items-center min-h-[70vh]">
@@ -71,6 +68,7 @@ const AllUsers = () => {
     },
   };
 
+  console.log(data);
   return (
     <div className="space-y-12">
       <div>
@@ -105,7 +103,7 @@ const AllUsers = () => {
               ))}
             </div>
           </div>
-          s
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <UsersBarChart data={barData} />
             <UsersByRolePie data={pieData} />
@@ -121,48 +119,13 @@ const AllUsers = () => {
         </div>
       )}
       {!isLoading && !isError && (
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Verified</TableHead>
-              <TableHead>Role</TableHead>
-              <TableHead>Parcels</TableHead>
-              <TableHead>Active</TableHead>
-              <TableHead></TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {users?.map((user: IUser) => (
-              <TableRow key={user._id}>
-                <TableCell>{user?.name}</TableCell>
-                <TableCell>{user?.email}</TableCell>
-                <TableCell>{user?.isVerified ? "Yes" : "No"}</TableCell>
-                <TableCell>{user?.role}</TableCell>
-                <TableCell>{user?.parcels.length}</TableCell>
-                <TableCell className="max-w-[100px]">
-                  <div
-                    className={cn(
-                      "py-1 w-full rounded text-xs font-medium text-center",
-                      user?.isActive === userActivity.active &&
-                        "bg-green-100 text-green-800",
-                      user?.isActive === userActivity.inActive &&
-                        "bg-yellow-100 text-yellow-800",
-                      user?.isActive === userActivity.blocked &&
-                        "bg-red-100 text-red-800"
-                    )}
-                  >
-                    {user?.isActive}
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <ChangeActivityModal {...user} />
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <DataTable
+          columns={UserColumns}
+          data={tableUsers}
+          page={data?.meta?.page}
+          totalPage={data?.meta?.totalPage}
+          onPageChange={setPageChange}
+        />
       )}
     </div>
   );

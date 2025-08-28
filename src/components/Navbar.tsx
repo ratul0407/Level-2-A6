@@ -18,16 +18,8 @@ import {
   useLogOutMutation,
 } from "@/redux/features/auth/auth.api";
 import { useAppDispatch } from "@/redux/hooks";
-// import { useEffect } from "react";
 
 import { Link, useLocation } from "react-router";
-
-// Navigation links array to be used in both desktop and mobile menus
-const navigationLinks = [
-  { href: "/", label: "Home" },
-  { href: "/contact", label: "Contact" },
-  { href: "/about", label: "About" },
-];
 
 const Navbar = () => {
   const { pathname } = useLocation();
@@ -40,8 +32,24 @@ const Navbar = () => {
     await logout(undefined);
     dispatch(authApi.util.resetApiState());
   };
-  const avatarName = data?.data?.data?.name?.[0].toUpperCase();
   const userRole = data?.data?.data?.role;
+
+  const navigationLinks = [
+    { href: "/", label: "Home" },
+    { href: "/contact", label: "Contact" },
+    { href: "/about", label: "About" },
+    {
+      href:
+        userRole === role.sender
+          ? "/sender"
+          : userRole === role.receiver
+          ? "/receiver"
+          : userRole === role.delivery_personnel
+          ? "/delivery"
+          : "/admin",
+      label: "Dashboard",
+    },
+  ];
   return (
     <header className="border-b">
       <div className="flex h-16 justify-between gap-4">
@@ -123,21 +131,6 @@ const Navbar = () => {
         <div className="flex items-center gap-2">
           {data?.success ? (
             <>
-              <Link
-                to={
-                  userRole === role.sender
-                    ? "/sender"
-                    : userRole === role.receiver
-                    ? "/receiver"
-                    : userRole === role.delivery_personnel
-                    ? "/delivery"
-                    : "/admin"
-                }
-              >
-                <div className="rounded-full bg-green-500 text-white size-8 flex flex-col items-center justify-center">
-                  {avatarName}
-                </div>
-              </Link>
               <Button onClick={handleLogOut} variant={"outline"}>
                 Log out
               </Button>
