@@ -39,7 +39,7 @@ const ConfirmParcelModal = ({
   parcelData: any;
 }) => {
   const navigate = useNavigate();
-  const [createParcel] = useCreateParcelMutation();
+  const [createParcel, { isLoading }] = useCreateParcelMutation();
   const today = new Date();
   const estimatedDeliveryDate = format(addDays(today, 7), "dd/MM/yy");
   console.log(today, estimatedDeliveryDate);
@@ -119,7 +119,9 @@ const ConfirmParcelModal = ({
               <p>Estimated Delivery Date: {estimatedDeliveryDate}</p>
             </div>
           </div>
-          <Button onClick={handleClick}>Confirm Order</Button>
+          <Button onClick={handleClick} disabled={isLoading}>
+            Confirm Order
+          </Button>
         </DialogHeader>
       </DialogContent>
     </Dialog>
