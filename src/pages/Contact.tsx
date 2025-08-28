@@ -1,9 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import { Textarea } from "@/components/ui/textarea";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface Contact2Props {
   title?: string;
@@ -13,6 +25,16 @@ interface Contact2Props {
   web?: { label: string; url: string };
 }
 
+const contactSchema = z.object({
+  name: z
+    .string()
+    .min(3, { error: "Name is too short" })
+    .max(50, { error: "Name is too big" }),
+  email: z.email(),
+  subject: z.string().min(1, { error: "Required" }),
+  message: z.string().min(1, { error: "Required" }),
+});
+
 const Contact = ({
   title = "Contact Us",
   description = "We are available for questions, feedback, or collaboration opportunities. Let us know how we can help!",
@@ -21,13 +43,24 @@ const Contact = ({
   web = { label: "shadcnblocks.com", url: "https://shadcnblocks.com" },
 }: Contact2Props) => {
   const navigate = useNavigate();
-  const handleContactFormSubmission = () => {
+
+  const form = useForm<z.infer<typeof contactSchema>>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    },
+  });
+
+  const onSubmit = (data: z.infer<typeof contactSchema>) => {
+    console.log(data);
     setTimeout(() => {
       toast.success("Contact form stored. We'll catch you soon!");
       navigate("/");
     }, 1000);
   };
-
   return (
     <section className="py-32">
       <div className="container">
@@ -64,31 +97,88 @@ const Contact = ({
             </div>
           </div>
           <div className="mx-auto flex max-w-3xl flex-col gap-6 rounded-lg border p-10">
-            <div className="flex gap-4">
-              <div className="grid w-full items-center gap-1.5">
-                <Label htmlFor="firstname">First Name</Label>
-                <Input type="text" id="firstname" placeholder="First Name" />
-              </div>
-              <div className="grid w-full items-center gap-1.5">
-                <Label htmlFor="lastname">Last Name</Label>
-                <Input type="text" id="lastname" placeholder="Last Name" />
-              </div>
-            </div>
-            <div className="grid w-full items-center gap-1.5">
-              <Label htmlFor="email">Email</Label>
-              <Input type="email" id="email" placeholder="Email" />
-            </div>
-            <div className="grid w-full items-center gap-1.5">
-              <Label htmlFor="subject">Subject</Label>
-              <Input type="text" id="subject" placeholder="Subject" />
-            </div>
-            <div className="grid w-full gap-1.5">
-              <Label htmlFor="message">Message</Label>
-              <Textarea placeholder="Type your message here." id="message" />
-            </div>
-            <Button onClick={handleContactFormSubmission} className="w-full">
-              Send Message
-            </Button>
+            <Form {...form}>
+              <form
+                className="w-md space-y-6"
+                onSubmit={form.handleSubmit(onSubmit)}
+              >
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="enter your name"
+                          type="text"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription className="sr-only">
+                        This is a field for the name input
+                      </FormDescription>
+                      <FormMessage className="text-left" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="john.doe@company.com"
+                          type="email"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription className="sr-only">
+                        This is a field for the email input
+                      </FormDescription>
+                      <FormMessage className="text-left" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="subject"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Subject</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Subject" type="text" {...field} />
+                      </FormControl>
+                      <FormDescription className="sr-only">
+                        Enter the subject for the email
+                      </FormDescription>
+                      <FormMessage className="text-left" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Message</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Message"
+                          className="resize-none"
+                          {...field}
+                        />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button className="w-full">Send Message</Button>
+              </form>
+            </Form>
           </div>
         </div>
       </div>

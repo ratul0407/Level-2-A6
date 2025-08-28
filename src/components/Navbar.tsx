@@ -42,11 +42,6 @@ const Navbar = () => {
   };
   const avatarName = data?.data?.data?.name?.[0].toUpperCase();
   const userRole = data?.data?.data?.role;
-  // useEffect(() => {
-  //   navigationLinks.forEach((item) => {
-  //     item.active = item.href === pathname;
-  //   });
-  // }, [pathname]);
   return (
     <header className="border-b">
       <div className="flex h-16 justify-between gap-4">
