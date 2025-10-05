@@ -20,7 +20,7 @@ export function UsersBarChart({
   return (
     <Card className="border-0 shadow-none">
       <CardHeader>
-        <CardTitle>Users Created (Last 30 Days)</CardTitle>
+        <CardTitle>Parcels Created (Last 90 Days)</CardTitle>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={350}>

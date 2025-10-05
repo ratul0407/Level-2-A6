@@ -18,6 +18,7 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
 import { toast } from "sonner";
+import config from "@/config";
 
 const loginSchema = z.object({
   email: z.email(),
@@ -49,7 +50,18 @@ const Login = () => {
   };
 
   const handleDemoAdminLogin = async () => {
-    onSubmit({ email: "super@gmail.com", password: "12345678" });
+    onSubmit({ email: config.admin_email, password: config.admin_pass });
+  };
+  const handleDriverLogin = async () => {
+    onSubmit({ email: config.driver_email, password: config.driver_pass });
+  };
+
+  const handleReceiverLogin = async () => {
+    onSubmit({ email: config.receiver_email, password: config.receiver_pass });
+  };
+
+  const handleSenderLogin = async () => {
+    onSubmit({ email: config.sender_email, password: config.sender_pass });
   };
   return (
     <div className="grid lg:grid-cols-2 grid-rows-1 min-h-svh lg: gap-12">
@@ -66,9 +78,9 @@ const Login = () => {
           Enter your email below to login to your account
         </p>
         <div className="grid grid-cols-2 gap-4 max-w-xs items-center justify-center  mx-auto">
-          <Button>Demo Sender</Button>
-          <Button>Demo Receiver</Button>
-          <Button>Demo Delivery Man</Button>
+          <Button onClick={handleSenderLogin}>Demo Sender</Button>
+          <Button onClick={handleReceiverLogin}>Demo Receiver</Button>
+          <Button onClick={handleDriverLogin}>Demo Delivery Man</Button>
           <Button onClick={handleDemoAdminLogin}>Demo Admin</Button>
         </div>
         <div>
