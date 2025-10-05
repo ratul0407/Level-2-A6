@@ -47,6 +47,10 @@ const Login = () => {
       toast.error(error?.data?.message);
     }
   };
+
+  const handleDemoAdminLogin = async () => {
+    onSubmit({ email: "super@gmail.com", password: "12345678" });
+  };
   return (
     <div className="grid lg:grid-cols-2 grid-rows-1 min-h-svh lg: gap-12">
       <div className="relative hidden lg:block h-full ">
@@ -61,6 +65,12 @@ const Login = () => {
         <p className="text-muted-foreground text-sm text-balance">
           Enter your email below to login to your account
         </p>
+        <div className="grid grid-cols-2 gap-4 max-w-xs items-center justify-center  mx-auto">
+          <Button>Demo Sender</Button>
+          <Button>Demo Receiver</Button>
+          <Button>Demo Delivery Man</Button>
+          <Button onClick={handleDemoAdminLogin}>Demo Admin</Button>
+        </div>
         <div>
           <Form {...form}>
             <form
