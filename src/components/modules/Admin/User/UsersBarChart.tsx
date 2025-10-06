@@ -18,7 +18,7 @@ export function UsersBarChart({
   data: { date: string; users: number }[];
 }) {
   return (
-    <Card className="border-0 shadow-none">
+    <Card className="border-0 shadow-none max-w-screen">
       <CardHeader>
         <CardTitle>Parcels Created (Last 90 Days)</CardTitle>
       </CardHeader>

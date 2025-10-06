@@ -7,6 +7,11 @@ export interface ISidebarItems {
     title: string;
     url: string;
     component: ComponentType;
+    subRoutes?: {
+      title: string;
+      url: string;
+      component: ComponentType;
+    }[];
   }[];
 }
 

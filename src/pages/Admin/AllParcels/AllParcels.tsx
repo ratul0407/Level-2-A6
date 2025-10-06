@@ -2,7 +2,7 @@ import {
   useGetAllParcelsQuery,
   useGetParcelStatsQuery,
 } from "@/redux/features/parcel/parcel.api";
-import { columns } from "../../components/modules/Admin/Parcel/Columns";
+import { columns } from "../../../components/modules/Admin/Parcel/Columns";
 import { useState } from "react";
 import { format } from "date-fns";
 import Loading from "@/components/ui/Loading/Loading";
@@ -76,7 +76,7 @@ const AllParcels = () => {
         <h1 className="font-bold text-3xl">All Parcels</h1>
       </div>
       {!parcelStatsLoading && (
-        <div className="grid md:grid-cols-4 lg:grid-cols-5 gap-6">
+        <div className="grid md:grid-cols-4 lg:grid-cols-4 gap-6">
           {Object.entries(statsBox)?.map(([key, { value, icon }]) => (
             <div
               key={key}
