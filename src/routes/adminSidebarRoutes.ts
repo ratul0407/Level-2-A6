@@ -5,8 +5,8 @@ export const AllParcels = lazy(
   () => import("@/pages/Admin/AllParcels/AllParcels")
 );
 export const AllUsers = lazy(() => import("@/pages/Admin/AllUsers"));
-export const AllPendingParcels = lazy(
-  () => import("@/pages/Admin/AllParcels/AllPendingParcels")
+export const AllRequestedParcels = lazy(
+  () => import("@/pages/Admin/AllParcels/AllRequestedParcels")
 );
 export const adminSidebarItems: ISidebarItems[] = [
   {
@@ -24,9 +24,9 @@ export const adminSidebarItems: ISidebarItems[] = [
         component: AllParcels,
         subRoutes: [
           {
-            title: "Pending",
-            url: "/admin/all-parcels/pending",
-            component: AllPendingParcels,
+            title: "Requested",
+            url: "/admin/all-parcels/requested",
+            component: AllRequestedParcels,
           },
         ],
       },
