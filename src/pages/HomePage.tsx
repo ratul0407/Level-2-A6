@@ -4,6 +4,7 @@ import HeroSection from "@/components/HomePage/HeroSection";
 import OurStats from "@/components/HomePage/OurStats";
 import Testimonials from "@/components/HomePage/Testimonials.tsx";
 import OurServices from "@/components/HomePage/OurServices";
+import Process from "@/components/HomePage/Process";
 
 const HomePage = () => {
   return (
@@ -18,6 +19,7 @@ const HomePage = () => {
 
       <OurServices />
       <Testimonials />
+      <Process />
       <Faq />
     </div>
   );
