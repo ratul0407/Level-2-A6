@@ -79,7 +79,7 @@ const gridClasses = [
 
 const OurServices = () => {
   return (
-    <section className="py-16 lg:py-24">
+    <section className="py-16 lg:py-24 container mx-auto">
       <h2 className="mb-3 text-3xl font-semibold md:mb-4 lg:mb-6 lg:text-4xl pb-12">
         Our Services
       </h2>
@@ -93,8 +93,8 @@ const OurServices = () => {
           >
             <div className="absolute bg-black/60 inset-0"></div>
             <div className="p-4 relative z-20 ">
-              <div className="bg-white/10 rounded-xl border border-white p-2 w-fit">
-                <item.icon size={20} strokeWidth={1} className="text-white" />
+              <div className="bg-primary/20 rounded-xl border border-primary p-2 w-fit">
+                <item.icon size={20} strokeWidth={1} className="text-primary" />
               </div>
             </div>
             <div className="p-6 text-white relative z-20">

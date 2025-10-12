@@ -4,12 +4,13 @@ import img3 from "../../assets/images/testimonial-3.jpg";
 import img4 from "../../assets/images/testimonial-4.jpg";
 import img5 from "../../assets/images/testimonial-5.jpg";
 import img6 from "../../assets/images/testimonial-6.jpg";
-import { Quote } from "lucide-react";
+import { ArrowDown, Quote } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { Button } from "../ui/button";
 
 const testimonials = [
   {
@@ -58,13 +59,22 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-16 lg:py-32">
-      <h2 className="mb-3 text-3xl font-semibold md:mb-4 lg:mb-6 lg:text-4xl pb-12">
-        What our clients say about us
-      </h2>
+    <section className="py-16 lg:py-32 container mx-auto">
+      <div className="flex items-center justify-between">
+        <h2 className="mb-3 text-3xl font-semibold md:mb-4 lg:mb-6 lg:text-4xl pb-12">
+          What our clients say about us
+        </h2>
+        <div className="space-x-5">
+          <Button className="custom-prev h-10 rounded-full border-none">
+            <ArrowDown className="h-10 w-10 rotate-90" />
+          </Button>
+          <Button className="custom-next h-10 rounded-full border-none">
+            <ArrowDown className="h-10 w-10 rotate-270" />
+          </Button>
+        </div>
+      </div>
       <Swiper
         modules={[Navigation, Autoplay, Pagination]}
-        navigation
         autoplay={{ delay: 3000, disableOnInteraction: true }}
         spaceBetween={30}
         slidesPerView={3}
@@ -83,6 +93,10 @@ const Testimonials = () => {
             slidesPerView: 3,
             slidesPerGroup: 3,
           },
+        }}
+        navigation={{
+          nextEl: ".custom-next",
+          prevEl: ".custom-prev",
         }}
       >
         {testimonials.map((testimonial, index) => (

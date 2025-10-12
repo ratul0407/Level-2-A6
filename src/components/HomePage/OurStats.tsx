@@ -39,7 +39,7 @@ const OurStats = ({
   achievements = defaultAchievements,
 }) => {
   return (
-    <section>
+    <section className="container mx-auto">
       <div className="py-16 lg:py-24">
         <p className="text-center">{companiesTitle} </p>
         <div className="mt-8 flex flex-wrap justify-center gap-8">
