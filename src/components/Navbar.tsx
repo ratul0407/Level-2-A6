@@ -19,13 +19,10 @@ import {
 } from "@/redux/features/auth/auth.api";
 import { useAppDispatch } from "@/redux/hooks";
 
-import { Link, useLocation } from "react-router";
+import { Link } from "react-router";
 
 const Navbar = () => {
-  const { pathname } = useLocation();
-  console.log(pathname);
   const { data } = useGetMeQuery(undefined);
-  console.log(data);
   const [logout] = useLogOutMutation();
   const dispatch = useAppDispatch();
   const handleLogOut = async () => {

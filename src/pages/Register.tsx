@@ -93,7 +93,6 @@ const Register = () => {
   });
 
   const onSubmit = async (data: z.infer<typeof registerSchema>) => {
-    console.log(data);
     const { division, city, zip, street, ...rest } = data;
     const userData = {
       ...rest,
@@ -105,8 +104,8 @@ const Register = () => {
       },
     };
     try {
-      const res = await register(userData).unwrap();
-      console.log(res);
+      await register(userData).unwrap();
+
       toast.success("Account created successfully");
       navigate("/");
     } catch (error: any) {

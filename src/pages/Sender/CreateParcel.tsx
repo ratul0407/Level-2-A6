@@ -58,8 +58,7 @@ const CreateParcel = () => {
       weight: "0",
     },
   });
-  // const formValues = form.watch();
-  console.log(form);
+
   const onSubmit = async (data: z.infer<typeof createParcelSchema>) => {
     const { division, street, city, zip, ...rest } = data;
     const parcelData = {
@@ -74,7 +73,6 @@ const CreateParcel = () => {
       weight: Number(data?.weight),
     };
     setOpen(true);
-    console.log(parcelData);
     return setParcelInfo(parcelData);
   };
   return (

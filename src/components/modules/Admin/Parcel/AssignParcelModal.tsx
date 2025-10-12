@@ -35,10 +35,8 @@ const AssignParcelModal = ({
     role: role.delivery_personnel,
   });
   const deliveryMens = data?.data;
-  console.log(deliveryMens);
 
   const handleAssign = async (id: string) => {
-    console.log(id);
     try {
       const res = await approveParcel({
         data: { deliveryDriver: id },
@@ -49,7 +47,6 @@ const AssignParcelModal = ({
       }
       setOpen(false);
       closeDropdown();
-      console.log(res);
     } catch (error) {
       console.log(error);
     }

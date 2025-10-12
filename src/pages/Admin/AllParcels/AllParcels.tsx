@@ -17,11 +17,10 @@ const AllParcels = () => {
   const [page, setPageChange] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebounce(search, 500);
-  console.log(search);
+
   const { data: parcelStats, isLoading: parcelStatsLoading } =
     useGetParcelStatsQuery(undefined);
 
-  console.log(parcelStats);
   const { data, isLoading, isError } = useGetAllParcelsQuery({
     page,
     searchTerm: debouncedSearch || undefined,
@@ -62,7 +61,7 @@ const AllParcels = () => {
       users: item.count,
     })
   );
-  console.log(statsBox);
+
   if (isLoading || parcelStatsLoading) {
     return (
       <div className="grid justify-center items-center min-h-[70vh]">

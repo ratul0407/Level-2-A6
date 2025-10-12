@@ -23,7 +23,6 @@ const SenderParcels = () => {
     deliveryDriver: parcel?.deliveryDriver?.email ?? "",
     createdAt: format(new Date(parcel?.createdAt), "dd-MMM-yyyy"),
   }));
-  console.log(parcels);
   return (
     <div className="space-y-12">
       <div>

@@ -42,7 +42,6 @@ const ConfirmParcelModal = ({
   const [createParcel, { isLoading }] = useCreateParcelMutation();
   const today = new Date();
   const estimatedDeliveryDate = format(addDays(today, 7), "dd/MM/yy");
-  console.log(today, estimatedDeliveryDate);
   let cost: number;
   if (parcelData.sameDivision) {
     if (parcelData.weight) {
@@ -53,10 +52,6 @@ const ConfirmParcelModal = ({
       cost = Math.ceil(100 + parcelData.weight * 7);
     }
   }
-  console.log(
-    "delvery date",
-    parse(estimatedDeliveryDate, "dd/MM/yy", new Date()).toISOString()
-  );
 
   const handleClick = async () => {
     const toastId = toast.loading("creating parcel....");
@@ -70,7 +65,6 @@ const ConfirmParcelModal = ({
         ).toISOString(),
         cost,
       }).unwrap();
-      console.log(res);
       if (res.success) {
         toast.success(res?.message, { id: toastId });
         navigate("/sender/my-parcel");
@@ -81,7 +75,6 @@ const ConfirmParcelModal = ({
       console.log(error);
     }
   };
-  console.log(estimatedDeliveryDate);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>

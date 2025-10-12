@@ -11,8 +11,6 @@ import { parcelStatus } from "@/constants/parcelStatus";
 const ParcelDetails = (parcel: IParcel) => {
   const { data } = useGetMeQuery(undefined);
   const UserRole = data?.data?.data?.role;
-  console.log(UserRole === role.superAdmin || UserRole === role.admin);
-  console.log(data);
   return (
     <Card
       className={`${

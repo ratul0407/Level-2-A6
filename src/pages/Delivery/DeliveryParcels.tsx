@@ -23,7 +23,6 @@ const DeliveryParcels = () => {
     deliveryDriver: parcel?.deliveryDriver?.email ?? "",
     createdAt: format(new Date(parcel?.createdAt), "dd-MMM-yyyy"),
   }));
-  console.log(parcels);
   return (
     <div>
       <div></div>

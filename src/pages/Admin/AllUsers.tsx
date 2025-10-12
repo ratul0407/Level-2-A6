@@ -68,7 +68,6 @@ const AllUsers = () => {
     },
   };
 
-  console.log(data);
   return (
     <div className="space-y-12">
       <div>

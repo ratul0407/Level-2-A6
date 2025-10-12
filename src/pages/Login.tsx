@@ -35,7 +35,6 @@ const Login = () => {
     },
   });
   const onSubmit = async (data: unknown) => {
-    console.log(data);
     try {
       const res = await login(data).unwrap();
       if (res.success) {
