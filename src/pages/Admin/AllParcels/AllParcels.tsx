@@ -118,15 +118,7 @@ const AllParcels = () => {
       )}
 
       <Outlet />
-      {/* {!isLoading && !isError && (
-        <DataTable
-          columns={columns}
-          data={parcels}
-          page={data?.data?.meta?.page}
-          totalPage={data?.data?.meta?.totalPage}
-          onPageChange={setPageChange}
-        />
-      )} */}
+    
     </div>
   );
 };

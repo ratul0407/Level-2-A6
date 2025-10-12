@@ -38,6 +38,7 @@ const Navbar = () => {
     { href: "/", label: "Home" },
     { href: "/contact", label: "Contact" },
     { href: "/about", label: "About" },
+    {href:"/faq", label: "Faq"},
     {
       href:
         userRole === role.sender

@@ -5,6 +5,7 @@ import Contact from "@/pages/Contact";
 import HomePage from "@/pages/HomePage";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
+import Faq from "@/pages/Faq"
 import { generateRoute } from "@/utils/generateRoutes";
 
 import { createBrowserRouter, Navigate } from "react-router";
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         Component: Contact,
+      },
+      {
+        path: "/faq",
+        Component: Faq,
       },
       {
         path: "*",

@@ -1,6 +1,7 @@
 import Faq from "@/components/HomePage/FaqSection";
 import Feature from "@/components/HomePage/Feature";
 import HeroSection from "@/components/HomePage/HeroSection";
+import Testimonials from "@/components/HomePage/Testimonials.tsx";
 
 const HomePage = () => {
   return (
@@ -11,6 +12,7 @@ const HomePage = () => {
         badge="About us"
       />
       <Feature />
+        <Testimonials />
       <Faq />
     </div>
   );
