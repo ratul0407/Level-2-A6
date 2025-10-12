@@ -32,6 +32,8 @@
     "noUncheckedSideEffectImports": true
   },
   "include": [
-    "src"
+    "src",
+    "vite-end.d.ts",
+    "swiper.d.ts"
   ]
 }

@@ -12,7 +12,7 @@ import { Package, PackagePlus, PackageX } from "lucide-react";
 
 import { UsersBarChart } from "@/components/modules/Admin/User/UsersBarChart";
 import DataTable from "@/components/modules/Shared/DataTable";
-import { Outlet } from "react-router";
+
 const AllParcels = () => {
   const [page, setPageChange] = useState(1);
   const [search, setSearch] = useState("");
@@ -116,9 +116,17 @@ const AllParcels = () => {
           </h3>
         </div>
       )}
-
-      <Outlet />
-    
+      <div>
+        {!isLoading && !isError && (
+          <DataTable
+            columns={columns}
+            data={parcels}
+            page={data?.data?.meta?.page}
+            totalPage={data?.data?.meta?.totalPage}
+            onPageChange={setPageChange}
+          />
+        )}
+      </div>
     </div>
   );
 };

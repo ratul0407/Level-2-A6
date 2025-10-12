@@ -8,8 +8,8 @@ import { Quote } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 const testimonials = [
   {
@@ -70,7 +70,7 @@ const Testimonials = () => {
         slidesPerView={3}
         loop={true}
         speed={1000}
-       breakpoints={{
+        breakpoints={{
           0: {
             slidesPerView: 1,
             slidesPerGroup: 1,
@@ -83,8 +83,7 @@ const Testimonials = () => {
             slidesPerView: 3,
             slidesPerGroup: 3,
           },
-        
-        }}  
+        }}
       >
         {testimonials.map((testimonial, index) => (
           <SwiperSlide key={index}>

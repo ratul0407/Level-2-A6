@@ -10,14 +10,14 @@ const HomePage = () => {
     <div className="min-h-screen mx-auto">
       <HeroSection
         heading="Let Us Take care of your parcels"
-        description="Our delivery men's will deliver your belongings before you even know it"
+        description="Grow you business with E-parcel. Along side 300+ happy customers nationwide."
         badge="About us"
       />
       <Feature />
-      <Testimonials />
       <OurStats />
 
       <OurServices />
+      <Testimonials />
       <Faq />
     </div>
   );

@@ -5,9 +5,7 @@ export const AllParcels = lazy(
   () => import("@/pages/Admin/AllParcels/AllParcels")
 );
 export const AllUsers = lazy(() => import("@/pages/Admin/AllUsers"));
-export const AllRequestedParcels = lazy(
-  () => import("@/pages/Admin/AllParcels/AllRequestedParcels")
-);
+
 export const adminSidebarItems: ISidebarItems[] = [
   {
     title: "Dashboard",
@@ -22,13 +20,6 @@ export const adminSidebarItems: ISidebarItems[] = [
         title: "All Parcels",
         url: "/admin/all-parcels",
         component: AllParcels,
-        subRoutes: [
-          {
-            title: "Requested",
-            url: "/admin/all-parcels/requested",
-            component: AllRequestedParcels,
-          },
-        ],
       },
     ],
   },
