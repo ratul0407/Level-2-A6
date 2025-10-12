@@ -1,6 +1,7 @@
 import Faq from "@/components/HomePage/FaqSection";
 import Feature from "@/components/HomePage/Feature";
 import HeroSection from "@/components/HomePage/HeroSection";
+import OurStats from "@/components/HomePage/OurStats";
 import Testimonials from "@/components/HomePage/Testimonials.tsx";
 
 const HomePage = () => {
@@ -12,7 +13,8 @@ const HomePage = () => {
         badge="About us"
       />
       <Feature />
-        <Testimonials />
+      <Testimonials />
+      <OurStats />
       <Faq />
     </div>
   );
