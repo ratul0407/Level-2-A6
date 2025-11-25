@@ -48,7 +48,7 @@ const Navbar = () => {
     },
   ];
   return (
-    <header className="border-b">
+    <header className="border-b sticky top-0 z-50 bg-white">
       <div className="flex h-16 justify-between gap-4">
         {/* Left side */}
         <div className="flex gap-2">

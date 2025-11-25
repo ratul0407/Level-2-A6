@@ -25,7 +25,6 @@ const ConfirmDeliveryModal = (parcel: IParcel) => {
         data: { delivered: true },
         tracking_id: parcel?.trackingId,
       }).unwrap();
-      console.log(res);
       if (res?.success) {
         toast.success("Delivery Confirmed");
       }

@@ -42,15 +42,15 @@ const AllParcels = () => {
       value: parcelStats?.data?.totalDeliveredParcels,
       icon: <PackageX />,
     },
-    "Parcel created 30 Days": {
+    "created in Last 30 Days": {
       value: parcelStats?.data?.totalParcelCreatedInLast30Days,
       icon: <PackagePlus />,
     },
-    "Parcel created 7 Days": {
+    "Created in last 7 Days": {
       value: parcelStats?.data?.totalParcelCreatedInLast7Days,
       icon: <PackagePlus />,
     },
-    "Total Parcels": {
+    "Total Parcels managed": {
       value: parcelStats?.data?.totalParcels,
       icon: <Package />,
     },

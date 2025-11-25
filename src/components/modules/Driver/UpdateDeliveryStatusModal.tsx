@@ -25,7 +25,6 @@ const UpdateDeliveryStatus = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [note, setNote] = useState("");
-  console.log(note);
   const [updateStatus, { isLoading }] = useUpdateParcelStatusMutation();
   const nextStatus = getNextStatus(parcel?.currentStatus as Status);
 
@@ -35,7 +34,6 @@ const UpdateDeliveryStatus = ({
         data: { status: value, note: note },
         tracking_id: parcel.trackingId,
       }).unwrap();
-      console.log(res);
       if (res?.success) {
         toast.success("Parcel Status Updated successfully!");
         setOpen(false);

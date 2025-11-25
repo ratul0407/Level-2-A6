@@ -19,7 +19,7 @@ const LocationMap = () => {
     if (!mapRef.current) return;
 
     // Default location (fallback)
-    const defaultPosition = fromLonLat([23.7655, 90.3878]); // London
+    const defaultPosition = fromLonLat([23.7655, 90.3878]);
 
     // Marker feature for current location
     const marker = new Feature({
@@ -58,13 +58,17 @@ const LocationMap = () => {
     });
 
     setMap(initialMap);
+
     map
       ?.getView()
-      .setExtent([
-        fromLonLat([23.7655, 90.3878]),
-        fromLonLat([23.7655, 90.3878]),
-      ]);
-
+      .fit(
+        [fromLonLat([90.387, 23.765]), fromLonLat([90.388, 23.766])].flat(),
+        {
+          size: map.getSize(),
+          padding: [100, 100, 100, 100],
+          duration: 500,
+        }
+      );
     // Get user location
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
