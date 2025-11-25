@@ -49,14 +49,12 @@ const CancelParcelModal = ({
   const [cancelParcel] = useCancelParcelsMutation();
   form.watch();
   const onSubmit = async (data: z.infer<typeof cancelSchema>) => {
-    console.log(data);
     const toastId = toast.loading("Loading.....");
     try {
       const res = await cancelParcel({
         tracking_id: parcel?.trackingId,
         data: { status: parcelStatus.cancelled },
       }).unwrap();
-      console.log(res);
       if (res.success) {
         toast.info("Parcel has been cancelled", { id: toastId });
         setOpen(false);

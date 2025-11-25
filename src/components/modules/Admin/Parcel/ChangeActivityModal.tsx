@@ -31,10 +31,8 @@ const ChangeActivityModal = (user: any) => {
   const [changeActivity, { isLoading }] = useChangeUserActivityMutation();
   const form = useForm();
   const onSubmit = async (data: unknown) => {
-    console.log(data);
     try {
       const res = await changeActivity({ id: user._id, data: data }).unwrap();
-      console.log(res);
       if (res.success) {
         toast.success("User activity changed successfully!");
         setOpen(false);
