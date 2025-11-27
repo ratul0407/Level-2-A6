@@ -17,6 +17,7 @@ import { TRole } from "@/types";
 import UnAuthorized from "@/pages/UnAuthorized";
 import NotFound from "@/pages/NotFound";
 import { adminSidebarItems } from "./adminSidebarRoutes";
+import Careers from "@/pages/Careers";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         Component: Contact,
+      },
+      {
+        path: "/careers",
+        Component: Careers,
       },
       {
         path: "*",

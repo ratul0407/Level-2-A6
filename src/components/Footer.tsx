@@ -1,4 +1,4 @@
-import Logo from "@/assets/icons/Logo";
+import Logo from "@/components/shared/Logo";
 import React from "react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 

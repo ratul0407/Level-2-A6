@@ -61,10 +61,10 @@ const Testimonials = () => {
   return (
     <section className="py-16 lg:py-32 container mx-auto">
       <div className="flex items-center justify-between">
-        <h2 className="mb-3 text-3xl font-semibold md:mb-4 lg:mb-6 lg:text-4xl pb-12">
+        <h2 className="text-3xl font-semibold  lg:text-4xl ">
           What our clients say about us
         </h2>
-        <div className="space-x-5">
+        <div className="flex items-center  justify-center gap-5">
           <Button className="custom-prev h-10 rounded-full border-none">
             <ArrowDown className="h-10 w-10 rotate-90" />
           </Button>
@@ -101,7 +101,7 @@ const Testimonials = () => {
       >
         {testimonials.map((testimonial, index) => (
           <SwiperSlide key={index}>
-            <div className="relative  bg-white rounded-2xl shadow-sm text-center px-6 py-8 space-y-4 border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+            <div className="relative  mt-12 bg-white rounded-2xl shadow-sm text-center px-6 py-8 space-y-4 border border-gray-100 hover:shadow-lg transition-shadow duration-300 ">
               {/* Decorative Quotes */}
               <Quote
                 strokeWidth={1}

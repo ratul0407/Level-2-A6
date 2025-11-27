@@ -11,7 +11,7 @@ const Loading = () => {
       <div className="size-60">
         <>{View}</>
       </div>
-      <p className="text-gray-600 -mt-16 text-lg">The Parcels are coming!!!!</p>
+      <p className="text-gray-600 -mt-16 text-lg">Getting your parcels!!!!</p>
     </div>
   );
 };

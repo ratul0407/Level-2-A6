@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/sidebar";
 import { getSidebarItems } from "@/utils/getSidebarItems";
 import { Link, useLocation } from "react-router";
-import Logo from "@/assets/icons/Logo";
+import Logo from "@/components/shared/Logo";
 import { useGetMeQuery } from "@/redux/features/auth/auth.api";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

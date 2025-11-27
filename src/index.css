@@ -1,8 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --font-open-sans: "Open Sans", sans-serif;
+  --color-custom-red: #fe4c4b;
+}
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -122,4 +127,8 @@
 .leaflet-container {
   height: 100vh;
   min-width: 100%;
+}
+
+.grid-container-area {
+  grid-area: "f f f j j j" ". e e s s s";
 }

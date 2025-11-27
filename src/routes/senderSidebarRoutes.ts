@@ -21,11 +21,11 @@ export const senderSidebarItems: ISidebarItems[] = [
         url: "/sender/create-parcel",
         component: CreateParcel,
       },
-      // {
-      //   title: "Track Parcel",
-      //   url: "/sender/track-parcel",
-      //   component: TrackParcel,
-      // },
+      {
+        title: "Track Parcel",
+        url: "/sender/track-parcel",
+        component: TrackParcel,
+      },
     ],
   },
 ];

@@ -49,6 +49,7 @@ const CancelParcelModal = ({
   const [cancelParcel] = useCancelParcelsMutation();
   form.watch();
   const onSubmit = async (data: z.infer<typeof cancelSchema>) => {
+    console.log(data);
     const toastId = toast.loading("Loading.....");
     try {
       const res = await cancelParcel({
