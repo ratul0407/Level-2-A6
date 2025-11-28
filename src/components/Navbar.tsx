@@ -146,9 +146,16 @@ import { ArrowDown, Menu, Phone, PhoneCall } from "lucide-react";
 //     </header>
 //   );
 // };
+
+//       href:
+
+//       label: "Dashboard",
+//     },
 const Navbar = () => {
+  const { data } = useGetMeQuery(undefined);
+  const userRole = data?.data?.data?.role;
   return (
-    <header className="pt-6 sticky top-0 ">
+    <header className="pt-6 sticky top-0 bg-white pb-6 w-full px-8 z-[100]">
       <nav className="flex items-center justify-between">
         <div className="flex items-center gap-10">
           <div className="bg-black rounded-4xl w-fit px-4 py-1">
@@ -162,16 +169,28 @@ const Navbar = () => {
               </div>
             </li>
             <li>
-              <Link to="/">About Us</Link>
+              <Link to="/about">About Us</Link>
             </li>
             <li>
-              <Link to="/">Dashboard</Link>
+              <Link
+                to={
+                  userRole === role.sender
+                    ? "/sender"
+                    : userRole === role.receiver
+                      ? "/receiver"
+                      : userRole === role.delivery_personnel
+                        ? "/delivery"
+                        : "/admin"
+                }
+              >
+                Dashboard
+              </Link>
             </li>
           </ul>
         </div>
-        <div>
+        <Link to="/">
           <Logo />
-        </div>
+        </Link>
         <div className="flex items-center gap-20">
           <div>
             <Link to="/" className="flex items-center gap-2">
@@ -182,10 +201,13 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="space-x-4">
-            <button className="px-4 py-1 bg-custom-red text-white rounded-full">
+            <Link
+              to="/register"
+              className="px-4 py-1 bg-custom-red text-white rounded-full"
+            >
               Register
-            </button>
-            <button>Login</button>
+            </Link>
+            <Link to="/login">Login</Link>
           </div>
         </div>
       </nav>

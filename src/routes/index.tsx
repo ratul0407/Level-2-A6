@@ -53,7 +53,7 @@ const router = createBrowserRouter([
       (role.superAdmin as TRole) || (role.admin as TRole)
     ),
     children: [
-      { index: true, element: <Navigate to="/admin/all-parcels" /> },
+      { index: true, element: <Navigate to="/admin/overview" /> },
       ...generateRoute(adminSidebarItems),
     ],
   },

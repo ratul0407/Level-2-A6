@@ -18,12 +18,12 @@ export function UsersBarChart({
   data: { date: string; users: number }[];
 }) {
   return (
-    <Card className="border-0 shadow-none max-w-screen">
+    <Card className="border-0 shadow-none ">
       <CardHeader>
         <CardTitle>Parcels Created (Last 90 Days)</CardTitle>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width="100%" height={350}>
+        <ResponsiveContainer width={100} height={350}>
           <BarChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="date" />

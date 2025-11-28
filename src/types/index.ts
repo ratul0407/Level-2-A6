@@ -7,6 +7,7 @@ export interface ISidebarItems {
     title: string;
     url: string;
     component: ComponentType;
+    icon?: ComponentType;
     subRoutes?: {
       title: string;
       url: string;
