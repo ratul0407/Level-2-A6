@@ -155,8 +155,8 @@ const Navbar = () => {
   const { data } = useGetMeQuery(undefined);
   const userRole = data?.data?.data?.role;
   return (
-    <header className="pt-6 sticky top-0 bg-white pb-6 w-full px-8 z-[100]">
-      <nav className="flex items-center justify-between">
+    <header className="pt-6 sticky top-0 bg-white pb-6 w-full px-8 z-[100] ">
+      <nav className="hidden md:flex items-center justify-between">
         <div className="flex items-center gap-10">
           <div className="bg-black rounded-4xl w-fit px-4 py-1">
             <Menu color="#fff" />
