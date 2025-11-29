@@ -133,7 +133,7 @@ const Hero = () => {
                 </p>{" "}
                 <br />
                 <p className="linline">
-                  Redefined <Sun className="inline" /> Your
+                  Redefined <Sun className="inline animate-spin" /> Your
                 </p>{" "}
                 <p>
                   Cargo, Our <ArrowRight className="inline" />
@@ -159,7 +159,7 @@ const Hero = () => {
         <div className="flex justify-between items-center ">
           <div className="w-1/2 space-y-5 lg:space-y-10">
             <div className="w-fit  rounded-full border border-custom-red px-4 py-1 text-custom-red hover:bg-custom-red hover:text-white transition-all duraiton-300">
-              <Sun className="inline-block mr-3" />
+              <Sun className="inline-block mr-3 animate-spin" />
               efficiency unleased
             </div>
             <p className="font-medium max-w-[30ch]">

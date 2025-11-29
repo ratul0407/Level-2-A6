@@ -1,3 +1,4 @@
+import Marquee from "react-fast-marquee";
 const defaultAchievements = [
   { label: "Customers", value: "300+" },
   { label: "Parcel Delivered", value: "800+" },
@@ -43,29 +44,31 @@ const OurStats = ({
       <div className="py-16 lg:py-24">
         <p className="text-center">{companiesTitle} </p>
         <div className="mt-8 flex flex-wrap justify-center gap-8">
-          {companies.map((company, idx) => (
-            <div className="flex items-center gap-3" key={company.src + idx}>
-              <img
-                src={company.src}
-                alt={company.alt}
-                className="h-6 w-auto md:h-8"
-              />
-            </div>
-          ))}
+          <Marquee>
+            {companies.map((company, idx) => (
+              <div className="ml-16" key={company.src + idx}>
+                <img
+                  src={company.src}
+                  alt={company.alt}
+                  className="h-6 w-auto md:h-8"
+                />
+              </div>
+            ))}
+          </Marquee>
         </div>
       </div>
-      <div className="relative overflow-hidden rounded-xl bg-muted p-10 md:p-16">
+      <div className="relative overflow-hidden rounded-xl bg-black text-white p-10 md:p-16">
         <div className="flex flex-col gap-4 text-center md:text-left">
-          <h2 className="text-4xl font-semibold">{achievementsTitle}</h2>
-          <p className="max-w-xl text-muted-foreground">
-            {achievementsDescription}
-          </p>
+          <h2 className="text-4xl font-semibold text-custom-red">
+            {achievementsTitle}
+          </h2>
+          <p className="max-w-xl">{achievementsDescription}</p>
         </div>
         <div className="mt-10 flex flex-wrap justify-between gap-10 text-center">
           {achievements.map((item, idx) => (
             <div className="flex flex-col gap-4" key={item.label + idx}>
               <p>{item.label}</p>
-              <span className="text-4xl font-semibold md:text-5xl">
+              <span className="text-4xl font-semibold md:text-5xl text-custom-red">
                 {item.value}
               </span>
             </div>

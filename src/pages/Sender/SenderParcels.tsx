@@ -39,7 +39,7 @@ const SenderParcels = () => {
       </div>
 
       {isError && (
-        <div className="flex items-center justify-center w-full min-h-[60vh]">
+        <div className="flex items-center justify-center w-fit min-h-[60vh]">
           <h3 className="text-muted-foreground text-3xl">
             Something went wrong please try again later!
           </h3>
@@ -79,7 +79,7 @@ function DashboardGrid() {
       {
         label: "Spending",
         data: [30, 40, 60, 75, 40, 50, 65],
-        backgroundColor: "#FDE68A", // soft yellow
+        backgroundColor: "#fff",
         borderRadius: 8,
         barThickness: 25,
       },
@@ -88,6 +88,7 @@ function DashboardGrid() {
 
   const barOptions = {
     responsive: true,
+
     plugins: {
       legend: { display: false },
       tooltip: { enabled: true },
@@ -148,7 +149,7 @@ function DashboardGrid() {
         </div>
 
         {/* Right side chart */}
-        <div className="rounded-2xl p-6 bg-teal-600 text-white shadow-lg">
+        <div className="rounded-2xl p-6 bg-primary text-white shadow-lg">
           <div className="flex justify-between items-start mb-4">
             <div>
               <h2 className="text-lg font-semibold">Spending</h2>

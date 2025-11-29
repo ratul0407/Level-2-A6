@@ -27,8 +27,11 @@ import { division } from "@/constants/division";
 
 import { useGetMeQuery } from "@/redux/features/auth/auth.api";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router";
+import { HashLink } from "react-router-hash-link";
 import z from "zod";
 
 const createParcelSchema = z.object({
@@ -115,6 +118,32 @@ const CreateParcel = () => {
                         <FormControl>
                           <Input
                             placeholder="Enter a name for your parcel"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          Parcel Hub
+                          <Link
+                            to="/our-hubs#hubs"
+                            className="inline-block ml-auto text-custom-red"
+                          >
+                            see all hubs{" "}
+                            <ArrowRight className="inline size-3" />
+                          </Link>
+                        </FormLabel>
+
+                        <FormControl>
+                          <Input
+                            placeholder="The hub from where you are sending the parcel"
                             {...field}
                           />
                         </FormControl>

@@ -65,10 +65,10 @@ const Testimonials = () => {
           What our clients say about us
         </h2>
         <div className="flex items-center  justify-center gap-5">
-          <Button className="custom-prev h-10 rounded-full border-none">
+          <Button className="custom-prev h-10 rounded-full border-none bg-custom-red hover:bg-custom-red/45">
             <ArrowDown className="h-10 w-10 rotate-90" />
           </Button>
-          <Button className="custom-next h-10 rounded-full border-none">
+          <Button className="custom-next h-10 rounded-full border-none bg-custom-red hover:bg-custom-red/45">
             <ArrowDown className="h-10 w-10 rotate-270" />
           </Button>
         </div>
@@ -106,15 +106,15 @@ const Testimonials = () => {
               <Quote
                 strokeWidth={1}
                 size={40}
-                stroke="#10b981"
-                fill="#10b981"
+                stroke="#fe4c4b"
+                fill="#fe4c4b"
                 className="rotate-180 absolute top-0 left-4 opacity-20"
               />
               <Quote
                 strokeWidth={1}
                 size={40}
-                stroke="#10b981"
-                fill="#10b981"
+                stroke="#fe4c4b"
+                fill="#fe4c4b"
                 className="absolute top-0 right-4 opacity-20"
               />
 
@@ -122,7 +122,7 @@ const Testimonials = () => {
               <img
                 src={testimonial.img}
                 alt={testimonial.name}
-                className="w-16 h-16 rounded-full mx-auto object-cover border-2 border-primary"
+                className="w-16 h-16 rounded-full mx-auto object-cover border-2 border-custom-red"
               />
 
               {/* Name */}
@@ -131,7 +131,7 @@ const Testimonials = () => {
               </h3>
 
               {/* Job Title */}
-              <p className="text-sm text-green-600 font-medium -mt-2">
+              <p className="text-sm text-custom-red font-medium -mt-2">
                 {testimonial.jobTitle}
               </p>
 

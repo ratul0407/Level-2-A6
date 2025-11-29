@@ -91,8 +91,8 @@ const Faq = ({
 }: Faq3Props) => {
   return (
     <section className="lg:py-24 py-16">
-      <div className="container space-y-16 mx-auto">
-        <div className="mx-auto flex max-w-3xl flex-col text-left md:text-center">
+      <div className="container mx-auto space-y-16 ">
+        <div className="mx-auto flex max-w-3xl flex-col">
           <h2 className="mb-3 text-3xl font-semibold md:mb-4 lg:mb-6 lg:text-4xl">
             {heading}
           </h2>

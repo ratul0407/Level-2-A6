@@ -93,8 +93,12 @@ const OurServices = () => {
           >
             <div className="absolute bg-black/60 inset-0"></div>
             <div className="p-4 relative z-20 ">
-              <div className="bg-primary/20 rounded-xl border border-primary p-2 w-fit">
-                <item.icon size={20} strokeWidth={1} className="text-primary" />
+              <div className="bg-custom-red/20 rounded-xl border border-custom-red p-2 w-fit">
+                <item.icon
+                  size={20}
+                  strokeWidth={1}
+                  className="text-custom-red"
+                />
               </div>
             </div>
             <div className="p-6 text-white relative z-20">

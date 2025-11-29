@@ -48,7 +48,7 @@ const Process = () => {
         <div className="mx-auto py-12 md:py-20 px-6">
           <div className="relative ml-6">
             {/* Timeline line */}
-            <div className="absolute left-0 md:left-1/2 inset-y-0 border-l-2 border-green-300 transform md:-translate-x-1/2" />
+            <div className="absolute left-0 md:left-1/2 inset-y-0 border-l-2 border-custom-red transform md:-translate-x-1/2" />
             {timelineData.map((item, index) => {
               // Check if the index is even (0, 2, 4...) -> Content on the right (default for small screens)
               const isContentOnRight = index % 2 === 0;
@@ -63,14 +63,14 @@ const Process = () => {
                 >
                   {/* Timeline Icon - Centered on medium screens */}
                   <div
-                    className={`absolute bg-white left-px -translate-x-1/2 md:left-1/2 md:transform-none md:-translate-x-1/2 p-2 border-2 border-primary/40 flex items-center justify-center rounded-full ring-8 ring-background z-10 ${
+                    className={`absolute bg-white left-px -translate-x-1/2 md:left-1/2 md:transform-none md:-translate-x-1/2 p-2 border-2 border-custom-red/50 flex items-center justify-center rounded-full ring-8 ring-background z-10 ${
                       // Adjust icon position on small screens for left-aligned content
                       isContentOnRight ? "md:ml-0" : "md:mr-0"
                     }`}
                   >
                     <item.icon
                       size={30}
-                      className="text-primary relative z-20"
+                      className="text-custom-red relative z-20"
                     />
                   </div>
 

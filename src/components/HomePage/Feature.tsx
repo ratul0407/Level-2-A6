@@ -9,12 +9,12 @@ const Feature = () => {
         </p>
         <h2 className="text-3xl font-medium lg:text-4xl">Why Choose Us?</h2>
         <div className="mt-14 grid gap-6 lg:mt-20 lg:grid-cols-3">
-          <div className="rounded-lg bg-accent p-5">
-            <span className="mb-8 flex size-12 items-center justify-center rounded-full bg-background">
-              <Timer className="size-6" />
+          <div className="rounded-lg bg-custom-red p-5">
+            <span className="mb-8 flex size-12 items-center justify-center rounded-full bg-black">
+              <Timer className="size-6 text-white" />
             </span>
-            <h3 className="mb-2 text-xl font-medium">Performance</h3>
-            <p className="leading-7 text-muted-foreground">
+            <h3 className="mb-2 text-xl font-medium ">Performance</h3>
+            <p className="leading-7  text-white">
               We have provided service flawlessly over the last 3 years across
               all divisions in bangladesh.
             </p>

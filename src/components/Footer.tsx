@@ -60,7 +60,11 @@ const defaultSocialLinks = [
   { icon: <FaInstagram className="size-5" />, href: "#", label: "Instagram" },
   { icon: <FaFacebook className="size-5" />, href: "#", label: "Facebook" },
   { icon: <FaTwitter className="size-5" />, href: "#", label: "Twitter" },
-  { icon: <FaLinkedin className="size-5" />, href: "#", label: "LinkedIn" },
+  {
+    icon: <FaLinkedin className="size-5" />,
+    href: "https://www.linkedin.com/in/ratul0407",
+    label: "LinkedIn",
+  },
 ];
 
 const Footer = ({
@@ -94,7 +98,6 @@ const Footer = ({
         if (fontSize < 5) break;
       }
     };
-
     const resizeObserver = new ResizeObserver(fit);
     resizeObserver.observe(wrapper);
 
@@ -106,58 +109,63 @@ const Footer = ({
   return (
     <section className="py-16  sm:py-10 bg-black text-white">
       <div
-        className="relative h-[600px]"
+        className="relative h-[700px] lg:h-[600px]"
         style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
       >
-        <div className="fixed h-[600px] w-full bottom-0">
-          <div className="container mx-auto md:px-10">
-            <div className="flex w-full flex-col justify-between gap-10 lg:flex-row lg:items-start lg:text-left">
-              <div className="flex w-full flex-col justify-between gap-6 lg:items-start">
-                {/* Logo */}
-                <div className="flex items-center gap-2 lg:justify-start">
-                  <Logo />
-                  <h2 className="text-xl font-semibold">EParcel</h2>
-                </div>
-                <p className="text-muted-foreground max-w-[70%] text-sm">
-                  {description}
-                </p>
-                <ul className="text-muted-foreground flex items-center space-x-6">
-                  {socialLinks.map((social, idx) => (
-                    <li key={idx} className="hover:text-primary font-medium">
-                      <a href={social.href} aria-label={social.label}>
-                        {social.icon}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="grid w-full gap-6 md:grid-cols-3 lg:gap-20">
-                {sections.map((section, sectionIdx) => (
-                  <div key={sectionIdx}>
-                    <h3 className="mb-4 font-bold">{section.title}</h3>
-                    <ul className="text-muted-foreground space-y-3 text-sm">
-                      {section.links.map((link, linkIdx) => (
-                        <li
-                          key={linkIdx}
-                          className="hover:text-primary font-medium"
-                        >
-                          <a href={link.href}>{link.name}</a>
-                        </li>
-                      ))}
-                    </ul>
+        <div className="relative h-[calc(100vh+700px)] lg:h-[calc(100vh+600px)] -top-[100vh]">
+          <div className="sticky h-700px top-[calc(100vh-700px)] lg:top-[calc(100vh-600px)] lg:h-[600px]">
+            <div className="container mx-auto md:px-10">
+              <div className="flex w-full flex-col justify-between gap-10 lg:flex-row lg:items-start lg:text-left">
+                <div className="flex w-full flex-col justify-between gap-6 lg:items-start">
+                  {/* Logo */}
+                  <div className="flex items-center gap-2 lg:justify-start">
+                    <Logo />
+                    <h2 className="text-xl font-semibold">EParcel</h2>
                   </div>
-                ))}
+                  <p className="text-muted-foreground max-w-[70%] text-sm">
+                    {description}
+                  </p>
+                  <ul className="text-muted-foreground flex items-center space-x-6">
+                    {socialLinks.map((social, idx) => (
+                      <li
+                        key={idx}
+                        className="hover:text-custom-red font-medium"
+                      >
+                        <a href={social.href} aria-label={social.label}>
+                          {social.icon}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="grid w-full gap-6 md:grid-cols-3 lg:gap-20">
+                  {sections.map((section, sectionIdx) => (
+                    <div key={sectionIdx}>
+                      <h3 className="mb-4 font-bold">{section.title}</h3>
+                      <ul className="text-muted-foreground space-y-3 text-sm">
+                        {section.links.map((link, linkIdx) => (
+                          <li
+                            key={linkIdx}
+                            className="hover:text-custom-red font-medium"
+                          >
+                            <a href={link.href}>{link.name}</a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div ref={wrapperRef} className="w-full">
-              <span
-                ref={textRef}
-                className="block whitespace-nowrap uppercase font-open-sans"
-                style={{ display: "inline-block" }}
-              >
-                <span className="text-custom-red italic">E</span>
-                Parcel
-              </span>
+              <div ref={wrapperRef} className="w-full">
+                <span
+                  ref={textRef}
+                  className="block whitespace-nowrap uppercase font-open-sans"
+                  style={{ display: "inline-block" }}
+                >
+                  <span className="text-custom-red italic">E</span>
+                  Parcel
+                </span>
+              </div>
             </div>
           </div>
         </div>
