@@ -4,42 +4,113 @@ import joinImg from "../../assets/home-grid/join.jpg";
 import truckImg from "../../assets/home-grid/truck.jpg";
 import craneImg from "../../assets/home-grid/crane.jpg";
 import excellenceImg from "../../assets/home-grid/excellence.jpg";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { SplitText } from "gsap/all";
+gsap.registerPlugin(SplitText);
 const Hero = () => {
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      defaults: { duration: 0, ease: "power1.inOut" },
+    });
+    const imgGridtl = gsap.timeline({
+      defaults: {
+        duration: 0.5,
+        ease: "power2.inOut",
+      },
+    });
+    const mySplitText = new SplitText(".hero-line-down", { type: "words" });
+    const words = mySplitText.words;
+    console.log(words);
+    tl.from(words, {
+      y: 100,
+      autoAlpha: 0,
+      duration: 0.5,
+      stagger: {
+        amount: 0.5,
+      },
+      ease: "power4.out",
+    })
+      .from(
+        ".transport",
+        {
+          x: -100,
+          opacity: 0,
+          duration: 0.5,
+        },
+        "-=0.5"
+      )
+      .from(".hero-opacity", {
+        opacity: 0,
+        duration: 0.5,
+      });
+    imgGridtl.from(".img-grid div", {
+      y: 100,
+      opacity: 0,
+      stagger: {
+        each: 0.3,
+      },
+    });
+  });
+
   return (
     <div className="mt-10 min-h-[100vh] lg:mt-20">
       <div className="">
         {/* top side */}
         <div className="w-full flex flex-col-reverse md:flex-row space-y-10 ">
-          <div className="lg:w-1/2">
+          <div className="lg:w-1/2 overflow-hidden">
             <h1 className="font-open-sans text-3xl uppercase lg:text-5xl text-center leading-relaxed sm:text-left">
-              <div>
-                Pioneering the logistics{" "}
-                <div className="ml-2 inline-block -space-y-1 text-sm lowercase">
-                  <div className="flex items-center">
-                    <p>10K+</p>{" "}
-                    <div className="bg-custom-red rounded-full p-1">
-                      <ArrowUp className="size-4 text-white" />
-                    </div>
+              <div className="overflow-hidden">
+                <div className="overflow-hidden w-fit">
+                  <span className="hero-line-down inline-block">
+                    Pioneering the
+                  </span>
+                </div>
+                <div className="flex items-center">
+                  <div className="overflow-hidden w-fit">
+                    <span className="inline-block hero-line-down">
+                      logistics{" "}
+                    </span>
                   </div>
-                  <p className="text-gray-600">parcel Delivered</p>
-                </div>{" "}
-                landscape with{" "}
+                  <div className="ml-2 inline-block -space-y-1 text-sm lowercase hero-opacity">
+                    <div className="flex items-center">
+                      <p>10K+</p>{" "}
+                      <div className="bg-custom-red rounded-full p-1">
+                        <ArrowUp className="size-4 text-white" />
+                      </div>
+                    </div>
+                    <p className="text-gray-600">parcel Delivered</p>
+                  </div>{" "}
+                </div>
+                <div className="overflow-hidden w-fit">
+                  <span className="hero-line-down inline-block">
+                    landscape with
+                  </span>{" "}
+                </div>
               </div>
               <div className="">
-                <div className="divide flex h-full w-fit items-center divide-[#e63956] rounded-full border px-4 py-2 text-xs lowercase mx-auto sm:mx-0">
+                <div className="transport divide flex h-full w-fit items-center divide-[#e63956] rounded-full border px-4 py-2 text-xs lowercase mx-auto sm:mx-0 hover:bg-black transition-colors duration-400 hover:text-white">
                   <Package strokeWidth={"1px"} className="size-6" />
                   <Truck strokeWidth={"1px"} className="mx-2 size-6" />
                   <div className="min-h-full w-0.5 bg-[#e42030]"></div>
                   <p className="">Transportation every day</p>
                 </div>
-                <span className="self-center">cutting-edge</span>
+                <div className="overflow-hidden w-fit">
+                  <span className="hero-line-down inline-block self-center">
+                    cutting-edge
+                  </span>
+                </div>
               </div>
-              cargo management
+              <div className="overflow-hidden w-fit">
+                <span className="hero-line-down inline-block">
+                  cargo management
+                </span>
+              </div>
             </h1>
           </div>
 
           {/*grid */}
-          <div className="lg:w-1/2 grid grid-cols-6 gap-4 content-start">
+          <div className="img-grid lg:w-1/2 grid grid-cols-6 gap-4 content-start">
             <div className="hidden md:block col-span-6 lg:col-span-3">
               <img src={factoryImg} className="aspect-video rounded-4xl" />
             </div>
@@ -58,7 +129,7 @@ const Hero = () => {
             <div className="hidden md:block bg-custom-red text-white px-8 py-9 rounded-4xl col-start-2 col-span-3">
               <div className="text-xl uppercase">
                 <p className="inline">
-                  <Sun className="inline" /> Efficiency
+                  <Sun className="inline animate-spin" /> Efficiency
                 </p>{" "}
                 <br />
                 <p className="linline">

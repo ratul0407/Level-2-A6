@@ -79,7 +79,7 @@ const gridClasses = [
 
 const OurServices = () => {
   return (
-    <section className="py-16 lg:py-24 container mx-auto">
+    <section id="service" className="py-16 lg:py-24 container mx-auto">
       <h2 className="mb-3 text-3xl font-semibold md:mb-4 lg:mb-6 lg:text-4xl pb-12">
         Our Services
       </h2>

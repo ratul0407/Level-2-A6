@@ -132,3 +132,7 @@
 .grid-container-area {
   grid-area: "f f f j j j" ". e e s s s";
 }
+
+html {
+  scroll-behavior: smooth;
+}

@@ -18,6 +18,7 @@ import UnAuthorized from "@/pages/UnAuthorized";
 import NotFound from "@/pages/NotFound";
 import { adminSidebarItems } from "./adminSidebarRoutes";
 import Careers from "@/pages/Careers";
+import OurHubs from "@/pages/OurHubs";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/careers",
         Component: Careers,
+      },
+      {
+        path: "/our-hubs",
+        Component: OurHubs,
       },
       {
         path: "*",

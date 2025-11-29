@@ -163,13 +163,16 @@ const Navbar = () => {
           </div>
           <ul className="flex items-center gap-5">
             <li className="flex items-center gap-2">
-              <Link to="#">Service</Link>
+              <a href="#service">Service</a>
               <div className="border border-custom-red rounded-full w-fit p-0.5">
                 <ArrowDown className="text-custom-red size-4" />
               </div>
             </li>
             <li>
               <Link to="/about">About Us</Link>
+            </li>
+            <li>
+              <Link to="/our-hubs">Our Hubs</Link>
             </li>
             <li>
               <Link
@@ -201,13 +204,21 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="space-x-4">
-            <Link
-              to="/register"
-              className="px-4 py-1 bg-custom-red text-white rounded-full"
-            >
-              Register
-            </Link>
-            <Link to="/login">Login</Link>
+            {userRole ? (
+              <button className="bg-custom-red px-4 py-2 rounded-4xl text-white cursor-pointer">
+                Log out
+              </button>
+            ) : (
+              <>
+                <Link
+                  to="/register"
+                  className="px-4 py-1 bg-custom-red text-white rounded-full"
+                >
+                  Register
+                </Link>
+                <Link to="/login">Login</Link>
+              </>
+            )}
           </div>
         </div>
       </nav>
