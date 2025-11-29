@@ -1,9 +1,15 @@
 import ConfirmParcelModal from "@/components/ConfirmParcelModal";
 import { Button } from "@/components/ui/button";
 import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -18,7 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { division } from "@/constants/division";
-import { cn } from "@/lib/utils";
+
 import { useGetMeQuery } from "@/redux/features/auth/auth.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -76,180 +82,194 @@ const CreateParcel = () => {
     return setParcelInfo(parcelData);
   };
   return (
-    <div className="min-h-screen min-w-full grid justify-center items-center">
-      <div className="max-w-xl">
-        <div className="flex flex-col  justify-center gap-2 text-center">
-          <h1 className="text-2xl font-bold">Create a Parcel</h1>
-          <p className="text-muted-foreground text-sm text-balance">
-            It will be delivered before you even know it!
-          </p>
-          <div>
+    <div className="min-h-screen w-full flex justify-center items-center bg-muted/40 py-10">
+      <div className="w-full max-w-3xl">
+        <Card className="shadow-xl border rounded-2xl">
+          <CardHeader className="text-center space-y-2">
+            <CardTitle className="text-3xl font-bold">
+              Create a Parcel
+            </CardTitle>
+            <CardDescription>
+              It will be delivered before you even know it!
+            </CardDescription>
+          </CardHeader>
+
+          <CardContent>
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className={cn(" flex flex-col gap-4 justify-center px-12")}
+                className="space-y-8"
               >
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Parcel Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="enter a name for your parcel"
-                          type="text"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormDescription className="sr-only">
-                        This is a field for the name of the parcel
-                      </FormDescription>
-                      <FormMessage className="text-left" />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="receiver"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Receiver Email</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="john.doe@company.com"
-                          type="email"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormDescription className="sr-only">
-                        This is a field for the receiver email
-                      </FormDescription>
-                      <FormMessage className="text-left" />
-                    </FormItem>
-                  )}
-                />
-
-                <div className="space-y-3">
-                  <h3 className="text-left text-muted-foreground">
-                    Delivery address
+                {/* PARCEL INFO */}
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-lg  text-gray-500 ">
+                    Parcel Information
                   </h3>
-                  <FormField
-                    control={form.control}
-                    name="division"
-                    render={({ field }) => (
-                      <FormItem className="flex-1">
-                        <FormLabel>Division</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl className="w-full">
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select Division" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent className="w-full">
-                            {Object.values(division)?.map((item: string) => (
-                              <SelectItem key={item} value={item}>
-                                {item}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormDescription className="sr-only">
-                          This is a field for the division select input
-                        </FormDescription>
-                        <FormMessage className="text-left" />
-                      </FormItem>
-                    )}
-                  />
 
-                  <div className="flex gap-3">
-                    <FormField
-                      control={form.control}
-                      name="city"
-                      render={({ field }) => (
-                        <FormItem className="flex-1">
-                          <FormLabel>City</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="enter city"
-                              type="text"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormDescription className="sr-only">
-                            This is a field for the city input
-                          </FormDescription>
-                          <FormMessage className="text-left" />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="zip"
-                      render={({ field }) => (
-                        <FormItem className="flex-1">
-                          <FormLabel>Zip Code</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="enter zip code"
-                              type="number"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormDescription className="sr-only">
-                            This is a field for the zip code input
-                          </FormDescription>
-                          <FormMessage className="text-left" />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
                   <FormField
                     control={form.control}
-                    name="street"
+                    name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Street address</FormLabel>
+                        <FormLabel>Parcel Name</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="enter street address"
-                            type="text"
+                            placeholder="Enter a name for your parcel"
                             {...field}
                           />
                         </FormControl>
-                        <FormDescription className="sr-only">
-                          This is a field for the street address input
-                        </FormDescription>
-                        <FormMessage className="text-left" />
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
                 </div>
-                <FormField
-                  control={form.control}
-                  name="weight"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Parcel Weight</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="enter the weight in kg"
-                          type="number"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormDescription className="sr-only">
-                        Enter your parcels weight
-                      </FormDescription>
-                      <FormMessage className="text-left" />
-                    </FormItem>
-                  )}
-                />
 
-                <Button type="submit">submit</Button>
+                {/* RECEIVER INFO */}
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-lg  text-gray-500 ">
+                    Receiver Information
+                  </h3>
+
+                  <FormField
+                    control={form.control}
+                    name="receiver"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Receiver Email</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="john.doe@company.com"
+                            type="email"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                {/* DELIVERY ADDRESS */}
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-lg  text-gray-500 ">
+                    Delivery Address
+                  </h3>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {/* Division */}
+                    <FormField
+                      control={form.control}
+                      name="division"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Division</FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select Division" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {Object.values(division)?.map((item) => (
+                                <SelectItem key={item} value={item}>
+                                  {item}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* City */}
+                    <FormField
+                      control={form.control}
+                      name="city"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>City</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Enter city" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {/* ZIP */}
+                    <FormField
+                      control={form.control}
+                      name="zip"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Zip Code</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Enter zip code"
+                              type="number"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Street */}
+                    <FormField
+                      control={form.control}
+                      name="street"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Street Address</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Enter street address"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+
+                {/* WEIGHT */}
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-lg  text-gray-500 ">
+                    Parcel Details
+                  </h3>
+
+                  <FormField
+                    control={form.control}
+                    name="weight"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Parcel Weight (kg)</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Enter weight in kg"
+                            type="number"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <Button type="submit" className="w-full bg-custom-red">
+                  Submit
+                </Button>
+
                 <ConfirmParcelModal
                   open={open}
                   setOpen={setOpen}
@@ -257,13 +277,8 @@ const CreateParcel = () => {
                 />
               </form>
             </Form>
-          </div>
-        </div>
-      </div>
-      <div>
-        {/* <h3>A parcel from, {senderData?.data?.data?.name}</h3>
-        <p>To: {formValues.receiver}</p>
-        <p>Estimated Delivery Time: </p> */}
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
